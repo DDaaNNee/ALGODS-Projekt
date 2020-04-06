@@ -20,7 +20,16 @@ namespace ALGODS_Projekt
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            List<int> floorZero = new List<int>();
+            List<int> floorOne = new List<int>();
+            List<int> floorTwo = new List<int>();
+            List<int> floorThree = new List<int>();
+            List<int> floorFour = new List<int>();
+            List<int> floorFive = new List<int>();
+            List<int> floorSix = new List<int>();
+            List<int> floorSeven = new List<int>();
+            List<int> floorEight = new List<int>();
+            List<int> floorNine = new List<int>();
         }
 
 

@@ -1,0 +1,252 @@
+Project
+
+Elevator simulation is the group assignment. The description is given below.
+
+Getting started
+This assignment is solved in groups of six people.
+
+Submission
+
+  • Attend the compulsory project supervision on April 14 to show what you have done so far
+  with the code. The following parts of the documentation should be also presented: data
+  structures and algorithms, test cases or test dataset and analysis of the proposed solution,
+  e.g., best case, worst case and average case, space vs. time and data manipulation (insertion,
+  deletion, swapping, etc.). Prepare a test dataset for elevator simulation and upload in the
+  Student portal on April 14 (groupname.txt).
+
+  • All groups are required to collect all test datasets, use them to run their simulation and
+  analyse their algorithms.
+
+  • Publish the complete solution in the Student portal no later than Tuesday, April 21, at 08.00.
+  Make sure that the names of all group members can be found in source files and
+  documentation.
+
+  • The opposition should also be uploaded in the Student portal no later than Wednesday, April
+  22, at 08.00.
+
+  • The assignment is presented at the seminar on Wednesday, April 22, where attendance is
+  compulsory. At the seminar, every group presents the assignment of their opponents and
+  perform an opposition.
+
+The form of the program
+
+The program should be well structured, well documented, easy to use and it should handle
+incorrect input sensibly. Principles of good programming should be applied (correctness, userfriendliness, efficiency, transparency/readability, simplicity, reusability, extendibility,
+understandability, modifiability, robustness, scalability and documentation).
+
+Documentation
+
+In the documentation, a project plan, a programming manual, and a user manual should be
+included in one pdf file. The file should contain the group name, the names of all group
+members, and the date. A table of contents, header with the group name, and footer with page
+numbers should also be added. All figures and tables (if exists) should be labelled and it is
+preferred to have a list of figures and a list of tables after the table of contents.
+
+  1. Project Plan
+  A plan describing how the work has been divided between the group members where
+  each task has a date, estimated working hours, and name of group member(s).
+
+  2. Programming Manual
+  2.1. Program Purpose: An introduction and simple description of the elevator simulation
+  and the purpose of the program.
+
+  2.2. Program Structure: A diagram/flowchart of the program structure with the subparts.
+
+  2.3. User Interface: A simple description of the user interface, main options, inputs and
+  outputs. More details with screenshots of the implementation can be included in the
+  User Manual.
+
+  2.4. Program Code: A print-out of a well-documented and commented program. The code
+  can be included in this section of the programming manual or can be uploaded as a
+  separated file/folder. A description of the related file (if exists) should be included in
+  this section of the document. In the code file, group information should be included in
+  the beginning, and comments that contain a description of the task and its input and
+  output should be placed above each function.
+
+  2.5. Testing: A report regarding the tests that are performed and their results. Tests
+  regarding whether or not the program performs the main requirements and meets the
+  objective of the project should be performed. In addition, tests should ensure the
+  robustness of the program and that it is able to provide an appropriate output for any
+  errors that might occur in the system or any user-related errors such as incorrect inputs.
+  Each test case should have the following info: Id, date, tester name, test description,
+  user input, expected result, actual result, whether it passed or failed, severity of the
+  defect, summary of the defect and how it was resolved. Screenshots can also be added
+  to each test case if necessary.
+
+  3. User Manual
+  A user manual with instructions on how to run the elevator simulation and examples
+  of program executions where it is clear how the user could communicate with the
+  program. Screenshots of the implementation should also be included.
+
+Opposition
+
+  In the written opposition the following should be included:
+  1. Name of the opponents and the name of the group members that have done the
+  assignment.
+  2. A description of the user interface (the chosen solutions, advantages, disadvantages,
+  possible alternatives) and how easy it is to use.
+  3. A report regarding the program code (the solutions chosen, advantages, disadvantages,
+  possible alternatives) and an evaluation of how easy it is to follow the code.
+  4. An evaluation of the program’s function (do all the subparts work well, does the
+  program cope with incorrect input).
+  5. An evaluation of how well the program has been tested.
+  6. An evaluation of the whole program documentation. In the oral opposition the group
+  should choose to present some of the given points given above, points that are important
+  in relation to the current program.
+
+Elevator Simulation - Description
+
+The task is to design the elevator algorithm in a way to minimize the total time taken to get all
+the passengers to their destination floor. It takes 1-unit time for the elevator to reach any
+consecutive floor from the current floor. Waiting for an elevator is a situation with which we
+are all familiar. We press a button and then wait for an elevator to arrive traveling in the right
+direction. We may have to wait a long time if there are too many passengers. Just how long we
+wait depends on the dispatching strategy the elevators use to decide where to go. For example,
+if passengers on several floors have requested pickups, which should be served first? The aim
+of this project is select and implement a dispatching strategy (i.e. algorithm) and simulate it.
+The performance of elevator dispatchers is measured in several different ways, all with respect
+to an average passenger entering the system. The waiting time is how long the passenger waits
+before getting on an elevator (time passenger waits before stepping into an elevator), and the
+system time is how long the passenger waits before being dropped off at the destination floor
+(time passenger spends in an elevator). Completion time is sum of waiting time and system
+time (Total time when passenger click a call button and drop off at the destination floor).
+
+Requirements
+
+1. A data structure has both strengths and weaknesses. Choosing the right data
+structure(s) that can be used to solve a given problem is important.
+
+2. Choosing and implementing appropriate solution algorithms to achieve efficiency.
+Also explain your algorithm(s) in simple words, e.g., my algorithms serviced requests
+in one direction only, et cetera.
+
+3. List different scenarios best case, worst case and average case.
+
+4. Prepared test data.
+
+5. Execute the code and calculate wait time for each test user (also store output in a
+separate file).
+
+6. Convince/proof that your algorithm is efficient.
+
+7. Design for scalability that means if we need we can change number of floors, capacity,
+etc. (if needed)
+
+8. Extra (optional): Design the solution so that it can work if there are multiple
+elevators.
+
+Assumptions and Specifications
+
+• Passengers are very patient and do not abandon.
+• Passenger assignments may not be changed.
+• Passengers at any specific floor board the elevator first-come, first-serve bases (we
+ignore the possibility of two or more persons come at same time).
+• Destination floor distribution is time independent (morning, lunch time or evening).
+• Doors open/close and last passenger in/out time is ignored.
+• Elevators take 10 milliseconds to traverse 1 floor
+• Elevator has a capacity of 10 passenger.
+• Maximum number of passengers waiting at any floor should be less than equal to 50.
+• Initially elevator is at the ground floor (floor 0) and there is no basement.
+• There are 10 floors in the building
+• On each floor there are two call buttons, on for UP and one for DOWN (Actually floor
+0 has only UP and floor 9 has only DOWN, but we may ignore that anomaly since the
+excess buttons will never be used).
+• There are also buttons within the elevator car correspond to floor number (0-9)
+• The elevator is in one of three states: GOINGUP, GOINGDOWN, or NEUTRAL
+User Interface
+The Simulation system need to display following information:
+During Simulation:
+• Current position of elevator (floor number) and elevator’s state
+• Passengers waiting at different floors and their destination direction
+ 1 I unit time: 10 milliseconds in C# you can use “System.Threading.Thread.Sleep(10);”
+When Simulation finished
+• Number of passengers (who used the elevator)
+• Total time taken
+• Average waiting time
+• Average completion time
+• Least total time taken (by X number of passengers 2
+)
+• Highest total time taken (by Y number of passengers)
+The user interface needs to allow to play, pause, or go to end buttons for simulation. Also, we
+can run step by step using go to next step button (see for example https://visualgo.net/).
+A Basic Algorithm
+Here is an algorithm with simplest set of rules. This algorithm assumes that an elevator carrying
+passengers could not pass by a floor if any of its passengers wanted to get off there, nor could
+it go in reverse direction until all of its passengers wanting to go in its current direction had
+reached their floors.
+1. Start going in the direction of the first button pressed, keep track of which direction
+we're going
+2. When a floor is reached and that button was pressed, stop and open the doors, mark
+the buttons for this floor as not pressed anymore.
+3. If there are still more floors that we need to visit that are in the same direction, keep
+going in that direction.
+4. If not and there are still floors we need to visit, move in that direction.
+5. If not then we're done and will start at 1 when a button is pressed again.
+At first glance, it’s clear that this will generate excessive up and down movement of the
+elevator. It also will not be the most time efficient. But it’s not all bad. It’s very fair in terms of
+serving, if fairness means relative wait time. You may need to improve or modify it after you
+will experiment using different set of data. For example, you may adopt one of following
+strategies:
+• First come first
+• Shortest time first
+• Shortest remaining time first
+You need to specify and discuss about assumptions you have made in your algorithm design.
+For example, elevator in your simulation may pass a floor or go in reverse direction without
+dropping off all its current passengers in current direction. Clearly, there is a possibility that
+requests keep coming from a region of nearby floors, and the elevator doesn’t get a chance to
+serve older requests from floors that are far away. This can lead to starvation for some requests,
+as there is no upper bound on the wait time. You have to think about trade-offs in your design.
+You may need to use simple queue data structure or a complex data structure that would store
+the requests in way that they can be searched quickly.
+ 2 This means how many passengers were reached on their destination with smallest time, e.g., 10 milliseconds
+(23).
+Test DataSet File
+The test data will be a comma-separated values (CSV) file that is named as groupname.txt
+(e.g., a1.txt)
+Test DataSet Format
+If there are n floors in the building, first n lines represent each floor status at time t0. Next n
+lines represent each floor status at t1. Last n lines represent floor status at tn-1. Within the set
+of n lines, the first line represent floor 0, second line floor 1 and the last line represent floor
+n-1. If there is no person waiting at any floor it is represented with one negative number -1.
+If there are multiple person waiting at any floor they are represented with number of positive
+numbers separated with comma (,). The placement of numbers from left to right represent
+who come first. One positive number represents where the person wants to go and its value
+can be between 0 and n-1. If at any floor more person want to go to same floor, a positive
+number can be repeated however the order of entries can be different. The maximum number
+of entries in one row <= 50. Wrong entries must be identified and corrected (or notified to
+concern group), e.g., if a person is on 3rd floor and want to go to 3rd floor. Similarly, a person
+wants to go to a floor >= n, e.g., there are 10 floor and if there is any entry with 10 or 11 or
+greater value is wrong.
+A sample data to start with at t0:
+1,3,6,8,9,1,2
+0,3,2,5,6,2,8,9
+3,0,9,5,4,6,0
+0
+-1
+-1
+-1
+0,5
+-1
+-1
+1,3,6,8,9,1,2
+0,3,2,5,6,2,8,9
+3,0,9,5,4,6,0
+0
+-1
+-1
+-1
+0,1
+0
+0
+Group Coordination and communication
+Each group have to decide themselves how they are going to communicate with each other
+e.g. through Skype, Social media platforms, Zoom, Student portal, Slack, Trello, Google
+Hangouts, etc. Similarly, to share documentation and source code of project you can use
+Google Drive, Dropbox, OneDrive, GitHub, Office 365, etc.
+Note: The only restriction is that the source code and documentation should not be available
+or accessible publicly. You are not allowed to discussed the source code with anyone other
+than our teachers assigned to this course. Particularly you are not allowed to share with other
+groups. However, you can discuss about project in general without provide specific solution.
+If any source code or documentation used in your program that was obtained from another
+source, such as a text book or course notes, a website, that has to be clearly noted with a
+proper citation in the comments of your program.

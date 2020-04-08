@@ -12,7 +12,8 @@ namespace ALGODS_Projekt
         {
             _Start_floor = start_floor;
             _End_floor = end_floor;
-            _Time = 0;
+            _Waiting_time = 0;
+            _System_time = 0;
         }
         
         
@@ -44,18 +45,44 @@ namespace ALGODS_Projekt
         }
         private int _End_floor;
         
-        public int Time 
-        {
+       // Time that the person has been waiting for the elevator.
+       public int Waiting_time
+       {  
             get
             {
-                return _Time;
+                return _Waiting_time;
+            }
+            set
+            {
+                 _Waiting_time = value;       
+            }
+       }
+        private int _Waiting_time;
+        
+        // Time that the person has been in the elevator.
+        public int System_time 
+        {
+            get 
+            {
+                return _System_time;
             }
             set 
             {
-                _Time = value;
+                _System_time = value;
             }
         }
-        private int _Time;
+        private int _System_time;
+        
+        // Methods:
+        
+        // Total time
+        public int Completion_time()
+        {
+            return _Waiting_time + _System_time;
+        }
+        
+        
+        
         
         
     }

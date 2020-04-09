@@ -50,8 +50,15 @@ namespace ALGODS_Projekt
                     string line;
                     while ((line = reader.ReadLine()) != null)
                     {
+                        line.Trim();
                         TEST_READ_FROM_FILE.Text = line;
                         listBox1.Items.Add("Floor " + counter.ToString() + ": " + line);
+
+                        foreach (var item in line)
+                        {
+                            Person person = new Person(counter, item);
+                        }
+
                         counter++;
                     }
 

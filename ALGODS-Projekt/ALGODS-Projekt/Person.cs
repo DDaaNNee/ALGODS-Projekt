@@ -8,12 +8,14 @@ namespace ALGODS_Projekt
 {
     public class Person
     {
+
         public Person(int start_floor, int end_floor)
         {
             _Start_floor = start_floor;
             _End_floor = end_floor;
             _Waiting_time = 0;
             _System_time = 0;
+            _DirectionInt = start_floor - end_floor;
         }
         
         
@@ -72,13 +74,48 @@ namespace ALGODS_Projekt
             }
         }
         private int _System_time;
-        
+
+
+        public int DirectionInt
+        {
+            get
+            {
+                return _DirectionInt;
+            }
+            set
+            {
+                _DirectionInt = value;
+            }
+        }
+        private int _DirectionInt;
+
         // Methods:
-        
+
         // Total time
         public int Completion_time()
         {
             return _Waiting_time + _System_time;
+        }
+
+        public Direction.DirectionEnum GetDirection(int starting_floor, int ending_floor)
+        {
+            Direction.DirectionEnum currentDirection;
+
+            if (_DirectionInt > 0)
+            {
+                currentDirection = Direction.DirectionEnum.Up;
+                return currentDirection;
+            }
+            else if (_DirectionInt < 0)
+            {
+                currentDirection = Direction.DirectionEnum.Down;
+                return currentDirection;
+            }
+            else
+            {
+                currentDirection = Direction.DirectionEnum.Neutral;
+                return currentDirection;
+            }
         }
         
         

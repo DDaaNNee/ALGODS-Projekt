@@ -41,17 +41,31 @@ namespace ALGODS_Projekt
 
         private void btn_play_Click(object sender, EventArgs e)
         {
-            //List<int> ListOfPeople = File.ReadAllLines("C:/Users/Danne/Desktop/Test.csv").ToList();
 
-            var csvData = new DataTable();
-
-            using (var reader = new StreamReader(@"C:/Users/Danne/Desktop/Test.csv"))
+            try
             {
-                while(!reader.EndOfStream)
+                using (var reader = new StreamReader(@"C:/Users/Danne/Desktop/Book1.csv"))
                 {
+                    int counter = 0;
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        TEST_READ_FROM_FILE.Text = line;
+                        listBox1.Items.Add("Floor " + counter.ToString() + ": " + line);
+                        counter++;
+                    }
 
+                    TOTAL_LINES.Text = ("Total number of rows: " + counter);
                 }
             }
+            catch (Exception)
+            {
+                Console.WriteLine("The file could not be read!");
+                throw;
+            }
+            
+
+
         }
     }
 }

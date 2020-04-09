@@ -1,0 +1,10 @@
+D:\ALGODS - Projekt\ALGODS-Projekt\ALGODS-Projekt\ALGODS-Projekt\bin\Debug\ALGODS-Projekt.exe.config
+D:\ALGODS - Projekt\ALGODS-Projekt\ALGODS-Projekt\ALGODS-Projekt\bin\Debug\ALGODS-Projekt.exe
+D:\ALGODS - Projekt\ALGODS-Projekt\ALGODS-Projekt\ALGODS-Projekt\bin\Debug\ALGODS-Projekt.pdb
+D:\ALGODS - Projekt\ALGODS-Projekt\ALGODS-Projekt\ALGODS-Projekt\obj\Debug\ALGODS-Projekt.csprojAssemblyReference.cache
+D:\ALGODS - Projekt\ALGODS-Projekt\ALGODS-Projekt\ALGODS-Projekt\obj\Debug\ALGODS_Projekt.Form1.resources
+D:\ALGODS - Projekt\ALGODS-Projekt\ALGODS-Projekt\ALGODS-Projekt\obj\Debug\ALGODS_Projekt.Properties.Resources.resources
+D:\ALGODS - Projekt\ALGODS-Projekt\ALGODS-Projekt\ALGODS-Projekt\obj\Debug\ALGODS-Projekt.csproj.GenerateResource.cache
+D:\ALGODS - Projekt\ALGODS-Projekt\ALGODS-Projekt\ALGODS-Projekt\obj\Debug\ALGODS-Projekt.csproj.CoreCompileInputs.cache
+D:\ALGODS - Projekt\ALGODS-Projekt\ALGODS-Projekt\ALGODS-Projekt\obj\Debug\ALGODS-Projekt.exe
+D:\ALGODS - Projekt\ALGODS-Projekt\ALGODS-Projekt\ALGODS-Projekt\obj\Debug\ALGODS-Projekt.pdb

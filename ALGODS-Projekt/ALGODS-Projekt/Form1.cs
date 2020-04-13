@@ -19,7 +19,7 @@ namespace ALGODS_Projekt
         }
 
         List<Person> personList;
-        //List<Floor> floorList;
+        List<Floor> floorList;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -58,7 +58,7 @@ namespace ALGODS_Projekt
                         floorCounter++;
                     }
 
-                    foreach (Person p in personList /*Floor floor in floorList*/)
+                    foreach (Person p in personList)
                     {
                         listBox1.Items.Add(GetPeopleOnSameFloor(p));
                     }

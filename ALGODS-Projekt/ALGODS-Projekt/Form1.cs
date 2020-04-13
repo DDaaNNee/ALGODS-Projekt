@@ -19,6 +19,7 @@ namespace ALGODS_Projekt
         }
 
         List<Person> personList;
+        //List<Floor> floorList;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -39,39 +40,29 @@ namespace ALGODS_Projekt
             {
                 using (var reader = new StreamReader(@"C:/Users/Danne/Desktop/Book1.csv"))
                 {
-                    int counter = 0;
+                    int floorCounter = 0;
                     string line;
                     while ((line = reader.ReadLine()) != null)
                     {
                         line.Trim();
                         TEST_READ_FROM_FILE.Text = line;
-                        //listBox1.Items.Add("Floor " + counter.ToString() + ": " + line);
 
-                        //foreach (var item in line)
-                        //{
-                        //    if (item != -1 && string.IsNullOrEmpty(item.ToString()) == false)
-                        //    {
-                        //        Person person = new Person(counter, /*Convert.ToInt32(line[stringCounter])*/ 5);
-                        //        personList.Add(person);
-                        //    }
-                        //}
-
-                        for (int i = 0; i < line.Length; i++)
+                        foreach (var item in line)
                         {
-                            int test = Convert.ToInt32(line[i]);
-                            Person person = new Person(counter, Convert.ToInt32(line[i]));
-                            personList.Add(person);
+                            if (char.GetNumericValue(item) != -1)
+                            {
+                                Person person = new Person(floorCounter, Convert.ToInt32(char.GetNumericValue(item)));
+                                personList.Add(person);
+                            }
                         }
-
-                        counter++;
+                        floorCounter++;
                     }
 
-                    foreach (Person p in personList)
+                    foreach (Person p in personList /*Floor floor in floorList*/)
                     {
-                        listBox1.Items.Add("(Start floor: " + p.Start_floor + ", End floor: " + p.End_floor + ")");
+                        listBox1.Items.Add(GetPeopleOnSameFloor(p));
                     }
-
-                    TOTAL_LINES.Text = ("Total number of rows: " + counter);
+                    TOTAL_LINES.Text = ("Total number of rows: " + floorCounter);
                 }
             }
             catch (Exception)
@@ -79,9 +70,26 @@ namespace ALGODS_Projekt
                 Console.WriteLine("The file could not be read!");
                 throw;
             }
-            
+        }
 
+        public string GetPeopleOnSameFloor(Person person)
+        {
+            string test = "";
+            List<Person> sameFloorPeople = new List<Person>();
+            foreach (Person p in personList)
+            {
+                if (person.Start_floor == p.Start_floor)
+                {
+                    sameFloorPeople.Add(p);
+                }
+            }
 
+            foreach (Person sameFloor in sameFloorPeople)
+            {
+                test = test + sameFloor.End_floor;
+            }
+
+            return "Floor " + person.Start_floor + " :" + test;
         }
     }
 }

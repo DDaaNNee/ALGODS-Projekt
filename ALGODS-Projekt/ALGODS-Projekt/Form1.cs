@@ -18,18 +18,11 @@ namespace ALGODS_Projekt
             InitializeComponent();
         }
 
+        List<Person> personList;
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            List<int> floorZero = new List<int>();
-            List<int> floorOne = new List<int>();
-            List<int> floorTwo = new List<int>();
-            List<int> floorThree = new List<int>();
-            List<int> floorFour = new List<int>();
-            List<int> floorFive = new List<int>();
-            List<int> floorSix = new List<int>();
-            List<int> floorSeven = new List<int>();
-            List<int> floorEight = new List<int>();
-            List<int> floorNine = new List<int>();
+            personList = new List<Person>();
         }
 
 
@@ -52,14 +45,30 @@ namespace ALGODS_Projekt
                     {
                         line.Trim();
                         TEST_READ_FROM_FILE.Text = line;
-                        listBox1.Items.Add("Floor " + counter.ToString() + ": " + line);
+                        //listBox1.Items.Add("Floor " + counter.ToString() + ": " + line);
 
-                        foreach (var item in line)
+                        //foreach (var item in line)
+                        //{
+                        //    if (item != -1 && string.IsNullOrEmpty(item.ToString()) == false)
+                        //    {
+                        //        Person person = new Person(counter, /*Convert.ToInt32(line[stringCounter])*/ 5);
+                        //        personList.Add(person);
+                        //    }
+                        //}
+
+                        for (int i = 0; i < line.Length; i++)
                         {
-                            Person person = new Person(counter, item);
+                            int test = Convert.ToInt32(line[i]);
+                            Person person = new Person(counter, Convert.ToInt32(line[i]));
+                            personList.Add(person);
                         }
 
                         counter++;
+                    }
+
+                    foreach (Person p in personList)
+                    {
+                        listBox1.Items.Add("(Start floor: " + p.Start_floor + ", End floor: " + p.End_floor + ")");
                     }
 
                     TOTAL_LINES.Text = ("Total number of rows: " + counter);

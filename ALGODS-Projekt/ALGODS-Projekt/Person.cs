@@ -101,12 +101,12 @@ namespace ALGODS_Projekt
         {
             Direction.DirectionEnum currentDirection;
 
-            if (_DirectionInt > 0)
+            if (_DirectionInt < 0)
             {
                 currentDirection = Direction.DirectionEnum.Up;
                 return currentDirection;
             }
-            else if (_DirectionInt < 0)
+            else if (_DirectionInt > 0)
             {
                 currentDirection = Direction.DirectionEnum.Down;
                 return currentDirection;

@@ -18,10 +18,21 @@ namespace ALGODS_Projekt
         Elevator elevator;
 
         // Våningar - En lista med Floor-objekt?
-
         List<Floor> floors;
-        
 
+        Floor floor;
+
+        public void CreateFloors(List<Person> pList)
+        {
+            foreach(int startFloor in pList.Select(x=>x.Start_floor).Distinct())
+            {
+                floor = new Floor(startFloor);
+                foreach (Person p in pList)
+                {
+                    //floor.AddPerson(p);
+                }
+            }
+        }
 
 
     }

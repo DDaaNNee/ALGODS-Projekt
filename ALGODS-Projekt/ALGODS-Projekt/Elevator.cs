@@ -11,12 +11,24 @@ namespace ALGODS_Projekt
 
         Direction.DirectionEnum currentDirection;
         List<Person> currentPeople;
+        List<Floor> listOfFloors;
         int currentFloor;
         
+
+        // Två konstruktorer: en för en "default" byggnad med 10 floors, och en med ett specificerat antal våningar utifrån användar-input.
         public Elevator()
         {
             currentDirection = Direction.DirectionEnum.Up;
             currentPeople = new List<Person>(10);
+            listOfFloors = new List<Floor>(10);
+            currentFloor = 0;
+        }
+
+        public Elevator(int numOfFloors)
+        {
+            currentDirection = Direction.DirectionEnum.Up;
+            currentPeople = new List<Person>(10);
+            listOfFloors = new List<Floor>(numOfFloors);
             currentFloor = 0;
         }
 

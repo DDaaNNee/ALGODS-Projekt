@@ -8,9 +8,14 @@ namespace ALGODS_Projekt
 {
     public class Floor
     {
-        public Floor()
+        public Floor(int floorNumber)
         {
-
+            _floorNumber = floorNumber;
         }
+
+        int _floorNumber;
+        List<Person> peopleWaiting;
+
+
     }
 }

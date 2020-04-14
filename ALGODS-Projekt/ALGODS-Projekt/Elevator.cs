@@ -40,6 +40,21 @@ namespace ALGODS_Projekt
                 currentFloor = currentFloor - 1;           
             }
         }
-        
+
+        // Öka passagerares System_time med 1
+        public void IncreaseSystemTime()
+        {
+            foreach (Person passenger in currentPeople)
+            {
+                passenger.System_time = passenger.System_time + 1;
+            }
+        }
+
+
+
+
+        // Metod för att sortera passagerarna i currentPeople så att listan snabbare kan sökas igenom efter personer som ska gå av?
+
+
     }
 }

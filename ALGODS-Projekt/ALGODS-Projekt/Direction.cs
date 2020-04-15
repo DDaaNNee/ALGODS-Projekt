@@ -14,5 +14,7 @@ namespace ALGODS_Projekt
             Down,
             Neutral
         }
+
+        // Test commit
     }
 }

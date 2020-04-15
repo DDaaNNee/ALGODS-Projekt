@@ -32,6 +32,11 @@ namespace ALGODS_Projekt
             peopleWaiting.Add(person);
         }
 
+        public void RemovePerson(Person person)
+        {
+            peopleWaiting.Remove(person);
+        }
+
         public List<Person> GetPeopleOnFloor()
         {
             return peopleWaiting;
@@ -40,6 +45,11 @@ namespace ALGODS_Projekt
         public int GetFloorNumber()
         {
             return _floorNumber;
+        }
+
+        public void ChangeFloorNumber(int num)
+        {
+            _floorNumber = num;
         }
     }
 }

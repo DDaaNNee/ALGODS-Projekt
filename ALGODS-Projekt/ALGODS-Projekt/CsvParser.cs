@@ -25,10 +25,9 @@ namespace ALGODS_Projekt
                     int floorCounter = 0;
                     string line;
 
-                    if (floorCounter < numberOfFloors)
+                    while ((line = reader.ReadLine()) != null)
                     {
-
-                        while ((line = reader.ReadLine()) != null)
+                        if (floorCounter < numberOfFloors)
                         {
                             line.Trim();
                             foreach (var item in line)

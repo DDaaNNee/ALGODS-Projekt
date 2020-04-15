@@ -53,11 +53,10 @@
             this.label28 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label29 = new System.Windows.Forms.Label();
-            this.TEST_READ_FROM_FILE = new System.Windows.Forms.Label();
-            this.TOTAL_LINES = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label9 = new System.Windows.Forms.Label();
             this.cb_numOfFloors = new System.Windows.Forms.ComboBox();
+            this.listBox2 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // btn_play
@@ -284,24 +283,6 @@
             this.label29.TabIndex = 34;
             this.label29.Text = "(Time taken)";
             // 
-            // TEST_READ_FROM_FILE
-            // 
-            this.TEST_READ_FROM_FILE.AutoSize = true;
-            this.TEST_READ_FROM_FILE.Location = new System.Drawing.Point(541, 261);
-            this.TEST_READ_FROM_FILE.Name = "TEST_READ_FROM_FILE";
-            this.TEST_READ_FROM_FILE.Size = new System.Drawing.Size(41, 13);
-            this.TEST_READ_FROM_FILE.TabIndex = 35;
-            this.TEST_READ_FROM_FILE.Text = "label30";
-            // 
-            // TOTAL_LINES
-            // 
-            this.TOTAL_LINES.AutoSize = true;
-            this.TOTAL_LINES.Location = new System.Drawing.Point(541, 309);
-            this.TOTAL_LINES.Name = "TOTAL_LINES";
-            this.TOTAL_LINES.Size = new System.Drawing.Size(41, 13);
-            this.TOTAL_LINES.TabIndex = 36;
-            this.TOTAL_LINES.Text = "label30";
-            // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
@@ -327,16 +308,23 @@
             this.cb_numOfFloors.Size = new System.Drawing.Size(121, 21);
             this.cb_numOfFloors.TabIndex = 39;
             // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.Location = new System.Drawing.Point(425, 158);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(193, 160);
+            this.listBox2.TabIndex = 40;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(871, 552);
+            this.Controls.Add(this.listBox2);
             this.Controls.Add(this.cb_numOfFloors);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.TOTAL_LINES);
-            this.Controls.Add(this.TEST_READ_FROM_FILE);
             this.Controls.Add(this.label29);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label28);
@@ -397,11 +385,10 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label TEST_READ_FROM_FILE;
-        private System.Windows.Forms.Label TOTAL_LINES;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox cb_numOfFloors;
+        private System.Windows.Forms.ListBox listBox2;
     }
 }
 

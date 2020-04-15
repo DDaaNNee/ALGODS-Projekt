@@ -12,24 +12,15 @@ namespace ALGODS_Projekt
         Direction.DirectionEnum currentDirection;
         List<Person> currentPeople;
         List<Floor> listOfFloors;
-        int currentFloor;
+        Floor currentFloor;
         
-
-        // Två konstruktorer: en för en "default" byggnad med 10 floors, och en med ett specificerat antal våningar utifrån användar-input.
-        public Elevator()
-        {
-            currentDirection = Direction.DirectionEnum.Up;
-            currentPeople = new List<Person>(10);
-            listOfFloors = new List<Floor>(10);
-            currentFloor = 0;
-        }
-
-        public Elevator(int numOfFloors)
+        public Elevator(int numOfFloors = 10)
         {
             currentDirection = Direction.DirectionEnum.Up;
             currentPeople = new List<Person>(10);
             listOfFloors = new List<Floor>(numOfFloors);
-            currentFloor = 0;
+            currentFloor = new Floor(0);
+
         }
 
         public void AddPerson(Person person)
@@ -41,15 +32,15 @@ namespace ALGODS_Projekt
         }
         
         // Flytta hissen en våning uppåt eller en våning nedåt.
-        public void MoveElevator()
+        public void MoveElevator(Direction.DirectionEnum currentDirection = Direction.DirectionEnum.Up)
         {
-            if(currentDirection == Direction.DirectionEnum.Up && currentFloor < 9)
+            if(currentDirection == Direction.DirectionEnum.Up && currentFloor.GetFloorNumber() < 9)
             {
-                currentFloor = currentFloor + 1;
+                currentFloor.ChangeFloorNumber(currentFloor.GetFloorNumber() + 1);
             }
-            else if (currentDirection == Direction.DirectionEnum.Down && currentFloor > 0)
+            else if (currentDirection == Direction.DirectionEnum.Down && currentFloor.GetFloorNumber() > 0)
             {
-                currentFloor = currentFloor - 1;           
+                currentFloor.ChangeFloorNumber(currentFloor.GetFloorNumber() - 1);           
             }
         }
 
@@ -60,6 +51,21 @@ namespace ALGODS_Projekt
             {
                 passenger.System_time = passenger.System_time + 1;
             }
+        }
+
+        public List<Person> GetCurrentPassagers()
+        {
+            return currentPeople;
+        }
+
+        public Floor GetCurrentFloor()
+        {
+            return currentFloor;
+        }
+
+        public Direction.DirectionEnum GetCurrentElevatorDirection()
+        {
+            return currentDirection;
         }
 
 

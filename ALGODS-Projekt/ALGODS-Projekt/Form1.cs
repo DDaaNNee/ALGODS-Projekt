@@ -19,10 +19,16 @@ namespace ALGODS_Projekt
         }
 
         CsvParser csvParser;
+        Building building;
 
         private void Form1_Load(object sender, EventArgs e)
         {
             csvParser = new CsvParser();
+            building = new Building();
+            for (int i = 0; i < 100; i++)
+            {
+                cb_numOfFloors.Items.Add(i);
+            }
         }
 
         // Denna metod behöver sannolikt felhantering
@@ -32,20 +38,27 @@ namespace ALGODS_Projekt
             OpenFileDialog openFileDiag = new OpenFileDialog();
             DialogResult result = openFileDiag.ShowDialog();
             string path = openFileDiag.FileName;
+            string rowInListbox;
 
-            // Placeholder tills att vi har fixat så att vi får data via Floor-klassen som säger vilka Person vi har på varje floor.
-            try
+            building.CreateFloor(csvParser.ParseCsv(path));
+
+            foreach (Floor f in building.GetFloors())
             {
-                foreach (Person p in csvParser.ParseCsv(path))
+                rowInListbox = "";
+                listBox1.Items.Add("Floor " + f.GetFloorNumber());
+
+                foreach (Person p in f.GetPeopleOnFloor())
                 {
-                    listBox1.Items.Add("Floor " + p.Start_floor + ": " + p.End_floor);
+                    if (p == f.GetPeopleOnFloor().Last())
+                    {
+                        rowInListbox += p.End_floor;
+                    }
+                    else
+                    {
+                        rowInListbox += p.End_floor + ", ";
+                    }
                 }
-            }
-
-            catch (Exception)
-            {
-                MessageBox.Show("Invalid file path, please try again!");
-                throw;
+                listBox1.Items.Add(rowInListbox);
             }
         }
     }

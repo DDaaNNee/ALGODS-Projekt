@@ -12,26 +12,34 @@ namespace ALGODS_Projekt
         public Building()
         {
             elevator = new Elevator();
+            allFloors = new List<Floor>();
         }
 
         // Byggnaden får ett elevator-objekt vid instansiering
         Elevator elevator;
 
         // Våningar - En lista med Floor-objekt?
-        List<Floor> floors;
+        List<Floor> allFloors;
 
         Floor floor;
 
-        public void CreateFloors(List<Person> pList)
+        public void CreateFloor(List<Person> pList)
         {
             foreach(int startFloor in pList.Select(x=>x.Start_floor).Distinct())
             {
                 floor = new Floor(startFloor);
-                foreach (Person p in pList)
+                allFloors.Add(floor);
+                
+                foreach (Person p in pList.Where(x=>x.Start_floor == startFloor))
                 {
-                    //floor.AddPerson(p);
+                    floor.AddPerson(p);
                 }
             }
+        }
+
+        public List<Floor> GetFloors()
+        {
+            return allFloors;
         }
 
 

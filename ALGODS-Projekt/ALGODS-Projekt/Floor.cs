@@ -11,6 +11,7 @@ namespace ALGODS_Projekt
         public Floor(int floorNumber)
         {
             _floorNumber = floorNumber;
+            peopleWaiting = new List<Person>(50);
         }
 
         int _floorNumber;
@@ -26,6 +27,19 @@ namespace ALGODS_Projekt
             return false;
         }
 
-        // Lägg till en "AddPerson"-metod som tar alla Person från en rad i vår CSV-fil och lägger till dom på ett Floor.
+        public void AddPerson(Person person)
+        {
+            peopleWaiting.Add(person);
+        }
+
+        public List<Person> GetPeopleOnFloor()
+        {
+            return peopleWaiting;
+        }
+
+        public int GetFloorNumber()
+        {
+            return _floorNumber;
+        }
     }
 }

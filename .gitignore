@@ -3,3 +3,7 @@ ALGODS-Projekt/.vs/ALGODS-Projekt/v15
 ALGODS-Projekt/.vs/ALGODS-Projekt/v15/Server/sqlite3/storage.ide-wal
 *.ide-shm
 ALGODS-Projekt/.vs/ALGODS-Projekt/v15/.suo
+*.ide
+ALGODS-Projekt/.vs/ALGODS-Projekt/v15/.suo
+*.ide-shm
+*.ide-wal

@@ -14,29 +14,35 @@ namespace ALGODS_Projekt
 
         }
 
-        public List<Person> ParseCsv(string pathToFile)
+        // Implementera så att listan fortsätts att läsas efter första 10, men att den ska pausa eller liknande efter varje "numberOfFloors"
+        public List<Person> ParseCsv(string pathToFile, int numberOfFloors = 10)
         {
             List<Person> personList = new List<Person>();
             try
             {
-                //string path = "@" + pathToFile;
-                //@"C:/Users/Danne/Desktop/Book1.csv"
                 using (var reader = new StreamReader(pathToFile))
                 {
                     int floorCounter = 0;
                     string line;
-                    while ((line = reader.ReadLine()) != null)
+
+                    if (floorCounter < numberOfFloors)
                     {
-                        line.Trim();
-                        foreach (var item in line)
+
+                        while ((line = reader.ReadLine()) != null)
                         {
-                            if (char.GetNumericValue(item) != -1)
+                            line.Trim();
+                            foreach (var item in line)
                             {
-                                Person person = new Person(floorCounter, Convert.ToInt32(char.GetNumericValue(item)));
-                                personList.Add(person);
+                                // Problemet just nu: chars läses bara av som ett värde, dvs "-1" blir "1", vilket gör att den lägger till
+                                // de tomma våningarna i personList.
+                                if (char.GetNumericValue(item) != -1)
+                                {
+                                    Person person = new Person(floorCounter, Convert.ToInt32(char.GetNumericValue(item)));
+                                    personList.Add(person);
+                                }
                             }
+                            floorCounter++;
                         }
-                        floorCounter++;
                     }
                 }
                 return personList;

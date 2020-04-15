@@ -56,6 +56,8 @@
             this.TEST_READ_FROM_FILE = new System.Windows.Forms.Label();
             this.TOTAL_LINES = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cb_numOfFloors = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btn_play
@@ -143,7 +145,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(15, 294);
+            this.label7.Location = new System.Drawing.Point(32, 96);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(141, 13);
             this.label7.TabIndex = 9;
@@ -152,7 +154,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(162, 294);
+            this.label8.Location = new System.Drawing.Point(179, 96);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(119, 13);
             this.label8.TabIndex = 10;
@@ -161,7 +163,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(15, 320);
+            this.label18.Location = new System.Drawing.Point(32, 122);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(56, 13);
             this.label18.TabIndex = 20;
@@ -179,7 +181,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(54, 261);
+            this.label20.Location = new System.Drawing.Point(71, 63);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(98, 13);
             this.label20.TabIndex = 22;
@@ -188,7 +190,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(162, 320);
+            this.label21.Location = new System.Drawing.Point(179, 122);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(59, 13);
             this.label21.TabIndex = 23;
@@ -197,7 +199,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(15, 346);
+            this.label22.Location = new System.Drawing.Point(32, 148);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(111, 13);
             this.label22.TabIndex = 24;
@@ -206,7 +208,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(162, 346);
+            this.label23.Location = new System.Drawing.Point(179, 148);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(111, 13);
             this.label23.TabIndex = 25;
@@ -215,7 +217,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(15, 375);
+            this.label24.Location = new System.Drawing.Point(32, 177);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(129, 13);
             this.label24.TabIndex = 26;
@@ -224,7 +226,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(162, 375);
+            this.label25.Location = new System.Drawing.Point(179, 177);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(129, 13);
             this.label25.TabIndex = 27;
@@ -233,7 +235,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(15, 405);
+            this.label26.Location = new System.Drawing.Point(32, 207);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(114, 13);
             this.label26.TabIndex = 28;
@@ -242,7 +244,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(304, 405);
+            this.label27.Location = new System.Drawing.Point(321, 207);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(66, 13);
             this.label27.TabIndex = 29;
@@ -251,7 +253,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(165, 402);
+            this.comboBox1.Location = new System.Drawing.Point(182, 204);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 31;
@@ -259,7 +261,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(15, 435);
+            this.label28.Location = new System.Drawing.Point(32, 237);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(124, 13);
             this.label28.TabIndex = 32;
@@ -268,7 +270,7 @@
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(165, 432);
+            this.comboBox2.Location = new System.Drawing.Point(182, 234);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(121, 21);
             this.comboBox2.TabIndex = 33;
@@ -276,7 +278,7 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(304, 440);
+            this.label29.Location = new System.Drawing.Point(321, 242);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(66, 13);
             this.label29.TabIndex = 34;
@@ -285,7 +287,7 @@
             // TEST_READ_FROM_FILE
             // 
             this.TEST_READ_FROM_FILE.AutoSize = true;
-            this.TEST_READ_FROM_FILE.Location = new System.Drawing.Point(375, 235);
+            this.TEST_READ_FROM_FILE.Location = new System.Drawing.Point(541, 261);
             this.TEST_READ_FROM_FILE.Name = "TEST_READ_FROM_FILE";
             this.TEST_READ_FROM_FILE.Size = new System.Drawing.Size(41, 13);
             this.TEST_READ_FROM_FILE.TabIndex = 35;
@@ -294,7 +296,7 @@
             // TOTAL_LINES
             // 
             this.TOTAL_LINES.AutoSize = true;
-            this.TOTAL_LINES.Location = new System.Drawing.Point(375, 283);
+            this.TOTAL_LINES.Location = new System.Drawing.Point(541, 309);
             this.TOTAL_LINES.Name = "TOTAL_LINES";
             this.TOTAL_LINES.Size = new System.Drawing.Size(41, 13);
             this.TOTAL_LINES.TabIndex = 36;
@@ -308,11 +310,30 @@
             this.listBox1.Size = new System.Drawing.Size(235, 355);
             this.listBox1.TabIndex = 37;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(32, 333);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(127, 13);
+            this.label9.TabIndex = 38;
+            this.label9.Text = "Choose number of floors: ";
+            // 
+            // cb_numOfFloors
+            // 
+            this.cb_numOfFloors.FormattingEnabled = true;
+            this.cb_numOfFloors.Location = new System.Drawing.Point(182, 330);
+            this.cb_numOfFloors.Name = "cb_numOfFloors";
+            this.cb_numOfFloors.Size = new System.Drawing.Size(121, 21);
+            this.cb_numOfFloors.TabIndex = 39;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(871, 552);
+            this.Controls.Add(this.cb_numOfFloors);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.TOTAL_LINES);
             this.Controls.Add(this.TEST_READ_FROM_FILE);
@@ -379,6 +400,8 @@
         private System.Windows.Forms.Label TEST_READ_FROM_FILE;
         private System.Windows.Forms.Label TOTAL_LINES;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cb_numOfFloors;
     }
 }
 

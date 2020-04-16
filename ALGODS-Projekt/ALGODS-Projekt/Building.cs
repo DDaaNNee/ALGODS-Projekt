@@ -15,6 +15,7 @@ namespace ALGODS_Projekt
             allFloors = new List<Floor>();
             arrivedPassengers = new List<Person>();
             totalWaitTime = 0;
+            totalCompletionTime = 0;
         }
 
         // Byggnaden får ett elevator-objekt vid instansiering
@@ -22,15 +23,18 @@ namespace ALGODS_Projekt
 
         // Våningar - En lista med Floor-objekt?
         List<Floor> allFloors;
+
+        // Då passagerare lämnar hissen adderas de till denna lista.
         List<Person> arrivedPassengers;
 
 
         Floor floor;
 
-        int totalWaitTime;
-        int totalSystemTime;
-        int averageWaitTime;
-
+        // instansvariabler för total tidsåtgång
+        int totalWaitingTime;
+        int totalCompletionTime;
+        int averageWaitingTime;
+        int averageCompletionTime;
 
 
 
@@ -79,6 +83,8 @@ namespace ALGODS_Projekt
                 if (pDeparting.End_floor == elevator.GetCurrentFloor().GetFloorNumber())
                 {
                     elevator.GetCurrentFloor().RemovePerson(pDeparting);
+                    // Lägger till en person som går av på våningen i en lista för alla personer som ankommit till sin destination:
+                    arrivedPassagers.Add(pDeparting);
                 }
             }
             foreach (Person pArriving in elevator.GetCurrentFloor().GetPeopleOnFloor())
@@ -148,6 +154,29 @@ namespace ALGODS_Projekt
             }
             while (PeopleLeft() == true);
         }
+
+        // Metod för att räkna ut total Waiting time och System time:
+
+        public void calculateTotalTime()
+        {
+            foreach(Person p in arrivedPassengers)
+            {
+                totalWaitingTime = totalWaitingTime + p.Waiting_time;
+                totalCompletionTime = totalCompletionTime + p.GetCompletionTime();
+            }
+        }
+
+        // Metod för att räkna ut medelvärden (Waiting och Completion time) bland passagerare:
+
+        public void calculateAverageTime()
+        {
+            if(arrivedPassengers.Count != 0)
+            {
+                averageWaitingTime = (totalWaitingTime/arrivedPassengers.Count);
+                averageCompletionTime = (totalCompletionTime/arrivedPassengers.Count);
+            }
+        }
+
 
     }
 }

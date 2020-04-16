@@ -92,7 +92,7 @@ namespace ALGODS_Projekt
         // Methods:
 
         // Total time
-        public int Completion_time()
+        public int GetCompletionTime()
         {
             return _Waiting_time + _System_time;
         }

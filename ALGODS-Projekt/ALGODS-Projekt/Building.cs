@@ -13,6 +13,8 @@ namespace ALGODS_Projekt
         {
             elevator = elev;
             allFloors = new List<Floor>();
+            arrivedPassengers = new List<Person>();
+            totalWaitTime = 0;
         }
 
         // Byggnaden får ett elevator-objekt vid instansiering
@@ -20,8 +22,17 @@ namespace ALGODS_Projekt
 
         // Våningar - En lista med Floor-objekt?
         List<Floor> allFloors;
+        List<Person> arrivedPassengers;
+
 
         Floor floor;
+
+        int totalWaitTime;
+        int totalSystemTime;
+        int averageWaitTime;
+
+
+
 
         public void CreateFloor(List<Person> pList)
         {
@@ -62,6 +73,7 @@ namespace ALGODS_Projekt
 
         public void AddRemovePeople()
         {
+            // tar detta bort personer från hissen eller från nuvarande våning? Kan ha fattat fel, men RemovePerson() tar väl bort en person som  väntar på våningen?
             foreach (Person pDeparting in elevator.GetCurrentPassagers())
             {
                 if (pDeparting.End_floor == elevator.GetCurrentFloor().GetFloorNumber())

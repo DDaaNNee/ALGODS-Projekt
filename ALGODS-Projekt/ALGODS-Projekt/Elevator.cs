@@ -44,12 +44,12 @@ namespace ALGODS_Projekt
             }
         }
 
-        // Öka passagerares System_time med 1
+        // Öka passagerares System_time med 10
         public void IncreaseSystemTime()
         {
             foreach (Person passenger in currentPeople)
             {
-                passenger.System_time = passenger.System_time + 1;
+                passenger.System_time = passenger.System_time + 10;
             }
         }
 

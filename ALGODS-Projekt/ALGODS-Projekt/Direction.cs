@@ -15,6 +15,6 @@ namespace ALGODS_Projekt
             Neutral
         }
 
-        // Test commit
+        
     }
 }

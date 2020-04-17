@@ -155,7 +155,7 @@ namespace ALGODS_Projekt
             while (PeopleLeft() == true);
         }
 
-        // Metod för att räkna ut total Waiting time och System time:
+        // Metod för att räkna ut total Waiting time och Completion time:
 
         public void calculateTotalTime()
         {

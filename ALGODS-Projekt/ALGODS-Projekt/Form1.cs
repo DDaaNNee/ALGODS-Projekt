@@ -21,13 +21,11 @@ namespace ALGODS_Projekt
         CsvParser csvParser;
         Building building;
         Elevator elevator;
-        BindingSource binding;
 
         private void Form1_Load(object sender, EventArgs e)
         {
             csvParser = new CsvParser();
-            elevator = new Elevator();
-            building = new Building(elevator);
+            building = new Building();
             for (int i = 0; i < 100; i++)
             {
                 cb_numOfFloors.Items.Add(i);
@@ -42,26 +40,41 @@ namespace ALGODS_Projekt
             OpenFileDialog openFileDiag = new OpenFileDialog();
             DialogResult result = openFileDiag.ShowDialog();
             string path = openFileDiag.FileName;
-            string rowInListbox = "";
-            binding = new BindingSource();
-            binding.DataSource = building.UpdateInformation();
-            listBox1.DataSource = binding;
-
+            
             if (cb_numOfFloors.SelectedItem != null)
             {
-                building.CreateFloor(csvParser.ParseCsv(path, Convert.ToInt32(cb_numOfFloors.SelectedItem)));
+                elevator = new Elevator(Convert.ToInt32(cb_numOfFloors.SelectedItem));
             }
             else
             {
-                building.CreateFloor(csvParser.ParseCsv(path));
-            }           
+                elevator = new Elevator();
+            }
+
+            building.CreateFloor(csvParser.ParseCsv(path));
+
+            listBox1.Items.Add(building.UpdateInformation());
+            foreach (string item in building.UpdateInformation())
+            {
+                listBox1.Items.Add(item);
+            }
+
+            //foreach (Floor f in building.GetFloors())
+            //{
+            //    listBox1.Items.Add("Floor:" f.GetFloorNumber());
+            //    foreach (Person p in f.GetPeopleOnFloor())
+            //    {
+            //        listBox1.Items.Add(p.End_floor);
+            //    }
+            //}
 
             foreach (Person p in elevator.GetCurrentPassagers())
             {
                 listBox2.Items.Add(p.End_floor);
             }
 
-            building.StartElevator();
+            //building.StartElevator();
+
+            //UpdateLists();
         }
 
         public void UpdateLists()

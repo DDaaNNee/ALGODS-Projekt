@@ -9,12 +9,12 @@ namespace ALGODS_Projekt
     class Building
     {
 
-        public Building(Elevator elev)
+        public Building()
         {
-            elevator = elev;
+            elevator = new Elevator();
             allFloors = new List<Floor>();
             arrivedPassengers = new List<Person>();
-            totalWaitTime = 0;
+            totalWaitingTime = 0;
             totalCompletionTime = 0;
         }
 
@@ -37,18 +37,17 @@ namespace ALGODS_Projekt
         int averageCompletionTime;
 
 
-
+        // Just nu kör den varje floor utan att ta hänsyn till hur många floors vi vill att den ska skapa.
         public void CreateFloor(List<Person> pList)
         {
             foreach(int startFloor in pList.Select(x=>x.Start_floor).Distinct())
             {
-                floor = new Floor(startFloor);
-                allFloors.Add(floor);
-                
+                floor = new Floor(startFloor);                
                 foreach (Person p in pList.Where(x=>x.Start_floor == startFloor))
                 {
                     floor.AddPerson(p);
                 }
+                allFloors.Add(floor);
             }
         }
 
@@ -82,16 +81,16 @@ namespace ALGODS_Projekt
             {
                 if (pDeparting.End_floor == elevator.GetCurrentFloor().GetFloorNumber())
                 {
-                    elevator.GetCurrentFloor().RemovePerson(pDeparting);
+                    elevator.GetCurrentPassagers().Remove(pDeparting);
                     // Lägger till en person som går av på våningen i en lista för alla personer som ankommit till sin destination:
-                    arrivedPassagers.Add(pDeparting);
+                    arrivedPassengers.Add(pDeparting);
                 }
             }
             foreach (Person pArriving in elevator.GetCurrentFloor().GetPeopleOnFloor())
             {
                 if (pArriving.GetDirection(pArriving.Start_floor, pArriving.End_floor) == elevator.GetCurrentElevatorDirection())
                 {
-                    elevator.AddPerson(pArriving);
+                    elevator.GetCurrentPassagers().Add(pArriving);
                 }
             }
         }
@@ -107,26 +106,28 @@ namespace ALGODS_Projekt
             }
         }
 
-        public string UpdateInformation()
+        public List<string> UpdateInformation()
         {
-            string rowInListbox = "";
+            List<string> allPeopleStartList = new List<string>();
             foreach (Floor f in GetFloors())
             {
-                rowInListbox = "Floor " + f.GetFloorNumber();
+                string rowInList = "";
+                allPeopleStartList.Add("Floor " + f.GetFloorNumber() + ": ");
 
                 foreach (Person p in f.GetPeopleOnFloor())
                 {
                     if (p == f.GetPeopleOnFloor().Last())
                     {
-                        rowInListbox += p.End_floor;
+                        rowInList += p.End_floor.ToString();
                     }
                     else
                     {
-                        rowInListbox += p.End_floor + ", ";
+                        rowInList += p.End_floor.ToString() + ", ";
                     }
                 }
+                allPeopleStartList.Add(rowInList);
             }
-            return rowInListbox;
+            return allPeopleStartList;
         }
 
 

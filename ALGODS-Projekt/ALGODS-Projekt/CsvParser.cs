@@ -34,15 +34,36 @@ namespace ALGODS_Projekt
                             {
                                 // Problemet just nu: chars läses bara av som ett värde, dvs "-1" blir "1", vilket gör att den lägger till
                                 // de tomma våningarna i personList.
-                                if (char.GetNumericValue(item) != -1)
+                                /*int val = (int)char.GetNumericValue(item);*/
+                                if (/*val != -1*/(int)Char.GetNumericValue(item) == -1)
                                 {
-                                    Person person = new Person(floorCounter, Convert.ToInt32(char.GetNumericValue(item)));
+                                    Person person = new Person(floorCounter, item);
                                     personList.Add(person);
                                 }
                             }
                             floorCounter++;
                         }
                     }
+                    //while ((line = reader.ReadLine()) != null)
+                    //{
+                    //    if (floorCounter < numberOfFloors)
+                    //    {
+                    //        for (int i = 0; i < line.Length; i++)
+                    //        {
+                    //            if ((int)Char.GetNumericValue(line[i]) == -1)
+                    //            {
+                    //                i += 1;
+                    //            }
+                    //            else
+                    //            {
+                    //                Person person = new Person(floorCounter, (int)Char.GetNumericValue(line[i]));
+                    //                personList.Add(person);
+                    //            }
+                    //        }
+                    //        floorCounter++;
+
+                    //    }
+                    //}
                 }
                 return personList;
             }

@@ -8,7 +8,6 @@ namespace ALGODS_Projekt
 {
     class Elevator
     {
-
         Direction.DirectionEnum currentDirection;
         List<Person> currentPeople;
         List<Floor> listOfFloors;

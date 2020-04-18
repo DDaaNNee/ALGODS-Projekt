@@ -16,6 +16,8 @@ namespace ALGODS_Projekt
             arrivedPassengers = new List<Person>();
             totalWaitingTime = 0;
             totalCompletionTime = 0;
+            peopleWithShortestTime = 0;
+            peopleWithLongestTime = 0;
         }
 
         // Byggnaden får ett elevator-objekt vid instansiering
@@ -35,7 +37,8 @@ namespace ALGODS_Projekt
         int totalCompletionTime;
         int averageWaitingTime;
         int averageCompletionTime;
-
+        int peopleWithShortestTime;
+        int peopleWithLongestTime;
 
         // Just nu kör den varje floor utan att ta hänsyn till hur många floors vi vill att den ska skapa.
         public void CreateFloor(List<Person> pList)
@@ -177,6 +180,27 @@ namespace ALGODS_Projekt
                 averageCompletionTime = (totalCompletionTime/arrivedPassengers.Count);
             }
         }
+
+
+        // Metod för att räkna ut antalet passagerare som har den längsta totala tiden samt kortaste totala tiden:
+        public void CountPeopleShortestLongestTime()
+        {
+            // Här behövs en metod för att sortera passagerare i arrivedPassagers efter deras CompletionTime från lägst till högst.
+            //sort(arrivedPassagers); 
+
+            foreach(Person passager in arrivedPassagers)
+            {
+                if(passager.GetCompletionTime() == arrivedPassagers[0].GetCompletionTime())
+                {
+                    peopleWithShortestTime++;
+                }
+                else if(passager.GetCompletionTime() == arrivedPassagers[arrivedPassagers.Count-1].GetCompletionTime())
+                {
+                    peopleWithLongestTime++;
+                }
+            }
+        }
+        
 
 
     }

@@ -27,12 +27,12 @@ namespace ALGODS_Projekt
             return false;
         }
 
-        public void AddPerson(Person person)
+        public void AddPersonToFloor(Person person)
         {
             peopleWaiting.Add(person);
         }
 
-        public void RemovePerson(Person person)
+        public void RemovePersonFromFloor(Person person)
         {
             peopleWaiting.Remove(person);
         }

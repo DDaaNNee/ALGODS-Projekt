@@ -9,9 +9,9 @@ namespace ALGODS_Projekt
     class Building
     {
 
-        public Building()
+        public Building(Floor startingFloor)
         {
-            elevator = new Elevator();
+            elevator = new Elevator(startingFloor);
             allFloors = new List<Floor>();
             arrivedPassengers = new List<Person>();
             totalWaitingTime = 0;
@@ -48,7 +48,7 @@ namespace ALGODS_Projekt
                 floor = new Floor(startFloor);                
                 foreach (Person p in pList.Where(x=>x.Start_floor == startFloor))
                 {
-                    floor.AddPerson(p);
+                    floor.AddPersonToFloor(p);
                 }
                 allFloors.Add(floor);
             }
@@ -57,6 +57,29 @@ namespace ALGODS_Projekt
         public List<Floor> GetFloors()
         {
             return allFloors;
+        }
+
+        public List<int> SortFloorsByPeopleWaiting()
+        {
+            List<int> orderedFloorList = new List<int>();
+            foreach (Floor f in allFloors)
+            {
+                orderedFloorList.Add(f.GetPeopleOnFloor().Count());
+            }
+            for (int i = 0; i < orderedFloorList.Count - 1; i++)
+            {
+                for (int j = 1; j < orderedFloorList.Count; j++)
+                {
+                    if (orderedFloorList[i] < orderedFloorList[j])
+                    {
+                        int temp = orderedFloorList[i];
+                        orderedFloorList[i] = orderedFloorList[j];
+                        orderedFloorList[j] = temp;
+                    }
+                }
+            }
+            return orderedFloorList;
+            
         }
 
         public bool PeopleLeft()
@@ -94,6 +117,7 @@ namespace ALGODS_Projekt
                 if (pArriving.GetDirection(pArriving.Start_floor, pArriving.End_floor) == elevator.GetCurrentElevatorDirection())
                 {
                     elevator.GetCurrentPassagers().Add(pArriving);
+                    elevator.GetCurrentFloor().RemovePersonFromFloor(pArriving);
                 }
             }
         }
@@ -136,21 +160,21 @@ namespace ALGODS_Projekt
 
         public void StartElevator(int numFloors = 10)
         {
-            PeopleLeft();
-            AddRemovePeople();
-            if (elevator.GetCurrentFloor().GetFloorNumber() == numFloors - 1)
-            {
-                elevator.MoveElevator(Direction.DirectionEnum.Down);
-            }
-            else if (elevator.GetCurrentFloor().GetFloorNumber() == 0)
-            {
-                elevator.MoveElevator(Direction.DirectionEnum.Up);
-            }
 
-            elevator.IncreaseSystemTime();
-            IncreaseWaitTime();
+                AddRemovePeople();
+                if (elevator.GetCurrentFloor().GetFloorNumber() == numFloors - 1)
+                {
+                    elevator.MoveElevator(Direction.DirectionEnum.Down);
+                }
+                else if (elevator.GetCurrentFloor().GetFloorNumber() == 0)
+                {
+                    elevator.MoveElevator(Direction.DirectionEnum.Up);
+                }
 
-            Console.Read();
+                elevator.IncreaseSystemTime();
+                IncreaseWaitTime();
+        
+            
 
         }
 
@@ -196,7 +220,8 @@ namespace ALGODS_Projekt
             }
         }
         
-        public void SplitIntoTime(string allTimesFromCSV, int numberOfFloors)
+        // Ett försök att manuellt försöka konvertera värderna i vår CSV-fil till hur det ser ut vid olika tidpunkter.
+        public string SplitIntoTime(string allTimesFromCSV, int numberOfFloors)
         {
             List<string> test = new List<string>();
             string t0 = "";
@@ -210,26 +235,82 @@ namespace ALGODS_Projekt
             string t8 = "";
             string t9 = "";
 
-            for (int i = 0; i < numberOfFloors; i++)
-            {
+            int numberOfLines = allTimesFromCSV.Count(x => x.Equals('\n')) + 1;
 
-            }
-            for (int i = numberOfFloors; numberOfFloors < numberOfFloors * 2; i++)
+            if (numberOfLines >= 0)
             {
-
+                for (int i = 0; i < numberOfFloors; i++)
+                {
+                    t0 += allTimesFromCSV[i];
+                }
             }
-            for (int i = numberOfFloors * 2; numberOfFloors * 2 < numberOfFloors * 3; i++)
+            if (numberOfLines >= numberOfFloors * 2)
             {
-
+                for (int i = numberOfFloors - 1; numberOfFloors < numberOfFloors * 2; i++)
+                {
+                    t1 += allTimesFromCSV[i];
+                }
             }
-            for (int i = numberOfFloors * 3; numberOfFloors * 3 < numberOfFloors * 4; i++)
+            if (numberOfLines >= numberOfFloors * 3)
             {
-
+                for (int i = (numberOfFloors * 2) - 1; numberOfFloors * 2 < numberOfFloors * 3; i++)
+                {
+                    t2 += allTimesFromCSV[i];
+                }
             }
-            for (int i = numberOfFloors * 4; numberOfFloors * 4 < numberOfFloors * 5; i++)
+            if (numberOfLines >= numberOfFloors * 4)
             {
-
+                for (int i = numberOfFloors * 3; numberOfFloors * 3 < numberOfFloors * 4; i++)
+                {
+                    t3 += allTimesFromCSV[i];
+                }
             }
+            if (numberOfLines >= numberOfFloors * 5)
+            {
+                for (int i = numberOfFloors * 4; numberOfFloors * 4 < numberOfFloors * 5; i++)
+                {
+                    t4 += allTimesFromCSV[i];
+                }
+            }
+            if (numberOfLines >= numberOfFloors * 6)
+            {
+                for (int i = numberOfFloors * 5; numberOfFloors * 5 < numberOfFloors * 6; i++)
+                {
+                    t5 += allTimesFromCSV[i];
+                }
+            }
+            if (numberOfLines >= numberOfFloors * 7)
+            {
+                for (int i = numberOfFloors * 6; numberOfFloors * 6 < numberOfFloors * 7; i++)
+                {
+                    t6 += allTimesFromCSV[i];
+                }
+            }
+            if (numberOfLines >= numberOfFloors * 8)
+            {
+                for (int i = numberOfFloors * 7; numberOfFloors * 7 < numberOfFloors * 8; i++)
+                {
+                    t7 += allTimesFromCSV[i];
+                }
+            }
+            if (numberOfLines >= numberOfFloors * 9)
+            {
+                for (int i = numberOfFloors * 8; numberOfFloors * 8 < numberOfFloors * 9; i++)
+                {
+                    t8 += allTimesFromCSV[i];
+                }
+            }
+            if (numberOfLines >= numberOfFloors * 10)
+            {
+                for (int i = numberOfFloors * 9; numberOfFloors * 9 < numberOfFloors * 10; i++)
+                {
+                    t9 += allTimesFromCSV[i];
+                }
+            }
+
+            return t0;
+
+
         }
 
     }

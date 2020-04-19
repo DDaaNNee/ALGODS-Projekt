@@ -180,8 +180,8 @@ namespace ALGODS_Projekt
         // Metod för att räkna ut antalet passagerare som har den längsta totala tiden samt kortaste totala tiden:
         public void CountPeopleShortestLongestTime()
         {
-            // Här behövs en metod för att sortera passagerare i arrivedPassagers efter deras CompletionTime från lägst till högst.
-            //sort(arrivedPassagers); 
+            // Här behövs en metod för att sortera passagerare i arrivedPassengers efter deras CompletionTime från lägst till högst.
+            //sort(arrivedPassengers); 
 
             foreach(Person passager in arrivedPassengers)
             {
@@ -196,7 +196,41 @@ namespace ALGODS_Projekt
             }
         }
         
+        public void SplitIntoTime(string allTimesFromCSV, int numberOfFloors)
+        {
+            List<string> test = new List<string>();
+            string t0 = "";
+            string t1 = "";
+            string t2 = "";
+            string t3 = "";
+            string t4 = "";
+            string t5 = "";
+            string t6 = "";
+            string t7 = "";
+            string t8 = "";
+            string t9 = "";
 
+            for (int i = 0; i < numberOfFloors; i++)
+            {
+
+            }
+            for (int i = numberOfFloors; numberOfFloors < numberOfFloors * 2; i++)
+            {
+
+            }
+            for (int i = numberOfFloors * 2; numberOfFloors * 2 < numberOfFloors * 3; i++)
+            {
+
+            }
+            for (int i = numberOfFloors * 3; numberOfFloors * 3 < numberOfFloors * 4; i++)
+            {
+
+            }
+            for (int i = numberOfFloors * 4; numberOfFloors * 4 < numberOfFloors * 5; i++)
+            {
+
+            }
+        }
 
     }
 }

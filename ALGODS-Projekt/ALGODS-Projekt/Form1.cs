@@ -52,7 +52,8 @@ namespace ALGODS_Projekt
                 elevator = new Elevator();
                 building.CreateFloor(csvParser.ParseCsvToListOfPerson(path));
             }
-            MessageBox.Show(csvParser.ParseCsvToString(path))
+
+            MessageBox.Show(csvParser.ParseCsvToString(path));
 
             foreach (string item in building.UpdateInformation())
             {

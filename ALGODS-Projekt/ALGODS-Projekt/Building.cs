@@ -91,7 +91,7 @@ namespace ALGODS_Projekt
             }
             foreach (Person pArriving in elevator.GetCurrentFloor().GetPeopleOnFloor())
             {
-                if (pArriving.GetDirection(pArriving.Start_floor, pArriving.End_floor) == elevator.GetCurrentElevatorDirection())
+                if (pArriving.GetDirection(pArriving.Start_floor, pArriving.End_floor) == elevator.GetCurrentElevatorDirection() && pArriving.End_floor != elevator.GetCurrentFloor().GetFloorNumber())
                 {
                     elevator.GetCurrentPassagers().Add(pArriving);
                 }

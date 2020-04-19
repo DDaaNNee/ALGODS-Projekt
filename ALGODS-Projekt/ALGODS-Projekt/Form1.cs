@@ -40,47 +40,26 @@ namespace ALGODS_Projekt
             OpenFileDialog openFileDiag = new OpenFileDialog();
             DialogResult result = openFileDiag.ShowDialog();
             string path = openFileDiag.FileName;
+            int selectedNumberOfFloors = Convert.ToInt32(cb_numOfFloors.SelectedItem);
             
-            if (cb_numOfFloors.SelectedItem != null)
+            if (selectedNumberOfFloors != 0)
             {
-                elevator = new Elevator(Convert.ToInt32(cb_numOfFloors.SelectedItem));
+                elevator = new Elevator(selectedNumberOfFloors);
+                building.CreateFloor(csvParser.ParseCsvToListOfPerson(path, selectedNumberOfFloors));
             }
             else
             {
                 elevator = new Elevator();
+                building.CreateFloor(csvParser.ParseCsvToListOfPerson(path));
             }
+            MessageBox.Show(csvParser.ParseCsvToString(path))
 
-            building.CreateFloor(csvParser.ParseCsv(path));
-
-            listBox1.Items.Add(building.UpdateInformation());
             foreach (string item in building.UpdateInformation())
             {
                 listBox1.Items.Add(item);
             }
 
-            //foreach (Floor f in building.GetFloors())
-            //{
-            //    listBox1.Items.Add("Floor:" f.GetFloorNumber());
-            //    foreach (Person p in f.GetPeopleOnFloor())
-            //    {
-            //        listBox1.Items.Add(p.End_floor);
-            //    }
-            //}
-
-            foreach (Person p in elevator.GetCurrentPassagers())
-            {
-                listBox2.Items.Add(p.End_floor);
-            }
-
             //building.StartElevator();
-
-            //UpdateLists();
-        }
-
-        public void UpdateLists()
-        {
-            listBox1.Items.Clear();
-            listBox1.Items.Add(building.UpdateInformation());
         }
     }
 }

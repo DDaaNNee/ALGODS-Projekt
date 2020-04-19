@@ -15,7 +15,7 @@ namespace ALGODS_Projekt
         }
 
         // Implementera så att listan fortsätts att läsas efter första 10, men att den ska pausa eller liknande efter varje "numberOfFloors"
-        public List<Person> ParseCsv(string pathToFile, int numberOfFloors = 10)
+        public List<Person> ParseCsvToListOfPerson(string pathToFile, int numberOfFloors = 10)
         {
             List<Person> personList = new List<Person>();
             try
@@ -29,49 +29,75 @@ namespace ALGODS_Projekt
                     {
                         if (floorCounter < numberOfFloors)
                         {
-                            line.Trim();
+                            //Problemet just nu: chars läses bara av som ett värde, dvs "-1" blir "1", vilket gör att den lägger till
+                            //de tomma våningarna i personList.
                             foreach (var item in line)
                             {
-                                // Problemet just nu: chars läses bara av som ett värde, dvs "-1" blir "1", vilket gör att den lägger till
-                                // de tomma våningarna i personList.
-                                /*int val = (int)char.GetNumericValue(item);*/
-                                if (/*val != -1*/(int)Char.GetNumericValue(item) == -1)
+                                int itemIndex = 0;
+                                itemIndex = line.IndexOf(item);
+                                // Fungerar inte alls som tänkt
+                                if (line[itemIndex].ToString() == "-" && line[itemIndex + 1].ToString() == "1")
                                 {
-                                    Person person = new Person(floorCounter, item);
+                                    continue;
+                                }
+                                else if (char.GetNumericValue(item) != -1 /*&& item !=  '-'*/)
+                                {
+                                    Person person = new Person(floorCounter, Convert.ToInt32(char.GetNumericValue(item)));
                                     personList.Add(person);
                                 }
                             }
                             floorCounter++;
                         }
-                    }
-                    //while ((line = reader.ReadLine()) != null)
-                    //{
-                    //    if (floorCounter < numberOfFloors)
-                    //    {
-                    //        for (int i = 0; i < line.Length; i++)
-                    //        {
-                    //            if ((int)Char.GetNumericValue(line[i]) == -1)
-                    //            {
-                    //                i += 1;
-                    //            }
-                    //            else
-                    //            {
-                    //                Person person = new Person(floorCounter, (int)Char.GetNumericValue(line[i]));
-                    //                personList.Add(person);
-                    //            }
-                    //        }
-                    //        floorCounter++;
-
-                    //    }
-                    //}
+                     }
+                    return personList;
                 }
-                return personList;
             }
+
             catch (Exception)
             {
                 Console.WriteLine("The file could not be read!");
                 throw;
             }
+        }
+
+        public string ParseCsvToString(string pathToFile, int numberOfFloors = 10)
+        {
+            using (var reader = new StreamReader(pathToFile))
+            {
+                string allText = reader.ReadToEnd();
+                return allText;
+            }
+        }
+
+        public string EditText(string parcedCsvToString)
+        {
+            string fixedText = "";
+            foreach (char item in parcedCsvToString)
+            {
+                if (item.ToString() != "-1")
+                {
+                    fixedText += item;
+                }
+            }
+            return fixedText;
+        }
+
+        public List<Person> TestEdit(List<Person> pList)
+        {
+            List<Person> editedpList = new List<Person>();
+
+            for (int i = 0; i < pList.Count; i++)
+            {
+                if (pList[i].End_floor.ToString() == "-" || pList[i].End_floor.ToString()[0] != '-')
+                {
+                    i++;
+                }
+                else
+                {
+                    editedpList.Add(pList[i]);
+                }
+            }
+            return editedpList;
         }
     }
 }

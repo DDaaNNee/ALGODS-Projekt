@@ -136,32 +136,27 @@ namespace ALGODS_Projekt
 
         public void StartElevator(int numFloors = 10)
         {
-            do
+            PeopleLeft();
+            AddRemovePeople();
+            if (elevator.GetCurrentFloor().GetFloorNumber() == numFloors - 1)
             {
-                
-                PeopleLeft();
-                AddRemovePeople();
-                if (elevator.GetCurrentFloor().GetFloorNumber() == numFloors - 1)
-                {
-                    elevator.MoveElevator(Direction.DirectionEnum.Down);
-                }
-                else if (elevator.GetCurrentFloor().GetFloorNumber() == 0)
-                {
-                    elevator.MoveElevator(Direction.DirectionEnum.Up);
-                }
-
-                elevator.IncreaseSystemTime();
-                IncreaseWaitTime();
-
-
-
+                elevator.MoveElevator(Direction.DirectionEnum.Down);
             }
-            while (PeopleLeft() == true);
+            else if (elevator.GetCurrentFloor().GetFloorNumber() == 0)
+            {
+                elevator.MoveElevator(Direction.DirectionEnum.Up);
+            }
+
+            elevator.IncreaseSystemTime();
+            IncreaseWaitTime();
+
+            Console.Read();
+
         }
 
         // Metod för att räkna ut total Waiting time och Completion time:
 
-        public void calculateTotalTime()
+        public void CalculateTotalTime()
         {
             foreach(Person p in arrivedPassengers)
             {
@@ -172,7 +167,7 @@ namespace ALGODS_Projekt
 
         // Metod för att räkna ut medelvärden (Waiting och Completion time) bland passagerare:
 
-        public void calculateAverageTime()
+        public void CalculateAverageTime()
         {
             if(arrivedPassengers.Count != 0)
             {
@@ -188,13 +183,13 @@ namespace ALGODS_Projekt
             // Här behövs en metod för att sortera passagerare i arrivedPassagers efter deras CompletionTime från lägst till högst.
             //sort(arrivedPassagers); 
 
-            foreach(Person passager in arrivedPassagers)
+            foreach(Person passager in arrivedPassengers)
             {
-                if(passager.GetCompletionTime() == arrivedPassagers[0].GetCompletionTime())
+                if(passager.GetCompletionTime() == arrivedPassengers[0].GetCompletionTime())
                 {
                     peopleWithShortestTime++;
                 }
-                else if(passager.GetCompletionTime() == arrivedPassagers[arrivedPassagers.Count-1].GetCompletionTime())
+                else if(passager.GetCompletionTime() == arrivedPassengers[arrivedPassengers.Count-1].GetCompletionTime())
                 {
                     peopleWithLongestTime++;
                 }

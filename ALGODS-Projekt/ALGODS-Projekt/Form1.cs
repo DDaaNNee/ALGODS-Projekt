@@ -70,8 +70,6 @@ namespace ALGODS_Projekt
             }
 
             testTimer.Enabled = true;
-            building.StartElevator(elevator);
-            AddPeopleToElevator();
             lbl_CurrentFloorNumber.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
             lbl_ElevatorState.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
             lbl_ElapsedTime.Text = elevator.GetElevatorRuntime().ToString();
@@ -83,12 +81,6 @@ namespace ALGODS_Projekt
             }
             lb_PeopleInElevator.Items.Add(currentPeople);
 
-            //string test = "";
-            //foreach (Person p in elevator.GetCurrentFloor().GetPeopleOnFloor())
-            //{
-            //    test += p.End_floor;
-            //}
-            //MessageBox.Show(test);
         }
 
         public void OnStartElevator(object source, ElapsedEventArgs e)
@@ -107,35 +99,25 @@ namespace ALGODS_Projekt
         private void button3_Click(object sender, EventArgs e)
         {
             building.StartElevator(elevator);
-            AddPeopleToElevator();
-            //RemovePeopleFromFloor();
             lbl_CurrentFloorNumber.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
             lbl_ElevatorState.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
             lbl_ElapsedTime.Text = elevator.GetElevatorRuntime().ToString();
-
-        }
-
-        public void AddPeopleToElevator()
-        {
-            foreach (Person p in elevator.GetCurrentFloor().GetPeopleOnFloor())
+            lb_PeopleOnFloors.Items.Clear();
+            foreach (string item in building.UpdateInformation())
             {
-                elevator.AddPersonToElevator(p);
+                lb_PeopleOnFloors.Items.Add(item);
             }
-        }
-
-        public void RemovePeopleFromFloor()
-        {
-            foreach (Person p in elevator.GetCurrentFloor().GetPeopleOnFloor())
+            string currentPeople = "";
+            lb_PeopleInElevator.Items.Clear();
+            foreach (Person p in elevator.GetCurrentPassagers())
             {
-                for (int i = 0; i < elevator.GetCurrentPassagers().Count; i++)
-                {
-                    if (p == elevator.GetCurrentPassagers()[i])
-                    {
-                        elevator.GetCurrentFloor().RemovePersonFromFloor(p);
-                    }
-                }
-
+                currentPeople += p.End_floor + ", ";
             }
+            lb_PeopleInElevator.Items.Add("\n");
+            lb_PeopleInElevator.Items.Add(currentPeople);
+
         }
+
+
     }
 }

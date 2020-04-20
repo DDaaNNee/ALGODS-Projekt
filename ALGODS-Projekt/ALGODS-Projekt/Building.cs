@@ -117,7 +117,7 @@ namespace ALGODS_Projekt
             foreach (Floor f in GetFloors())
             {
                 string rowInList = "";
-                allPeopleStartList.Add("Floor " + f.GetFloorNumber() + ": ");
+                //allPeopleStartList.Add("Floor " + f.GetFloorNumber() + ": ");
 
                 foreach (Person p in f.GetPeopleOnFloor())
                 {
@@ -138,7 +138,7 @@ namespace ALGODS_Projekt
         public void AddRemovePeople(Elevator elevator)
         {
 
-            foreach (Person pDeparting in elevator.GetCurrentPassagers())
+            foreach (Person pDeparting in elevator.GetCurrentPassagers().ToList())
             {
                 if (pDeparting.End_floor == elevator.GetCurrentFloor().GetFloorNumber())
                 {
@@ -147,7 +147,7 @@ namespace ALGODS_Projekt
                     arrivedPassengers.Add(pDeparting);
                 }
             }
-            foreach (Person pArriving in elevator.GetCurrentFloor().GetPeopleOnFloor())
+            foreach (Person pArriving in elevator.GetCurrentFloor().GetPeopleOnFloor().ToList())
             {
                 if (pArriving.GetDirection(pArriving.Start_floor, pArriving.End_floor) == elevator.GetCurrentElevatorDirection() && pArriving.End_floor != elevator.GetCurrentFloor().GetFloorNumber())
                 {
@@ -163,18 +163,51 @@ namespace ALGODS_Projekt
             bool peopleLeft = CheckIfPeopleWaiting();
             //while (peopleLeft == true)
             //{
-                //AddRemovePeople(elevator);
-                AddPersonToElevator(elevator);
-                List<Floor> sortedFloors = SortFloorsByPeopleWaiting();
 
-                if (elevator.GetCurrentFloor().GetFloorNumber() == numFloors - 1 || elevator.GetCurrentFloor().GetFloorNumber() > sortedFloors[0].GetFloorNumber() )
+            List<Floor> sortedFloors = SortFloorsByPeopleWaiting();
+
+            if (elevator.GetCurrentPassagers().Count > 0)
+            {
+                elevator.RemovePersonFromElevator();
+
+                int goingUp = 0;
+                int goingDown = 0;
+                foreach (Person p in elevator.GetCurrentPassagers().ToList())
                 {
-                    elevator.MoveElevator(Direction.DirectionEnum.Down);
+                    if (p.End_floor > elevator.GetCurrentFloor().GetFloorNumber())
+                    {
+                        goingUp++;
+                    }
+                    else
+                    {
+                        goingDown++;
+                    }
                 }
-                else /*if (elevator.GetCurrentFloor().GetFloorNumber() == 0 || elevator.GetCurrentFloor().GetFloorNumber() < sortedFloors[0].GetFloorNumber())*/
+                if (goingUp > goingDown)
                 {
                     elevator.MoveElevator(Direction.DirectionEnum.Up);
                 }
+                else
+                {
+                    elevator.MoveElevator(Direction.DirectionEnum.Down);
+                }
+            }
+            else
+            {
+                elevator.MoveElevator(Direction.DirectionEnum.Down);
+                elevator.AddPersonToElevator();
+                elevator.RemovePeopleFromFloor();
+            }
+
+
+            //if (elevator.GetCurrentFloor().GetFloorNumber() == numFloors - 1 || elevator.GetCurrentFloor().GetFloorNumber() > sortedFloors[0].GetFloorNumber() )
+            //{
+            //    elevator.MoveElevator(Direction.DirectionEnum.Down);
+            //}
+            //else /*if (elevator.GetCurrentFloor().GetFloorNumber() == 0 || elevator.GetCurrentFloor().GetFloorNumber() < sortedFloors[0].GetFloorNumber())*/
+            //{
+            //    elevator.MoveElevator(Direction.DirectionEnum.Up);
+            //}
 
             elevator.IncreaseSystemTime();
             IncreaseWaitTime();

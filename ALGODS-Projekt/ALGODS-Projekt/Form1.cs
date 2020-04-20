@@ -47,7 +47,7 @@ namespace ALGODS_Projekt
             DialogResult result = openFileDiag.ShowDialog();
             string path = openFileDiag.FileName;
             int selectedNumberOfFloors = Convert.ToInt32(cb_numOfFloors.SelectedItem);
-            
+
             //if (selectedNumberOfFloors != 0)
             //{
             //    elevator = new Elevator(selectedNumberOfFloors);
@@ -59,14 +59,15 @@ namespace ALGODS_Projekt
             //    building.CreateFloor(csvParser.ParseCsvToListOfPerson(path));
             //}
 
+            Floor newfloor = new Floor(0);
             if (selectedNumberOfFloors != 0)
             {
-                building = new Building();
+                building = new Building(newfloor);
                 building.CreateFloor(csvParser.ParseCsvToListOfPerson(path, selectedNumberOfFloors));
             }
             else
             {
-                building = new Building();
+                building = new Building(newfloor);
                 building.CreateFloor(csvParser.ParseCsvToListOfPerson(path));
             }
 

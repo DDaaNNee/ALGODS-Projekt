@@ -157,6 +157,7 @@ namespace ALGODS_Projekt
             }
         }
 
+        // La till så att hissen ska röra sig mot den våningen där flest personer väntar. (Ta bort om det inte funkar).
         public void StartElevator(Elevator elevator, int numFloors = 10)
         {
             bool peopleLeft = CheckIfPeopleWaiting();
@@ -164,11 +165,13 @@ namespace ALGODS_Projekt
             {
                 //AddRemovePeople(elevator);
                 AddPersonToElevator(elevator);
-                if (elevator.GetCurrentFloor().GetFloorNumber() == numFloors - 1)
+                List<Floor> sortedFloors = SortFloorsByPeopleWaiting();
+
+                if (elevator.GetCurrentFloor().GetFloorNumber() == numFloors - 1 || elevator.GetCurrentFloor().GetFloorNumber() > sortedFloors[0].GetFloorNumber() )
                 {
                     elevator.MoveElevator(Direction.DirectionEnum.Down);
                 }
-                else /*if (elevator.GetCurrentFloor().GetFloorNumber() == 0)*/
+                else /*if (elevator.GetCurrentFloor().GetFloorNumber() == 0 || elevator.GetCurrentFloor().GetFloorNumber() < sortedFloors[0].GetFloorNumber())*/
                 {
                     elevator.MoveElevator(Direction.DirectionEnum.Up);
                 }

@@ -79,7 +79,7 @@ namespace ALGODS_Projekt
 
         public void AddRemovePeople()
         {
-            // tar detta bort personer från hissen eller från nuvarande våning? Kan ha fattat fel, men RemovePerson() tar väl bort en person som  väntar på våningen?
+            
             foreach (Person pDeparting in elevator.GetCurrentPassagers())
             {
                 if (pDeparting.End_floor == elevator.GetCurrentFloor().GetFloorNumber())

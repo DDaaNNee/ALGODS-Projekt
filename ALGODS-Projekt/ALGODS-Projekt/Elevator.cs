@@ -11,15 +11,16 @@ namespace ALGODS_Projekt
         Direction.DirectionEnum currentDirection;
         List<Person> currentPeople;
         List<Floor> listOfFloors;
-        Floor currentFloor;
+        Floor _currentFloor;
+        int elevatorRuntime;
         
-        public Elevator(int numOfFloors = 10)
+        public Elevator(Floor currentFloor, int numOfFloors = 10)
         {
             currentDirection = Direction.DirectionEnum.Up;
             currentPeople = new List<Person>(10);
             listOfFloors = new List<Floor>(numOfFloors);
-            currentFloor = new Floor(0);
-
+            _currentFloor = currentFloor;
+            elevatorRuntime = 0;
         }
 
         public void AddPerson(Person person)
@@ -33,14 +34,21 @@ namespace ALGODS_Projekt
         // Flytta hissen en våning uppåt eller en våning nedåt.
         public void MoveElevator(Direction.DirectionEnum currentDirection = Direction.DirectionEnum.Up)
         {
-            if(currentDirection == Direction.DirectionEnum.Up && currentFloor.GetFloorNumber() < 9)
+            if(currentDirection == Direction.DirectionEnum.Up && _currentFloor.GetFloorNumber() < 9)
             {
-                currentFloor.ChangeFloorNumber(currentFloor.GetFloorNumber() + 1);
+                _currentFloor.ChangeFloorNumber(_currentFloor.GetFloorNumber() + 1);
+                elevatorRuntime += 10;
             }
-            else if (currentDirection == Direction.DirectionEnum.Down && currentFloor.GetFloorNumber() > 0)
+            else if (currentDirection == Direction.DirectionEnum.Down && _currentFloor.GetFloorNumber() > 0)
             {
-                currentFloor.ChangeFloorNumber(currentFloor.GetFloorNumber() - 1);           
+                _currentFloor.ChangeFloorNumber(_currentFloor.GetFloorNumber() - 1);
+                elevatorRuntime += 10;
             }
+        }
+
+        public int GetElevatorRuntime()
+        {
+            return elevatorRuntime;
         }
 
         // Öka passagerares System_time med 10
@@ -59,7 +67,7 @@ namespace ALGODS_Projekt
 
         public Floor GetCurrentFloor()
         {
-            return currentFloor;
+            return _currentFloor;
         }
 
         public Direction.DirectionEnum GetCurrentElevatorDirection()

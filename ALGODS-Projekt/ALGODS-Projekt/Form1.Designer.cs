@@ -32,11 +32,11 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbl_CurrentFloorNumber = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lbl_ElevatorState = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lbl_ElapsedTime = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -53,10 +53,10 @@
             this.label28 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label29 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lb_PeopleOnFloors = new System.Windows.Forms.ListBox();
             this.label9 = new System.Windows.Forms.Label();
             this.cb_numOfFloors = new System.Windows.Forms.ComboBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.lb_PeopleInElevator = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // btn_play
@@ -96,14 +96,14 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Current floor:";
             // 
-            // label2
+            // lbl_CurrentFloorNumber
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(413, 50);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "(Floor number)";
+            this.lbl_CurrentFloorNumber.AutoSize = true;
+            this.lbl_CurrentFloorNumber.Location = new System.Drawing.Point(413, 50);
+            this.lbl_CurrentFloorNumber.Name = "lbl_CurrentFloorNumber";
+            this.lbl_CurrentFloorNumber.Size = new System.Drawing.Size(74, 13);
+            this.lbl_CurrentFloorNumber.TabIndex = 4;
+            this.lbl_CurrentFloorNumber.Text = "(Floor number)";
             // 
             // label3
             // 
@@ -114,14 +114,14 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Elevator state:";
             // 
-            // label4
+            // lbl_ElevatorState
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(413, 70);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(196, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "(GOINGUP, GOINGDOWN, NEUTRAL)";
+            this.lbl_ElevatorState.AutoSize = true;
+            this.lbl_ElevatorState.Location = new System.Drawing.Point(413, 70);
+            this.lbl_ElevatorState.Name = "lbl_ElevatorState";
+            this.lbl_ElevatorState.Size = new System.Drawing.Size(196, 13);
+            this.lbl_ElevatorState.TabIndex = 6;
+            this.lbl_ElevatorState.Text = "(GOINGUP, GOINGDOWN, NEUTRAL)";
             // 
             // label5
             // 
@@ -132,14 +132,14 @@
             this.label5.TabIndex = 7;
             this.label5.Text = "Elapsed time:";
             // 
-            // label6
+            // lbl_ElapsedTime
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(413, 90);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(73, 13);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "(Elapsed time)";
+            this.lbl_ElapsedTime.AutoSize = true;
+            this.lbl_ElapsedTime.Location = new System.Drawing.Point(413, 90);
+            this.lbl_ElapsedTime.Name = "lbl_ElapsedTime";
+            this.lbl_ElapsedTime.Size = new System.Drawing.Size(73, 13);
+            this.lbl_ElapsedTime.TabIndex = 8;
+            this.lbl_ElapsedTime.Text = "(Elapsed time)";
             // 
             // label7
             // 
@@ -283,13 +283,13 @@
             this.label29.TabIndex = 34;
             this.label29.Text = "(Time taken)";
             // 
-            // listBox1
+            // lb_PeopleOnFloors
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(624, 63);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(235, 355);
-            this.listBox1.TabIndex = 37;
+            this.lb_PeopleOnFloors.FormattingEnabled = true;
+            this.lb_PeopleOnFloors.Location = new System.Drawing.Point(624, 63);
+            this.lb_PeopleOnFloors.Name = "lb_PeopleOnFloors";
+            this.lb_PeopleOnFloors.Size = new System.Drawing.Size(235, 355);
+            this.lb_PeopleOnFloors.TabIndex = 37;
             // 
             // label9
             // 
@@ -308,23 +308,23 @@
             this.cb_numOfFloors.Size = new System.Drawing.Size(121, 21);
             this.cb_numOfFloors.TabIndex = 39;
             // 
-            // listBox2
+            // lb_PeopleInElevator
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(425, 158);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(193, 160);
-            this.listBox2.TabIndex = 40;
+            this.lb_PeopleInElevator.FormattingEnabled = true;
+            this.lb_PeopleInElevator.Location = new System.Drawing.Point(425, 158);
+            this.lb_PeopleInElevator.Name = "lb_PeopleInElevator";
+            this.lb_PeopleInElevator.Size = new System.Drawing.Size(193, 160);
+            this.lb_PeopleInElevator.TabIndex = 40;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(871, 552);
-            this.Controls.Add(this.listBox2);
+            this.Controls.Add(this.lb_PeopleInElevator);
             this.Controls.Add(this.cb_numOfFloors);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.lb_PeopleOnFloors);
             this.Controls.Add(this.label29);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label28);
@@ -341,11 +341,11 @@
             this.Controls.Add(this.label18);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.lbl_ElapsedTime);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lbl_ElevatorState);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lbl_CurrentFloorNumber);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -364,11 +364,11 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbl_CurrentFloorNumber;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbl_ElevatorState;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lbl_ElapsedTime;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label18;
@@ -385,10 +385,10 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lb_PeopleOnFloors;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox cb_numOfFloors;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox lb_PeopleInElevator;
     }
 }
 

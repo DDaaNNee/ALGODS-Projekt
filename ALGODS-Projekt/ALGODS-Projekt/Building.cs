@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace ALGODS_Projekt
 {
     class Building
     {
-
         public Building()
         {
             allFloors = new List<Floor>();
@@ -27,7 +27,6 @@ namespace ALGODS_Projekt
 
         // Då passagerare lämnar hissen adderas de till denna lista.
         List<Person> arrivedPassengers;
-        
 
         Floor floor;
 
@@ -101,28 +100,6 @@ namespace ALGODS_Projekt
             return false;
         }
 
-        public void AddRemovePeople(Elevator elevator)
-        {
-            
-            foreach (Person pDeparting in elevator.GetCurrentPassagers())
-            {
-                if (pDeparting.End_floor == elevator.GetCurrentFloor().GetFloorNumber())
-                {
-                    elevator.GetCurrentPassagers().Remove(pDeparting);
-                    // Lägger till en person som går av på våningen i en lista för alla personer som ankommit till sin destination:
-                    arrivedPassengers.Add(pDeparting);
-                }
-            }
-            foreach (Person pArriving in elevator.GetCurrentFloor().GetPeopleOnFloor())
-            {
-                if (pArriving.GetDirection(pArriving.Start_floor, pArriving.End_floor) == elevator.GetCurrentElevatorDirection() && pArriving.End_floor != elevator.GetCurrentFloor().GetFloorNumber())
-                {
-                    elevator.GetCurrentPassagers().Add(pArriving);
-                    elevator.GetCurrentFloor().RemovePersonFromFloor(pArriving);
-                }
-            }
-        }
-
         public void IncreaseWaitTime()
         {
             foreach (Floor floor in allFloors)
@@ -158,26 +135,74 @@ namespace ALGODS_Projekt
             return allPeopleStartList;
         }
 
-        // Uppdaterade så att hissen ska röra sig mot våningen med störst antal personer som väntar (ta bort om det inte funkar)
+        public void AddRemovePeople(Elevator elevator)
+        {
+
+            foreach (Person pDeparting in elevator.GetCurrentPassagers())
+            {
+                if (pDeparting.End_floor == elevator.GetCurrentFloor().GetFloorNumber())
+                {
+                    elevator.GetCurrentPassagers().Remove(pDeparting);
+                    // Lägger till en person som går av på våningen i en lista för alla personer som ankommit till sin destination:
+                    arrivedPassengers.Add(pDeparting);
+                }
+            }
+            foreach (Person pArriving in elevator.GetCurrentFloor().GetPeopleOnFloor())
+            {
+                if (pArriving.GetDirection(pArriving.Start_floor, pArriving.End_floor) == elevator.GetCurrentElevatorDirection() && pArriving.End_floor != elevator.GetCurrentFloor().GetFloorNumber())
+                {
+                    elevator.GetCurrentPassagers().Add(pArriving);
+                    elevator.GetCurrentFloor().RemovePersonFromFloor(pArriving);
+                }
+            }
+        }
+
         public void StartElevator(Elevator elevator, int numFloors = 10)
         {
-                AddRemovePeople(elevator);
-                List<Floor> sortedFloors = SortFloorsByPeopleWaiting();
-
-                if (elevator.GetCurrentFloor().GetFloorNumber() == numFloors - 1 || elevator.GetCurrentFloor().GetFloorNumber > sortedFloors[0].GetFloorNumber())
+            bool peopleLeft = CheckIfPeopleWaiting();
+            while (peopleLeft == true)
+            {
+                //AddRemovePeople(elevator);
+                AddPersonToElevator(elevator);
+                if (elevator.GetCurrentFloor().GetFloorNumber() == numFloors - 1)
                 {
                     elevator.MoveElevator(Direction.DirectionEnum.Down);
                 }
-                else if (elevator.GetCurrentFloor().GetFloorNumber() == 0 || elevator.GetCurrentFloor.GetFloorNumber() < sortedFloors[0].GetFloorNumber)
+                else /*if (elevator.GetCurrentFloor().GetFloorNumber() == 0)*/
                 {
                     elevator.MoveElevator(Direction.DirectionEnum.Up);
                 }
 
-                elevator.IncreaseSystemTime();
-                IncreaseWaitTime();
-        
-            
+            elevator.IncreaseSystemTime();
+            IncreaseWaitTime();
+            peopleLeft = CheckIfPeopleWaiting();
+            }
+        }
 
+        public void AddPersonToElevator(Elevator elevator)
+        {
+            foreach (Person pArriving in elevator.GetCurrentFloor().GetPeopleOnFloor())
+            {
+                elevator.GetCurrentPassagers().Add(pArriving);
+                elevator.GetCurrentFloor().RemovePersonFromFloor(pArriving);
+            }
+        }
+
+        public bool CheckIfPeopleWaiting()
+        {
+            int peopleLeft = 0;
+            foreach (Floor f in allFloors)
+            {
+                if (f.StillPeopleWaiting() == true)
+                {
+                    peopleLeft++;
+                }
+            }
+            if (peopleLeft > 0)
+            {
+                return true;
+            }
+            return false;
         }
 
         // Metod för att räkna ut total Waiting time och Completion time:

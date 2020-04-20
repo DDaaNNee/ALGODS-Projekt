@@ -29,7 +29,7 @@ namespace ALGODS_Projekt
         {
             csvParser = new CsvParser();
             testTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnStartElevator);
-            testTimer.Interval = 1000;
+            testTimer.Interval = 5000;
             
 
             for (int i = 0; i < 100; i++)
@@ -51,16 +51,16 @@ namespace ALGODS_Projekt
             // Problem med att newfloor inte faktiskt är våning noll?
             if (selectedNumberOfFloors != 0)
             {
-                t0 = csvParser.ParseCsvToListOfPerson(path, selectedNumberOfFloors);
+                t0 = csvParser.ParseCsv_T0_ListOfPerson(path, selectedNumberOfFloors);
                 building = new Building();
-                building.CreateFloor(csvParser.ParseCsvToListOfPerson(path, selectedNumberOfFloors));
+                building.CreateFloor(t0);
                 elevator = new Elevator(building.GetFloors());
             }
             else
             {
-                t0 = csvParser.ParseCsvToListOfPerson(path);
+                t0 = csvParser.ParseCsv_T0_ListOfPerson(path);
                 building = new Building();
-                building.CreateFloor(csvParser.ParseCsvToListOfPerson(path));
+                building.CreateFloor(t0);
                 elevator = new Elevator(building.GetFloors());
             }
 
@@ -69,18 +69,28 @@ namespace ALGODS_Projekt
                 lb_PeopleOnFloors.Items.Add(item);
             }
 
-            building.StartElevator(elevator);
+            string test = "";
+
+
+            string currentPeople = "";
+            foreach (Person p in elevator.GetCurrentPassagers())
+            {
+                currentPeople += p.End_floor + ", ";
+            }
+            lb_PeopleInElevator.Items.Add(currentPeople);
+
             testTimer.Enabled = true;
+            //building.StartElevator(elevator);
             lbl_CurrentFloorNumber.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
             lbl_ElevatorState.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
             lbl_ElapsedTime.Text = elevator.GetElevatorRuntime().ToString();
 
-            string test = "";
-            foreach (Person p in elevator.GetCurrentFloor().GetPeopleOnFloor())
-            {
-                test += p.End_floor;
-            }
-            MessageBox.Show(test);
+            //string test = "";
+            //foreach (Person p in elevator.GetCurrentFloor().GetPeopleOnFloor())
+            //{
+            //    test += p.End_floor;
+            //}
+            //MessageBox.Show(test);
         }
 
         public void OnStartElevator(object source, ElapsedEventArgs e)
@@ -94,6 +104,38 @@ namespace ALGODS_Projekt
             lbl_ElevatorState.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
             lbl_ElapsedTime.Text = elevator.GetElevatorRuntime().ToString();
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            bool peopleLeft = building.CheckIfPeopleWaiting();
+            testTimer.Enabled = true;
+            lbl_CurrentFloorNumber.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
+            lbl_ElevatorState.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
+            lbl_ElapsedTime.Text = elevator.GetElevatorRuntime().ToString();
+            AddPeopleFromFloor();
+
+            if (elevator.GetCurrentFloor().GetFloorNumber() == 10 - 1)
+            {
+                elevator.MoveElevator(Direction.DirectionEnum.Down);
+            }
+            else /*if (elevator.GetCurrentFloor().GetFloorNumber() == 0)*/
+            {
+                elevator.MoveElevator(Direction.DirectionEnum.Up);
+            }
+
+            elevator.IncreaseSystemTime();
+            building.IncreaseWaitTime();
+            peopleLeft = building.CheckIfPeopleWaiting();
+        }
+
+        public void AddPeopleFromFloor()
+        {
+            foreach (Person p in elevator.GetCurrentFloor().GetPeopleOnFloor())
+            {
+                elevator.AddPersonToElevator(p);
+
+            }
         }
     }
 }

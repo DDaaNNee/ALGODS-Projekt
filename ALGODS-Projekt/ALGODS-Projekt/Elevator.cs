@@ -14,13 +14,13 @@ namespace ALGODS_Projekt
         Floor _currentFloor;
         int elevatorRuntime;
         
-        public Elevator(Floor currentFloor, int numOfFloors = 10)
+        public Elevator(List<Floor> allFloors, int numOfFloors = 10)
         {
             currentDirection = Direction.DirectionEnum.Up;
             currentPeople = new List<Person>(10);
-            listOfFloors = new List<Floor>(numOfFloors);
-            _currentFloor = currentFloor;
+            listOfFloors = allFloors;
             elevatorRuntime = 0;
+            _currentFloor = listOfFloors[0];
         }
 
         public void AddPerson(Person person)

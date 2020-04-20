@@ -22,15 +22,15 @@ namespace ALGODS_Projekt
         CsvParser csvParser;
         Building building;
         Elevator elevator;
+        List<Person> t0;
+        System.Timers.Timer testTimer = new System.Timers.Timer();
 
         private void Form1_Load(object sender, EventArgs e)
         {
             csvParser = new CsvParser();
-
-            System.Timers.Timer testTimer = new System.Timers.Timer();
             testTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnStartElevator);
-            testTimer.Interval = 5000;
-            testTimer.Enabled = true;
+            testTimer.Interval = 1000;
+            
 
             for (int i = 0; i < 100; i++)
             {
@@ -48,29 +48,20 @@ namespace ALGODS_Projekt
             string path = openFileDiag.FileName;
             int selectedNumberOfFloors = Convert.ToInt32(cb_numOfFloors.SelectedItem);
 
-            //if (selectedNumberOfFloors != 0)
-            //{
-            //    elevator = new Elevator(selectedNumberOfFloors);
-            //    building.CreateFloor(csvParser.ParseCsvToListOfPerson(path, selectedNumberOfFloors));
-            //}
-            //else
-            //{
-            //    elevator = new Elevator();
-            //    building.CreateFloor(csvParser.ParseCsvToListOfPerson(path));
-            //}
-
-            Floor newfloor = new Floor(0);
+            // Problem med att newfloor inte faktiskt är våning noll?
             if (selectedNumberOfFloors != 0)
             {
-                building = new Building(newfloor);
-                elevator = new Elevator(newfloor);
+                t0 = csvParser.ParseCsvToListOfPerson(path, selectedNumberOfFloors);
+                building = new Building();
                 building.CreateFloor(csvParser.ParseCsvToListOfPerson(path, selectedNumberOfFloors));
+                elevator = new Elevator(building.GetFloors());
             }
             else
             {
-                building = new Building(newfloor);
-                elevator = new Elevator(newfloor);
+                t0 = csvParser.ParseCsvToListOfPerson(path);
+                building = new Building();
                 building.CreateFloor(csvParser.ParseCsvToListOfPerson(path));
+                elevator = new Elevator(building.GetFloors());
             }
 
             foreach (string item in building.UpdateInformation())
@@ -78,8 +69,8 @@ namespace ALGODS_Projekt
                 lb_PeopleOnFloors.Items.Add(item);
             }
 
-
-            building.StartElevator();
+            building.StartElevator(elevator);
+            testTimer.Enabled = true;
             lbl_CurrentFloorNumber.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
             lbl_ElevatorState.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
             lbl_ElapsedTime.Text = elevator.GetElevatorRuntime().ToString();

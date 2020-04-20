@@ -30,8 +30,6 @@ namespace ALGODS_Projekt
                     {
                         if (floorCounter < numberOfFloors)
                         {
-                            //Problemet just nu: chars läses bara av som ett värde, dvs "-1" blir "1", vilket gör att den lägger till
-                            //de tomma våningarna i personList.
                             foreach (var item in line)
                             { 
                                 int itemIndex = itemIndex = line.IndexOf(item);

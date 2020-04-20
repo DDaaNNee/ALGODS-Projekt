@@ -9,9 +9,8 @@ namespace ALGODS_Projekt
     class Building
     {
 
-        public Building(Floor startingFloor)
+        public Building()
         {
-            elevator = new Elevator(startingFloor);
             allFloors = new List<Floor>();
             arrivedPassengers = new List<Person>();
             totalWaitingTime = 0;
@@ -21,7 +20,7 @@ namespace ALGODS_Projekt
         }
 
         // Byggnaden får ett elevator-objekt vid instansiering
-        Elevator elevator;
+        //Elevator elevator;
 
         // Våningar - En lista med Floor-objekt?
         List<Floor> allFloors;
@@ -52,6 +51,12 @@ namespace ALGODS_Projekt
                 }
                 allFloors.Add(floor);
             }
+        }
+
+        public Floor GetStartingFloor()
+        {
+            Floor startingFloor = allFloors.Min();
+            return startingFloor;
         }
 
         public List<Floor> GetFloors()
@@ -100,7 +105,7 @@ namespace ALGODS_Projekt
             return false;
         }
 
-        public void AddRemovePeople()
+        public void AddRemovePeople(Elevator elevator)
         {
             // tar detta bort personer från hissen eller från nuvarande våning? Kan ha fattat fel, men RemovePerson() tar väl bort en person som  väntar på våningen?
             foreach (Person pDeparting in elevator.GetCurrentPassagers())
@@ -158,10 +163,9 @@ namespace ALGODS_Projekt
         }
 
 
-        public void StartElevator(int numFloors = 10)
+        public void StartElevator(Elevator elevator, int numFloors = 10)
         {
-
-                AddRemovePeople();
+                AddRemovePeople(elevator);
                 if (elevator.GetCurrentFloor().GetFloorNumber() == numFloors - 1)
                 {
                     elevator.MoveElevator(Direction.DirectionEnum.Down);
@@ -219,99 +223,5 @@ namespace ALGODS_Projekt
                 }
             }
         }
-        
-        // Ett försök att manuellt försöka konvertera värderna i vår CSV-fil till hur det ser ut vid olika tidpunkter.
-        public string SplitIntoTime(string allTimesFromCSV, int numberOfFloors)
-        {
-            List<string> test = new List<string>();
-            string t0 = "";
-            string t1 = "";
-            string t2 = "";
-            string t3 = "";
-            string t4 = "";
-            string t5 = "";
-            string t6 = "";
-            string t7 = "";
-            string t8 = "";
-            string t9 = "";
-
-            int numberOfLines = allTimesFromCSV.Count(x => x.Equals('\n')) + 1;
-
-            if (numberOfLines >= 0)
-            {
-                for (int i = 0; i < numberOfFloors; i++)
-                {
-                    t0 += allTimesFromCSV[i];
-                }
-            }
-            if (numberOfLines >= numberOfFloors * 2)
-            {
-                for (int i = numberOfFloors - 1; numberOfFloors < numberOfFloors * 2; i++)
-                {
-                    t1 += allTimesFromCSV[i];
-                }
-            }
-            if (numberOfLines >= numberOfFloors * 3)
-            {
-                for (int i = (numberOfFloors * 2) - 1; numberOfFloors * 2 < numberOfFloors * 3; i++)
-                {
-                    t2 += allTimesFromCSV[i];
-                }
-            }
-            if (numberOfLines >= numberOfFloors * 4)
-            {
-                for (int i = numberOfFloors * 3; numberOfFloors * 3 < numberOfFloors * 4; i++)
-                {
-                    t3 += allTimesFromCSV[i];
-                }
-            }
-            if (numberOfLines >= numberOfFloors * 5)
-            {
-                for (int i = numberOfFloors * 4; numberOfFloors * 4 < numberOfFloors * 5; i++)
-                {
-                    t4 += allTimesFromCSV[i];
-                }
-            }
-            if (numberOfLines >= numberOfFloors * 6)
-            {
-                for (int i = numberOfFloors * 5; numberOfFloors * 5 < numberOfFloors * 6; i++)
-                {
-                    t5 += allTimesFromCSV[i];
-                }
-            }
-            if (numberOfLines >= numberOfFloors * 7)
-            {
-                for (int i = numberOfFloors * 6; numberOfFloors * 6 < numberOfFloors * 7; i++)
-                {
-                    t6 += allTimesFromCSV[i];
-                }
-            }
-            if (numberOfLines >= numberOfFloors * 8)
-            {
-                for (int i = numberOfFloors * 7; numberOfFloors * 7 < numberOfFloors * 8; i++)
-                {
-                    t7 += allTimesFromCSV[i];
-                }
-            }
-            if (numberOfLines >= numberOfFloors * 9)
-            {
-                for (int i = numberOfFloors * 8; numberOfFloors * 8 < numberOfFloors * 9; i++)
-                {
-                    t8 += allTimesFromCSV[i];
-                }
-            }
-            if (numberOfLines >= numberOfFloors * 10)
-            {
-                for (int i = numberOfFloors * 9; numberOfFloors * 9 < numberOfFloors * 10; i++)
-                {
-                    t9 += allTimesFromCSV[i];
-                }
-            }
-
-            return t0;
-
-
-        }
-
     }
 }

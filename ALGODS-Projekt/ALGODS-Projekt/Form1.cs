@@ -28,8 +28,8 @@ namespace ALGODS_Projekt
         private void Form1_Load(object sender, EventArgs e)
         {
             csvParser = new CsvParser();
-            testTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnStartElevator);
-            testTimer.Interval = 5000;
+            //testTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnStartElevator);
+            //testTimer.Interval = 5000;
             
 
             for (int i = 0; i < 100; i++)
@@ -69,8 +69,12 @@ namespace ALGODS_Projekt
                 lb_PeopleOnFloors.Items.Add(item);
             }
 
-            string test = "";
-
+            testTimer.Enabled = true;
+            building.StartElevator(elevator);
+            AddPeopleToElevator();
+            lbl_CurrentFloorNumber.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
+            lbl_ElevatorState.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
+            lbl_ElapsedTime.Text = elevator.GetElevatorRuntime().ToString();
 
             string currentPeople = "";
             foreach (Person p in elevator.GetCurrentPassagers())
@@ -78,12 +82,6 @@ namespace ALGODS_Projekt
                 currentPeople += p.End_floor + ", ";
             }
             lb_PeopleInElevator.Items.Add(currentPeople);
-
-            testTimer.Enabled = true;
-            //building.StartElevator(elevator);
-            lbl_CurrentFloorNumber.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
-            lbl_ElevatorState.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
-            lbl_ElapsedTime.Text = elevator.GetElevatorRuntime().ToString();
 
             //string test = "";
             //foreach (Person p in elevator.GetCurrentFloor().GetPeopleOnFloor())
@@ -108,32 +106,34 @@ namespace ALGODS_Projekt
 
         private void button3_Click(object sender, EventArgs e)
         {
-            bool peopleLeft = building.CheckIfPeopleWaiting();
-            testTimer.Enabled = true;
+            building.StartElevator(elevator);
+            AddPeopleToElevator();
+            //RemovePeopleFromFloor();
             lbl_CurrentFloorNumber.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
             lbl_ElevatorState.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
             lbl_ElapsedTime.Text = elevator.GetElevatorRuntime().ToString();
-            AddPeopleFromFloor();
 
-            if (elevator.GetCurrentFloor().GetFloorNumber() == 10 - 1)
-            {
-                elevator.MoveElevator(Direction.DirectionEnum.Down);
-            }
-            else /*if (elevator.GetCurrentFloor().GetFloorNumber() == 0)*/
-            {
-                elevator.MoveElevator(Direction.DirectionEnum.Up);
-            }
-
-            elevator.IncreaseSystemTime();
-            building.IncreaseWaitTime();
-            peopleLeft = building.CheckIfPeopleWaiting();
         }
 
-        public void AddPeopleFromFloor()
+        public void AddPeopleToElevator()
         {
             foreach (Person p in elevator.GetCurrentFloor().GetPeopleOnFloor())
             {
                 elevator.AddPersonToElevator(p);
+            }
+        }
+
+        public void RemovePeopleFromFloor()
+        {
+            foreach (Person p in elevator.GetCurrentFloor().GetPeopleOnFloor())
+            {
+                for (int i = 0; i < elevator.GetCurrentPassagers().Count; i++)
+                {
+                    if (p == elevator.GetCurrentPassagers()[i])
+                    {
+                        elevator.GetCurrentFloor().RemovePersonFromFloor(p);
+                    }
+                }
 
             }
         }

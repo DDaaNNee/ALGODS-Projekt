@@ -69,9 +69,9 @@ namespace ALGODS_Projekt
             orderedFloorList = allFloors;
             for (int i = 0; i < orderedFloorList.Count; i++)
             {
-                for (int j = 1; j < orderedFloorList.Count - 1; j++)
+                for (int j = 0; j < orderedFloorList.Count; j++)
                 {
-                    if (orderedFloorList[i].GetPeopleOnFloor().Count < orderedFloorList[j].GetPeopleOnFloor().Count)
+                    if (orderedFloorList[i].GetPeopleOnFloor().Count > orderedFloorList[j].GetPeopleOnFloor().Count)
                     {
                         Floor temp = orderedFloorList[i];
                         orderedFloorList[i] = orderedFloorList[j];
@@ -160,23 +160,33 @@ namespace ALGODS_Projekt
         public void StartElevator(Elevator elevator, int numFloors = 10)
         {
             bool peopleLeft = CheckIfPeopleWaiting();
-            while (peopleLeft == true)
-            {
+            //while (peopleLeft == true)
+            //{
                 //AddRemovePeople(elevator);
-                AddPersonToElevator(elevator);
-                if (elevator.GetCurrentFloor().GetFloorNumber() == numFloors - 1)
-                {
-                    elevator.MoveElevator(Direction.DirectionEnum.Down);
-                }
-                else /*if (elevator.GetCurrentFloor().GetFloorNumber() == 0)*/
-                {
-                    elevator.MoveElevator(Direction.DirectionEnum.Up);
-                }
+            //AddPersonToElevator(elevator);
+            //if (elevator.GetCurrentFloor().GetFloorNumber() == numFloors - 1)
+            //{
+            //    elevator.MoveElevator(Direction.DirectionEnum.Down);
+            //}
+            //else /*if (elevator.GetCurrentFloor().GetFloorNumber() == 0)*/
+            //{
+            //    elevator.MoveElevator(Direction.DirectionEnum.Up);
+            //}
+
+            List<Floor> SortedFloors = SortFloorsByPeopleWaiting();
+            if (elevator.GetCurrentFloor().GetFloorNumber() <= SortedFloors[0].GetFloorNumber())
+            {
+                elevator.MoveElevator(Direction.DirectionEnum.Up);
+            }
+            else if (elevator.GetCurrentFloor().GetFloorNumber() > SortedFloors[0].GetFloorNumber())
+            {
+                elevator.MoveElevator(Direction.DirectionEnum.Down);
+            }
 
             elevator.IncreaseSystemTime();
             IncreaseWaitTime();
             peopleLeft = CheckIfPeopleWaiting();
-            }
+            //}
         }
 
         public void AddPersonToElevator(Elevator elevator)

@@ -20,15 +20,20 @@ namespace ALGODS_Projekt
             currentPeople = new List<Person>(10);
             listOfFloors = allFloors;
             elevatorRuntime = 0;
-            _currentFloor = listOfFloors[0];
+            _currentFloor = listOfFloors.First();
         }
 
-        public void AddPerson(Person person)
+        public void AddPersonToElevator(Person person)
         {
             if (person.GetDirection(person.Start_floor, person.End_floor) == currentDirection && currentPeople.Count <= 9)
             {
                 currentPeople.Add(person);
             }
+        }
+
+        public void RemovePersonFromElevator(Person person)
+        {
+            currentPeople.Remove(person);
         }
         
         // Flytta hissen en våning uppåt eller en våning nedåt.

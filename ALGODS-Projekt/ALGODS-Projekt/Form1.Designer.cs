@@ -30,7 +30,7 @@
         {
             this.btn_play = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btn_Go = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lbl_CurrentFloorNumber = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -78,14 +78,15 @@
             this.button2.Text = "Pause";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btn_Go
             // 
-            this.button3.Location = new System.Drawing.Point(624, 475);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(235, 65);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Go";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_Go.Location = new System.Drawing.Point(624, 475);
+            this.btn_Go.Name = "btn_Go";
+            this.btn_Go.Size = new System.Drawing.Size(235, 65);
+            this.btn_Go.TabIndex = 2;
+            this.btn_Go.Text = "Go";
+            this.btn_Go.UseVisualStyleBackColor = true;
+            this.btn_Go.Click += new System.EventHandler(this.button3_Click);
             // 
             // label1
             // 
@@ -347,7 +348,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lbl_CurrentFloorNumber);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btn_Go);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btn_play);
             this.Name = "Form1";
@@ -362,7 +363,7 @@
 
         private System.Windows.Forms.Button btn_play;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btn_Go;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbl_CurrentFloorNumber;
         private System.Windows.Forms.Label label3;

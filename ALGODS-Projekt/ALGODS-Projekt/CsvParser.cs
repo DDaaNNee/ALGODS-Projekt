@@ -24,7 +24,7 @@ namespace ALGODS_Projekt
                 {
                     int floorCounter = 0;
                     string line;
-                    int isSkip = 0;
+                    string isSkip = "0";
 
                     while ((line = reader.ReadLine()) != null)
                     {
@@ -33,12 +33,18 @@ namespace ALGODS_Projekt
                             //Problemet just nu: chars läses bara av som ett värde, dvs "-1" blir "1", vilket gör att den lägger till
                             //de tomma våningarna i personList.
                             foreach (var item in line)
-                            {
-                                int itemIndex = 0;
-                                itemIndex = line.IndexOf(item);
-                                // Fungerar inte alls som tänkt
-                                if (line[itemIndex].ToString() == "-" && line[itemIndex + 1].ToString() == "1" || isSkip == 1)
+                            { 
+                                int itemIndex = itemIndex = line.IndexOf(item);
+                                string itemToString = item.ToString();
+                                if (line[itemIndex].ToString() == "-")
                                 {
+                                    isSkip = "1";
+                                    continue;
+
+                                }
+                                else if (isSkip == "1")
+                                {
+                                    isSkip = "0";
                                     continue;
 
                                 }

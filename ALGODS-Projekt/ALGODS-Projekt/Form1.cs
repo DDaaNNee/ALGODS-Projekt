@@ -63,11 +63,13 @@ namespace ALGODS_Projekt
             if (selectedNumberOfFloors != 0)
             {
                 building = new Building(newfloor);
+                elevator = new Elevator(newfloor);
                 building.CreateFloor(csvParser.ParseCsvToListOfPerson(path, selectedNumberOfFloors));
             }
             else
             {
                 building = new Building(newfloor);
+                elevator = new Elevator(newfloor);
                 building.CreateFloor(csvParser.ParseCsvToListOfPerson(path));
             }
 
@@ -92,6 +94,14 @@ namespace ALGODS_Projekt
 
         public void OnStartElevator(object source, ElapsedEventArgs e)
         {
+            ChangeLabels();
+        }
+
+        public void ChangeLabels()
+        {
+            lbl_CurrentFloorNumber.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
+            lbl_ElevatorState.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
+            lbl_ElapsedTime.Text = elevator.GetElevatorRuntime().ToString();
 
         }
     }

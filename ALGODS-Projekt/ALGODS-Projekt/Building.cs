@@ -43,7 +43,7 @@ namespace ALGODS_Projekt
         {
             foreach(int startFloor in pList.Select(x=>x.Start_floor).Distinct())
             {
-                floor = new Floor(startFloor);                
+                floor = new Floor(startFloor);
                 foreach (Person p in pList.Where(x=>x.Start_floor == startFloor))
                 {
                     floor.AddPersonToFloor(p);
@@ -157,31 +157,24 @@ namespace ALGODS_Projekt
             }
         }
 
+        // La till så att hissen ska röra sig mot den våningen där flest personer väntar. (Ta bort om det inte funkar).
         public void StartElevator(Elevator elevator, int numFloors = 10)
         {
             bool peopleLeft = CheckIfPeopleWaiting();
             //while (peopleLeft == true)
             //{
                 //AddRemovePeople(elevator);
-            //AddPersonToElevator(elevator);
-            //if (elevator.GetCurrentFloor().GetFloorNumber() == numFloors - 1)
-            //{
-            //    elevator.MoveElevator(Direction.DirectionEnum.Down);
-            //}
-            //else /*if (elevator.GetCurrentFloor().GetFloorNumber() == 0)*/
-            //{
-            //    elevator.MoveElevator(Direction.DirectionEnum.Up);
-            //}
+                AddPersonToElevator(elevator);
+                List<Floor> sortedFloors = SortFloorsByPeopleWaiting();
 
-            List<Floor> SortedFloors = SortFloorsByPeopleWaiting();
-            if (elevator.GetCurrentFloor().GetFloorNumber() <= SortedFloors[0].GetFloorNumber())
-            {
-                elevator.MoveElevator(Direction.DirectionEnum.Up);
-            }
-            else if (elevator.GetCurrentFloor().GetFloorNumber() > SortedFloors[0].GetFloorNumber())
-            {
-                elevator.MoveElevator(Direction.DirectionEnum.Down);
-            }
+                if (elevator.GetCurrentFloor().GetFloorNumber() == numFloors - 1 || elevator.GetCurrentFloor().GetFloorNumber() > sortedFloors[0].GetFloorNumber() )
+                {
+                    elevator.MoveElevator(Direction.DirectionEnum.Down);
+                }
+                else /*if (elevator.GetCurrentFloor().GetFloorNumber() == 0 || elevator.GetCurrentFloor().GetFloorNumber() < sortedFloors[0].GetFloorNumber())*/
+                {
+                    elevator.MoveElevator(Direction.DirectionEnum.Up);
+                }
 
             elevator.IncreaseSystemTime();
             IncreaseWaitTime();
@@ -242,7 +235,7 @@ namespace ALGODS_Projekt
         public void CountPeopleShortestLongestTime()
         {
             // Här behövs en metod för att sortera passagerare i arrivedPassengers efter deras CompletionTime från lägst till högst.
-            //sort(arrivedPassengers); 
+            //sort(arrivedPassengers);
 
             foreach(Person passager in arrivedPassengers)
             {

@@ -27,7 +27,7 @@ namespace ALGODS_Projekt
 
         // Då passagerare lämnar hissen adderas de till denna lista.
         List<Person> arrivedPassengers;
-
+        
 
         Floor floor;
 
@@ -158,15 +158,17 @@ namespace ALGODS_Projekt
             return allPeopleStartList;
         }
 
-
+        // Uppdaterade så att hissen ska röra sig mot våningen med störst antal personer som väntar (ta bort om det inte funkar)
         public void StartElevator(Elevator elevator, int numFloors = 10)
         {
                 AddRemovePeople(elevator);
-                if (elevator.GetCurrentFloor().GetFloorNumber() == numFloors - 1)
+                List<Floor> sortedFloors = SortFloorsByPeopleWaiting();
+
+                if (elevator.GetCurrentFloor().GetFloorNumber() == numFloors - 1 || elevator.GetCurrentFloor().GetFloorNumber > sortedFloors[0].GetFloorNumber())
                 {
                     elevator.MoveElevator(Direction.DirectionEnum.Down);
                 }
-                else if (elevator.GetCurrentFloor().GetFloorNumber() == 0)
+                else if (elevator.GetCurrentFloor().GetFloorNumber() == 0 || elevator.GetCurrentFloor.GetFloorNumber() < sortedFloors[0].GetFloorNumber)
                 {
                     elevator.MoveElevator(Direction.DirectionEnum.Up);
                 }

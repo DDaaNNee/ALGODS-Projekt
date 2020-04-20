@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
 
-namespace ALGODS_Projekt
+namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kaspar Visnapuu, Lowe Ekström, Mattias Holmström, Vilgot Holdar
 {
     public partial class Form1 : Form
     {

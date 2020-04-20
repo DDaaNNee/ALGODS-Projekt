@@ -64,29 +64,23 @@ namespace ALGODS_Projekt
             return allFloors;
         }
 
-        // Kom ihåg referens till föreläsningen som koden för sorteringen hämtades från.
-        // Hur få fram en lista av sorterade Floor-objekt istället för sorterade ints?
-        public List<int> SortFloorsByPeopleWaiting()
+        public List<Floor> SortFloorsByPeopleWaiting()
         {
-            List<int> orderedFloorList = new List<int>();
-            foreach (Floor f in allFloors)
+            List<Floor> orderedFloorList = new List<Floor>();
+            orderedFloorList = allFloors;
+            for (int i = 0; i < orderedFloorList.Count; i++)
             {
-                orderedFloorList.Add(f.GetPeopleOnFloor().Count());
-            }
-            for (int i = 0; i < orderedFloorList.Count - 1; i++)
-            {
-                for (int j = 1; j < orderedFloorList.Count; j++)
+                for (int j = 1; j < orderedFloorList.Count - 1; j++)
                 {
-                    if (orderedFloorList[i] < orderedFloorList[j])
+                    if (orderedFloorList[i].GetPeopleOnFloor().Count < orderedFloorList[j].GetPeopleOnFloor().Count)
                     {
-                        int temp = orderedFloorList[i];
+                        Floor temp = orderedFloorList[i];
                         orderedFloorList[i] = orderedFloorList[j];
                         orderedFloorList[j] = temp;
                     }
                 }
             }
             return orderedFloorList;
-            
         }
 
         public bool PeopleLeft()

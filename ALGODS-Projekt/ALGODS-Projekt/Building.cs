@@ -64,6 +64,8 @@ namespace ALGODS_Projekt
             return allFloors;
         }
 
+        // Kom ihåg referens till föreläsningen som koden för sorteringen hämtades från.
+        // Hur få fram en lista av sorterade Floor-objekt istället för sorterade ints?
         public List<int> SortFloorsByPeopleWaiting()
         {
             List<int> orderedFloorList = new List<int>();

@@ -34,8 +34,7 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
             //testTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnStartElevator);
             //testTimer.Interval = 5000;
             
-
-            for (int i = 0; i < 100; i++)
+            for (int i = 1; i < 50; i++)
             {
                 cb_numOfFloors.Items.Add(i);
             }
@@ -53,7 +52,6 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
             string path = openFileDiag.FileName;
             int selectedNumberOfFloors = Convert.ToInt32(cb_numOfFloors.SelectedItem);
 
-            // Problem med att newfloor inte faktiskt är våning noll?
             if (selectedNumberOfFloors != 0)
             {
                 t0 = csvParser.ParseCsv_T0_ListOfPerson(path, selectedNumberOfFloors);
@@ -86,6 +84,12 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
             }
             lb_PeopleInElevator.Items.Add(currentPeople);
 
+            //string test = "";
+            //foreach (var item in csvParser.ParseCsvReadAllLines(path))
+            //{
+            //    test += item;
+            //}
+            //MessageBox.Show(test);
         }
 
         public void OnStartElevator(object source, ElapsedEventArgs e)

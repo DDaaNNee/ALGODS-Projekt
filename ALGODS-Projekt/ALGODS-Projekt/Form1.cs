@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
 
-namespace ALGODS_Projekt
+namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kaspar Visnapuu, Lowe Ekström, Mattias Holmström, Vilgot Holdar
 {
     public partial class Form1 : Form
     {
@@ -27,12 +27,14 @@ namespace ALGODS_Projekt
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            HideAfterRunningLabels();
+            HideWhileRunningLabels();
+            ShowBeforeRunning();
             csvParser = new CsvParser();
-            testTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnStartElevator);
-            testTimer.Interval = 5000;
+            //testTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnStartElevator);
+            //testTimer.Interval = 5000;
             
-
-            for (int i = 0; i < 100; i++)
+            for (int i = 1; i < 50; i++)
             {
                 cb_numOfFloors.Items.Add(i);
             }
@@ -42,13 +44,14 @@ namespace ALGODS_Projekt
         // Implementera loop för att uppdatera listbox1 & 2
         private void btn_play_Click(object sender, EventArgs e)
         {
+            HideBeforeRunning();
+            ShowWhileRunningLabels();
             lb_PeopleOnFloors.Items.Clear();
             OpenFileDialog openFileDiag = new OpenFileDialog();
             DialogResult result = openFileDiag.ShowDialog();
             string path = openFileDiag.FileName;
             int selectedNumberOfFloors = Convert.ToInt32(cb_numOfFloors.SelectedItem);
 
-            // Problem med att newfloor inte faktiskt är våning noll?
             if (selectedNumberOfFloors != 0)
             {
                 t0 = csvParser.ParseCsv_T0_ListOfPerson(path, selectedNumberOfFloors);
@@ -69,8 +72,10 @@ namespace ALGODS_Projekt
                 lb_PeopleOnFloors.Items.Add(item);
             }
 
-            string test = "";
-
+            testTimer.Enabled = true;
+            lbl_CurrentFloorNumber_UPDATE.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
+            lbl_ElevatorState_UPDATE.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
+            lbl_ElapsedTime_UPDATE.Text = elevator.GetElevatorRuntime().ToString();
 
             string currentPeople = "";
             foreach (Person p in elevator.GetCurrentPassagers())
@@ -79,16 +84,10 @@ namespace ALGODS_Projekt
             }
             lb_PeopleInElevator.Items.Add(currentPeople);
 
-            testTimer.Enabled = true;
-            //building.StartElevator(elevator);
-            lbl_CurrentFloorNumber.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
-            lbl_ElevatorState.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
-            lbl_ElapsedTime.Text = elevator.GetElevatorRuntime().ToString();
-
             //string test = "";
-            //foreach (Person p in elevator.GetCurrentFloor().GetPeopleOnFloor())
+            //foreach (var item in csvParser.ParseCsvReadAllLines(path))
             //{
-            //    test += p.End_floor;
+            //    test += item;
             //}
             //MessageBox.Show(test);
         }
@@ -100,42 +99,114 @@ namespace ALGODS_Projekt
 
         public void ChangeLabels()
         {
-            lbl_CurrentFloorNumber.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
-            lbl_ElevatorState.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
-            lbl_ElapsedTime.Text = elevator.GetElevatorRuntime().ToString();
+            lbl_CurrentFloorNumber_UPDATE.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
+            lbl_ElevatorState_UPDATE.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
+            lbl_ElapsedTime_UPDATE.Text = elevator.GetElevatorRuntime().ToString();
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            bool peopleLeft = building.CheckIfPeopleWaiting();
-            testTimer.Enabled = true;
-            lbl_CurrentFloorNumber.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
-            lbl_ElevatorState.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
-            lbl_ElapsedTime.Text = elevator.GetElevatorRuntime().ToString();
-            AddPeopleFromFloor();
 
-            if (elevator.GetCurrentFloor().GetFloorNumber() == 10 - 1)
+            building.StartElevator(elevator);
+            lbl_CurrentFloorNumber_UPDATE.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
+            lbl_ElevatorState_UPDATE.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
+            lbl_ElapsedTime_UPDATE.Text = elevator.GetElevatorRuntime().ToString();
+            lb_PeopleOnFloors.Items.Clear();
+            foreach (string item in building.UpdateInformation())
             {
-                elevator.MoveElevator(Direction.DirectionEnum.Down);
+                lb_PeopleOnFloors.Items.Add(item);
             }
-            else /*if (elevator.GetCurrentFloor().GetFloorNumber() == 0)*/
+            string currentPeople = "";
+            lb_PeopleInElevator.Items.Clear();
+            foreach (Person p in elevator.GetCurrentPassagers())
             {
-                elevator.MoveElevator(Direction.DirectionEnum.Up);
+                currentPeople += p.End_floor + ", ";
             }
+            lb_PeopleInElevator.Items.Add("\n");
+            lb_PeopleInElevator.Items.Add(currentPeople);
 
-            elevator.IncreaseSystemTime();
-            building.IncreaseWaitTime();
-            peopleLeft = building.CheckIfPeopleWaiting();
+            //HideWhileRunningLabels();
+            //ShowAfterRunningLabels();
+
         }
 
-        public void AddPeopleFromFloor()
+        public void HideAfterRunningLabels()
         {
-            foreach (Person p in elevator.GetCurrentFloor().GetPeopleOnFloor())
-            {
-                elevator.AddPersonToElevator(p);
+            lbl_TotalNumOfPassengers.Hide();
+            lbl_TotalNumOfPassengers_UPDATE.Hide();
+            lbl_TotalTime.Hide();
+            lbl_TotalTime_UPDATE.Hide();
+            lbl_AverageWaitTime.Hide();
+            lbl_AverageWaitTime_UPDATE.Hide();
+            lbl_AverageCompTime.Hide();
+            lbl_AverageCompTime_UPDATE.Hide();
+            lbl_LeastTimeTaken.Hide();
+            lbl_LeastTimeTaken_UPDATE.Hide();
+            lbl_HighestTimeTaken.Hide();
+            lbl_HighestTimeTaken_UPDATE.Hide();
+        }
 
-            }
+        public void ShowAfterRunningLabels()
+        {
+            lbl_TotalNumOfPassengers.Show();
+            lbl_TotalNumOfPassengers_UPDATE.Show();
+            lbl_TotalTime.Show();
+            lbl_TotalTime_UPDATE.Show();
+            lbl_AverageWaitTime.Show();
+            lbl_AverageWaitTime_UPDATE.Show();
+            lbl_AverageCompTime.Show();
+            lbl_AverageCompTime_UPDATE.Show();
+            lbl_LeastTimeTaken.Show();
+            lbl_LeastTimeTaken_UPDATE.Show();
+            lbl_HighestTimeTaken.Show();
+            lbl_HighestTimeTaken_UPDATE.Show();
+        }
+
+        public void HideWhileRunningLabels()
+        {
+            lbl_PeopleInElevator.Hide();
+            lbl_PeopleOnFloors.Hide();
+            lb_PeopleInElevator.Hide();
+            lb_PeopleOnFloors.Hide();
+            lbl_CurrentFloorNumber.Hide();
+            lbl_CurrentFloorNumber_UPDATE.Hide();
+            lbl_ElevatorState.Hide();
+            lbl_ElevatorState_UPDATE.Hide();
+            lbl_ElapsedTime.Hide();
+            lbl_ElapsedTime_UPDATE.Hide();
+        }
+
+        public void ShowWhileRunningLabels()
+        {
+            lbl_PeopleInElevator.Show();
+            lbl_PeopleOnFloors.Show();
+            lb_PeopleInElevator.Show();
+            lb_PeopleOnFloors.Show();
+            lb_PeopleInElevator.Show();
+            lb_PeopleOnFloors.Show();
+            lbl_CurrentFloorNumber.Show();
+            lbl_CurrentFloorNumber_UPDATE.Show();
+            lbl_ElevatorState.Show();
+            lbl_ElevatorState_UPDATE.Show();
+            lbl_ElapsedTime.Show();
+            lbl_ElapsedTime_UPDATE.Show();
+        }
+
+        public void ShowBeforeRunning()
+        {
+            lbl_PeopleInElevator.Hide();
+            lbl_PeopleOnFloors.Hide();
+            lb_PeopleInElevator.Hide();
+            lb_PeopleOnFloors.Hide();
+            lbl_ChooseNumOfFloors.Show();
+            cb_numOfFloors.Show();
+        }
+
+        public void HideBeforeRunning()
+        {
+            lbl_ChooseNumOfFloors.Hide();
+            cb_numOfFloors.Hide();
         }
     }
 }

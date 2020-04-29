@@ -23,19 +23,43 @@ namespace ALGODS_Projekt
             _currentFloor = listOfFloors.First();
         }
 
-        public void AddPersonToElevator(Person person)
+        public void AddPersonToElevator()
         {
-            if (person.GetDirection(person.Start_floor, person.End_floor) == currentDirection && currentPeople.Count <= 9)
-            {
-                currentPeople.Add(person);
+            foreach (Person p in GetCurrentFloor().GetPeopleOnFloor().ToList())
+            {            
+                if (currentPeople.Count <= 9)
+                {
+                    currentPeople.Add(p);
+                }
             }
         }
 
-        public void RemovePersonFromElevator(Person person)
+        public void RemovePersonFromElevator()
         {
-            currentPeople.Remove(person);
+            foreach (Person p in GetCurrentPassagers().ToList())
+            {
+                if (p.End_floor == GetCurrentFloor().GetFloorNumber())
+                {
+                    currentPeople.Remove(p);
+                }
+            }
         }
-        
+
+        public void RemovePeopleFromFloor()
+        {
+            foreach (Person p in GetCurrentFloor().GetPeopleOnFloor().ToList())
+            {
+                for (int i = 0; i < GetCurrentPassagers().Count; i++)
+                {
+                    if (p == GetCurrentPassagers()[i])
+                    {
+                        GetCurrentFloor().GetPeopleOnFloor().Remove(p);
+                    }
+                }
+
+            }
+        }
+
         // Flytta hissen en våning uppåt eller en våning nedåt.
         public void MoveElevator(Direction.DirectionEnum currentDirection = Direction.DirectionEnum.Up)
         {

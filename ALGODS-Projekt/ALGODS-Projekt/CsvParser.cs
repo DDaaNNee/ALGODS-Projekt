@@ -56,7 +56,7 @@ namespace ALGODS_Projekt
                             }
                             floorCounter++;
                         }
-                     }
+                    }
                     return personList;
                 }
             }

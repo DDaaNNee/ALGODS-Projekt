@@ -306,7 +306,6 @@
             this.ClientSize = new System.Drawing.Size(871, 552);
             this.Controls.Add(this.lbl_PeopleOnFloors);
             this.Controls.Add(this.lbl_PeopleInElevator);
-            this.Controls.Add(this.lb_PeopleInElevator);
             this.Controls.Add(this.cb_numOfFloors);
             this.Controls.Add(this.lbl_ChooseNumOfFloors);
             this.Controls.Add(this.lb_PeopleOnFloors);
@@ -331,6 +330,7 @@
             this.Controls.Add(this.btn_Go);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btn_play);
+            this.Controls.Add(this.lb_PeopleInElevator);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

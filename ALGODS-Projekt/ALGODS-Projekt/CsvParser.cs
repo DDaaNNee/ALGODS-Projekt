@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ALGODS_Projekt
 {
@@ -63,8 +64,8 @@ namespace ALGODS_Projekt
 
             catch (Exception)
             {
-                Console.WriteLine("The file could not be read!");
-                throw;
+                MessageBox.Show("The file could not be read!");
+                return null;
             }
         }
 
@@ -78,6 +79,13 @@ namespace ALGODS_Projekt
             }
 
             return parsedText;
+        }
+
+        public string[] ParseCsvToArray(string pathToFile)
+        {
+            string[] arrOfText = File.ReadAllText(pathToFile).Split('\n');
+            string[] fixedArr = arrOfText.Select(x => x.Replace("-1", "")).ToArray();
+            return fixedArr;
         }
     }
 

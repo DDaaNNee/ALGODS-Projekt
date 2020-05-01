@@ -17,10 +17,8 @@ namespace ALGODS_Projekt
             totalCompletionTime = 0;
             peopleWithShortestTime = 0;
             peopleWithLongestTime = 0;
+            currentTime = 0;
         }
-
-        // Byggnaden får ett elevator-objekt vid instansiering
-        //Elevator elevator;
 
         // Våningar - En lista med Floor-objekt?
         List<Floor> allFloors;
@@ -37,19 +35,40 @@ namespace ALGODS_Projekt
         int averageCompletionTime;
         int peopleWithShortestTime;
         int peopleWithLongestTime;
+        int currentTime;
 
         // Just nu kör den varje floor utan att ta hänsyn till hur många floors vi vill att den ska skapa.
         public void CreateFloor(List<Person> pList)
         {
-            foreach(int startFloor in pList.Select(x=>x.Start_floor).Distinct())
+            try
             {
-                floor = new Floor(startFloor);
-                foreach (Person p in pList.Where(x=>x.Start_floor == startFloor))
+                foreach(int startFloor in pList.Select(x=>x.Start_floor).Distinct())
                 {
-                    floor.AddPersonToFloor(p);
+                    floor = new Floor(startFloor);
+                    foreach (Person p in pList.Where(x=>x.Start_floor == startFloor))
+                    {
+                        floor.AddPersonToFloor(p);
+                    }
+                    allFloors.Add(floor);
                 }
-                allFloors.Add(floor);
             }
+            catch (Exception)
+            {
+                
+            }
+        }
+
+        public void CreateTenFloors()
+        {
+            if (currentTime == 0)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    floor = new Floor(i);
+                    allFloors.Add(floor);
+                }
+            }
+
         }
 
         public Floor GetStartingFloor()

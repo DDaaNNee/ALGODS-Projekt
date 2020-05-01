@@ -20,7 +20,14 @@ namespace ALGODS_Projekt
             currentPeople = new List<Person>(10);
             listOfFloors = allFloors;
             elevatorRuntime = 0;
-            _currentFloor = listOfFloors.First();
+            try
+            {
+                _currentFloor = listOfFloors.First();
+            }
+            catch (Exception)
+            {
+                
+            }
         }
 
         public void AddPersonToElevator()

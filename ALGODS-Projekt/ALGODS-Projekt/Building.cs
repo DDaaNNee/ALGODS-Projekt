@@ -54,7 +54,6 @@ namespace ALGODS_Projekt
             }
             catch (Exception)
             {
-                
             }
         }
 

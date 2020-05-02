@@ -83,9 +83,89 @@ namespace ALGODS_Projekt
 
         public string[] ParseCsvToArray(string pathToFile)
         {
-            string[] arrOfText = File.ReadAllText(pathToFile).Split('\n');
-            string[] fixedArr = arrOfText.Select(x => x.Replace("-1", "")).ToArray();
-            return fixedArr;
+            //try
+            //{
+                string[] arrOfText = File.ReadAllText(pathToFile).Split('\n');
+                string[] fixedArr = arrOfText.Select(x => x.Replace("-1", "")).ToArray();
+                return fixedArr;
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Invalid file type!");
+            //    return null;
+            //}
+
+        }
+
+        public string[] GetCurrentTimeParsedArray(string[] parsedTextToStringArray)
+        {
+            try
+            {
+                string[] currentTimedArr = new string[10];
+                for (int i = currIndex; i < currIndex + 10; i++)
+                {
+                    currentTimedArr[i - currIndex] = parsedTextToStringArray[i];
+                }
+                currIndex += 10;
+                return currentTimedArr;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return null;
+            }
+        }
+
+        public List<Person> TESTGetCurrentTimeParsedArray(string[] parsedTextToStringArray)
+        {
+            try
+            {
+                Person person;
+                List<Person> listPerson = new List<Person>();
+                int isSkip;
+                string[] currentTimedArr = new string[10];
+                for (int i = currIndex; i < currIndex + 10; i++)
+                {
+                    currentTimedArr[i - currIndex] = parsedTextToStringArray[i];
+
+                    foreach (char c in currentTimedArr[i - currIndex])
+                    {
+                        isSkip = 0;
+                        if (true)
+                        {
+
+                            if (c.ToString() == "-")
+                            {
+                                isSkip = 1;
+                                continue;
+
+                            }
+                            else if (isSkip == 1)
+                            {
+                                isSkip = 0;
+                                continue;
+
+                            }
+                            else if (char.IsPunctuation(c) == true || c.ToString() == "\r")
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                int test = Convert.ToInt32(char.GetNumericValue(c));
+                                person = new Person(i - currIndex, test);
+                                listPerson.Add(person);
+                            }
+                        }
+                    }
+                }
+
+                currIndex += 10;
+                return listPerson;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return null;
+            }
         }
     }
 

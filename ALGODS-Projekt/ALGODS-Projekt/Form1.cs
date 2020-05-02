@@ -22,8 +22,8 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
         CsvParser csvParser;
         Building building;
         Elevator elevator;
-        List<Person> t0ListofPerson;
-        string[] t0StringArray;
+        List<Person> listOfPeopleToFloor;
+        Floor floor;
         System.Timers.Timer testTimer = new System.Timers.Timer();
 
         private void Form1_Load(object sender, EventArgs e)
@@ -32,17 +32,17 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
             HideWhileRunningLabels();
             ShowBeforeRunning();
             csvParser = new CsvParser();
+            listOfPeopleToFloor = new List<Person>();
+
             //testTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnStartElevator);
             //testTimer.Interval = 5000;
-            
+
             for (int i = 1; i <= 50; i++)
             {
                 cb_numOfFloors.Items.Add(i);
             }
         }
 
-        // Denna metod behöver sannolikt felhantering
-        // Implementera loop för att uppdatera listbox1 & 2
         private void btn_play_Click(object sender, EventArgs e)
         {
             try
@@ -54,7 +54,6 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
                 DialogResult result = openFileDiag.ShowDialog();
                 string path = openFileDiag.FileName;
                 //int selectedNumberOfFloors = Convert.ToInt32(cb_numOfFloors.SelectedItem);
-
                 //if (selectedNumberOfFloors != 0)
                 //{
                 //    t0 = csvParser.ParseCsv_T0_ListOfPerson(path, selectedNumberOfFloors);
@@ -69,40 +68,51 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
                 //    building.CreateFloor(t0);
                 //    elevator = new Elevator(building.GetFloors());
                 //}
-
+                
+                // Läser inte in -1 som en egen våning. Gör om -1 till nya våningar utan personer på dom.
                 building = new Building();
-                building.CreateTenFloors();
-                t0StringArray = csvParser.ParseCsvToArray(path);
-                Person person;
-                int currFloor = 0;
-                IEnumerable<Floor> selectedFloor;
+                //building.CreateTenFloors();
+                building.CreateFloor(csvParser.TESTGetCurrentTimeParsedArray(csvParser.ParseCsvToArray(path)));
+                //foreach (var item in csvParser.GetCurrentTimeParsedArray(csvParser.ParseCsvToArray(path)))
+                //{
 
-                /*
-                foreach(int startFloor in pList.Select(x=>x.Start_floor).Distinct())
-                {
-                    floor = new Floor(startFloor);
-                    foreach (Person p in pList.Where(x=>x.Start_floor == startFloor))
-                    {
-                        floor.AddPersonToFloor(p);
-                    }
-                    allFloors.Add(floor);
-                */
+                //}
+
+
+                //foreach (int startFloor in csvParser.TESTGetCurrentTimeParsedArray(csvParser.ParseCsvToArray(path)).Select(x => x.Start_floor).Distinct())
+                //{
+                //    floor = new Floor(startFloor);
+                //    foreach (Person p in csvParser.TESTGetCurrentTimeParsedArray(csvParser.ParseCsvToArray(path)).Where(x => x.Start_floor == startFloor))
+                //    {
+                //        floor.AddPersonToFloor(p);
+                //    }
+                //    allFloors.Add(floor);
+                //}
+
 
                 // Öka currFloor
-                foreach (string item in t0StringArray)
+                //foreach (string item in t0StringArray)
+                //{
+                //    if (item != "")
+                //    {
+                //        person = new Person(currFloor, Convert.ToInt32(item));
+                //        foreach (Floor f in building.GetFloors())
+                //        {
+                //            if (f.GetFloorNumber() == currFloor)
+                //            {
+                //                f.AddPersonToFloor(person);
+                //            }
+                //        }
+                //    }
+                //}
+
+
+                string test = "";
+                foreach (var item in csvParser.GetCurrentTimeParsedArray(csvParser.ParseCsvToArray(path)))
                 {
-                    if (item != "")
-                    {
-                        person = new Person(currFloor, Convert.ToInt32(item));
-                        foreach (Floor f in building.GetFloors())
-                        {
-                            if (f.GetFloorNumber() == currFloor)
-                            {
-                                f.AddPersonToFloor(person);
-                            }
-                        }
-                    }
+                    test += item;
                 }
+                MessageBox.Show(test);
 
                 foreach (string item in building.UpdateInformation())
                 {
@@ -170,7 +180,6 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
             {
                 MessageBox.Show("No valid file selected!");
             }
-
         }
 
         public void HideAfterRunningLabels()

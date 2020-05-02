@@ -82,6 +82,7 @@ namespace ALGODS_Projekt
             return allFloors;
         }
 
+       
         public List<Floor> SortFloorsByPeopleWaiting()
         {
             List<Floor> orderedFloorList = new List<Floor>();
@@ -286,18 +287,18 @@ namespace ALGODS_Projekt
         // Metod för att räkna ut antalet passagerare som har den längsta totala tiden samt kortaste totala tiden:
         public void CountPeopleShortestLongestTime()
         {
-            // Här behövs en metod för att sortera passagerare i arrivedPassengers efter deras CompletionTime från lägst till högst.
+            // Här behövs en metod för att sortera passagerare i arrivedPassengers efter deras CompletionTime från högst till lägst.
             //sort(arrivedPassengers);
 
             foreach(Person passager in arrivedPassengers)
             {
                 if(passager.GetCompletionTime() == arrivedPassengers[0].GetCompletionTime())
                 {
-                    peopleWithShortestTime++;
+                    peopleWithLongestTime++;
                 }
                 else if(passager.GetCompletionTime() == arrivedPassengers[arrivedPassengers.Count-1].GetCompletionTime())
                 {
-                    peopleWithLongestTime++;
+                    peopleWithShortestTime++;
                 }
             }
         }

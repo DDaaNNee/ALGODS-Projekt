@@ -263,7 +263,7 @@
             this.lb_PeopleOnFloors.FormattingEnabled = true;
             this.lb_PeopleOnFloors.Location = new System.Drawing.Point(624, 63);
             this.lb_PeopleOnFloors.Name = "lb_PeopleOnFloors";
-            this.lb_PeopleOnFloors.Size = new System.Drawing.Size(235, 355);
+            this.lb_PeopleOnFloors.Size = new System.Drawing.Size(500, 355);
             this.lb_PeopleOnFloors.TabIndex = 37;
             // 
             // lbl_ChooseNumOfFloors
@@ -288,7 +288,7 @@
             this.lb_PeopleInElevator.FormattingEnabled = true;
             this.lb_PeopleInElevator.Location = new System.Drawing.Point(303, 63);
             this.lb_PeopleInElevator.Name = "lb_PeopleInElevator";
-            this.lb_PeopleInElevator.Size = new System.Drawing.Size(270, 355);
+            this.lb_PeopleInElevator.Size = new System.Drawing.Size(270, 17);
             this.lb_PeopleInElevator.TabIndex = 40;
             // 
             // lbl_PeopleInElevator
@@ -403,7 +403,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(871, 552);
+            this.ClientSize = new System.Drawing.Size(1136, 552);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label8);

@@ -111,14 +111,6 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
             //    lb_PeopleOnFloors.Items.Add(item);
             //}
             //lb_PeopleInElevator.Items.Clear();
-            //string currentPeople = "";
-
-            //foreach (Person p in elevator.GetCurrentPassagers())
-            //{
-            //    currentPeople += p.End_floor + ", ";
-            //}
-            //lb_PeopleInElevator.Items.Add("\n");
-            //lb_PeopleInElevator.Items.Add(currentPeople);
 
             lb_PeopleOnFloors.Items.Clear();
             lb_PeopleInElevator.Items.Clear();
@@ -126,10 +118,13 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
             building.StartElevator(elevator);
             building.PopulateFloors(csvParser.GetCurrentTimeParsedListPerson(csvParser.ParseCsvToArray(path)));
 
-            foreach (string item in building.UpdateInformation())
+            string test = "";
+            foreach (Person p in csvParser.GetCurrentTimeParsedListPerson(csvParser.ParseCsvToArray(path)))
             {
-                lb_PeopleOnFloors.Items.Add(item);
+                lb_PeopleOnFloors.Items.Add(p.End_floor);
+                test += p.End_floor;
             }
+            MessageBox.Show(test);
 
             testTimer.Enabled = true;
             lbl_CurrentFloorNumber_UPDATE.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();

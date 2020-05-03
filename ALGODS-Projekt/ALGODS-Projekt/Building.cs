@@ -186,18 +186,17 @@ namespace ALGODS_Projekt
             foreach (Floor f in GetFloors())
             {
                 string rowInList = "";
-                //allPeopleStartList.Add("Floor " + f.GetFloorNumber() + ": ");
 
-                foreach (Person p in f.GetPeopleOnFloor())
+                if (f.GetPeopleOnFloor().Count > 0)
                 {
-                    if (p == f.GetPeopleOnFloor().Last())
-                    {
-                        rowInList += p.End_floor.ToString();
-                    }
-                    else
+                    foreach (Person p in f.GetPeopleOnFloor())
                     {
                         rowInList += p.End_floor.ToString() + ", ";
                     }
+                }
+                else
+                {
+                    rowInList = " ";
                 }
                 allPeopleStartList.Add(rowInList);
             }
@@ -275,7 +274,6 @@ namespace ALGODS_Projekt
                 else if (currFloorNum == maxFloorNum)
                 {
                     goUp = false;
-                    Console.WriteLine(elevator.GetCurrentPassagers());
                     elevator.AddPersonToElevator();
                     elevator.RemovePeopleFromFloor();
                     elevator.MoveElevator(Direction.DirectionEnum.Down);

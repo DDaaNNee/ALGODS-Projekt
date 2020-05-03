@@ -130,32 +130,30 @@ namespace ALGODS_Projekt
                     foreach (char c in currentTimedArr[i - currIndex])
                     {
                         isSkip = 0;
-                        if (true)
+
+                        if (c.ToString() == "-")
                         {
+                            isSkip = 1;
+                            continue;
 
-                            if (c.ToString() == "-")
-                            {
-                                isSkip = 1;
-                                continue;
-
-                            }
-                            else if (isSkip == 1)
-                            {
-                                isSkip = 0;
-                                continue;
-
-                            }
-                            else if (char.IsPunctuation(c) == true || c.ToString() == "\r")
-                            {
-                                continue;
-                            }
-                            else
-                            {
-                                int test = Convert.ToInt32(char.GetNumericValue(c));
-                                person = new Person(i - currIndex, test);
-                                listPerson.Add(person);
-                            }
                         }
+                        else if (isSkip == 1)
+                        {
+                            isSkip = 0;
+                            continue;
+
+                        }
+                        else if (char.IsPunctuation(c) == true || c.ToString() == "\r")
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            int test = Convert.ToInt32(char.GetNumericValue(c));
+                            person = new Person(i - currIndex, test);
+                            listPerson.Add(person);
+                        }
+                        
                     }
                 }
 

@@ -8,7 +8,7 @@ namespace ALGODS_Projekt
 {
     public class Person
     {
-
+        // Constructor
         public Person(int start_floor, int end_floor)
         {
             _Start_floor = start_floor;
@@ -91,7 +91,7 @@ namespace ALGODS_Projekt
 
         // Methods:
 
-        // Total time
+        // Get total time
         public int GetCompletionTime()
         {
             return _Waiting_time + _System_time;

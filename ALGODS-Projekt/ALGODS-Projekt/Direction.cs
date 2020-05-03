@@ -8,6 +8,9 @@ namespace ALGODS_Projekt
 {
     public class Direction
     {
+
+        // Possible directions that an elevator can have:
+
         public enum DirectionEnum
         {
             Up,

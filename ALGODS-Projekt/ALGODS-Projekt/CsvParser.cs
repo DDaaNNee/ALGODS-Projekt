@@ -115,7 +115,7 @@ namespace ALGODS_Projekt
             }
         }
 
-        public List<Person> TESTGetCurrentTimeParsedArray(string[] parsedTextToStringArray)
+        public List<Person> GetCurrentTimeParsedListPerson(string[] parsedTextToStringArray)
         {
             try
             {

@@ -19,6 +19,7 @@ namespace ALGODS_Projekt
             peopleWithShortestTime = 0;
             peopleWithLongestTime = 0;
             currentTime = 0;
+            goUp = false;
         }
 
         // Våningar - En lista med Floor-objekt?
@@ -37,6 +38,7 @@ namespace ALGODS_Projekt
         int peopleWithShortestTime;
         int peopleWithLongestTime;
         int currentTime;
+        bool goUp;
 
         // Just nu kör den varje floor utan att ta hänsyn till hur många floors vi vill att den ska skapa.
         public void CreateFloor(List<Person> pList)
@@ -56,6 +58,28 @@ namespace ALGODS_Projekt
             catch (Exception)
             {
             }
+        }
+
+        public void PopulateFloors(List<Person> pList)
+        {
+            try
+            {
+                foreach (Person p in pList)
+                {
+                    for (int i = 0; i < GetFloors().Count; i++)
+                    {
+                        int floorInt = GetFloors()[i].GetFloorNumber();
+                        if (p.Start_floor == floorInt)
+                        {
+                            GetFloors()[i].AddPersonToFloor(p);
+                        }
+                    }
+                }
+            }
+            catch (NullReferenceException)
+            {
+            }
+
         }
 
         public void CreateTenFloors()
@@ -206,12 +230,10 @@ namespace ALGODS_Projekt
         public void StartElevator(Elevator elevator, int numFloors = 10)
         {
             bool peopleLeft = CheckIfPeopleWaiting();
-            //while (peopleLeft == true)
-            //{
 
             List<Floor> sortedFloors = SortFloorsByPeopleWaiting();
 
-            if (elevator.GetCurrentPassagers().Count > 0)
+            if (elevator.GetCurrentPassagers().Count > 0 && CheckIfPeopleWaiting() == true)
             {
                 elevator.RemovePersonFromElevator();
 
@@ -237,11 +259,43 @@ namespace ALGODS_Projekt
                     elevator.MoveElevator(Direction.DirectionEnum.Down);
                 }
             }
+            else if(CheckIfPeopleWaiting() == true)
+            {
+                int currFloorNum = elevator.GetCurrentFloor().GetFloorNumber();
+                int minFloorNum = 0;
+                int maxFloorNum = 9;
+
+                if (currFloorNum == minFloorNum)
+                {
+                    goUp = true;
+                    elevator.AddPersonToElevator();
+                    elevator.RemovePeopleFromFloor();
+                    elevator.MoveElevator(Direction.DirectionEnum.Up);
+                }
+                else if (currFloorNum == maxFloorNum)
+                {
+                    goUp = false;
+                    Console.WriteLine(elevator.GetCurrentPassagers());
+                    elevator.AddPersonToElevator();
+                    elevator.RemovePeopleFromFloor();
+                    elevator.MoveElevator(Direction.DirectionEnum.Down);
+                }
+                else if (goUp == true)
+                {
+                    elevator.AddPersonToElevator();
+                    elevator.RemovePeopleFromFloor();
+                    elevator.MoveElevator(Direction.DirectionEnum.Up);
+                }
+                else if (goUp == false)
+                {
+                    elevator.AddPersonToElevator();
+                    elevator.RemovePeopleFromFloor();
+                    elevator.MoveElevator(Direction.DirectionEnum.Down);
+                }
+            }
             else
             {
-                elevator.MoveElevator(Direction.DirectionEnum.Down);
-                elevator.AddPersonToElevator();
-                elevator.RemovePeopleFromFloor();
+                //Klar
             }
 
 

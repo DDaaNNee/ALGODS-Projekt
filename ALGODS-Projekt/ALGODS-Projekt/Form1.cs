@@ -56,25 +56,25 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
                 
                 building = new Building();
                 building.CreateTenFloors();
-                building.PopulateFloors(csvParser.GetCurrentTimeParsedListPerson(csvParser.ParseCsvToArray(path)));
+                //building.PopulateFloors(csvParser.GetCurrentTimeParsedListPerson(csvParser.ParseCsvToArray(path)));
                 elevator = new Elevator(building.GetFloors());
 
-                foreach (string item in building.UpdateInformation())
-                {
-                    lb_PeopleOnFloors.Items.Add(item);
-                }
+                //foreach (string item in building.UpdateInformation())
+                //{
+                //    lb_PeopleOnFloors.Items.Add(item);
+                //}
 
                 testTimer.Enabled = true;
                 lbl_CurrentFloorNumber_UPDATE.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
                 lbl_ElevatorState_UPDATE.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
                 lbl_ElapsedTime_UPDATE.Text = elevator.GetElevatorRuntime().ToString();
 
-                string currentPeople = "";
-                foreach (Person p in elevator.GetCurrentPassagers())
-                {
-                    currentPeople += p.End_floor + ", ";
-                }
-                lb_PeopleInElevator.Items.Add(currentPeople);
+                //string currentPeople = "";
+                //foreach (Person p in elevator.GetCurrentPassagers())
+                //{
+                //    currentPeople += p.End_floor + ", ";
+                //}
+                //lb_PeopleInElevator.Items.Add(currentPeople);
             }
             catch (NullReferenceException)
             {
@@ -116,13 +116,20 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
             lb_PeopleInElevator.Items.Clear();
 
             building.StartElevator(elevator);
-            building.PopulateFloors(csvParser.GetCurrentTimeParsedListPerson(csvParser.ParseCsvToArray(path)));
+            csvParser.ParseCsvToArray(path);
+            building.PopulateFloors(csvParser.GetCurrentTimeParsedListPerson());
 
             string test = "";
-            foreach (Person p in csvParser.GetCurrentTimeParsedListPerson(csvParser.ParseCsvToArray(path)))
+            foreach (var item in building.UpdateInformation())
             {
-                lb_PeopleOnFloors.Items.Add(p.End_floor);
-                test += p.End_floor;
+                lb_PeopleOnFloors.Items.Add(item);
+                //test += item;
+            }
+            //MessageBox.Show(test);
+
+            foreach (var item in csvParser.GetCurrList())
+            {
+                test += item;
             }
             MessageBox.Show(test);
 

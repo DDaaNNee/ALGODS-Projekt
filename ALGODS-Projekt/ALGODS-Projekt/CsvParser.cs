@@ -11,6 +11,8 @@ namespace ALGODS_Projekt
     class CsvParser
     {
         int currIndex;
+        List<string> currentList;
+        List<Person> listPerson;
         public CsvParser()
         {
             currIndex = 0;
@@ -81,20 +83,19 @@ namespace ALGODS_Projekt
             return parsedText;
         }
 
-        public string[] ParseCsvToArray(string pathToFile)
+        public void ParseCsvToArray(string pathToFile)
         {
             //try
             //{
-                string[] arrOfText = File.ReadAllText(pathToFile).Split('\n');
-                string[] fixedArr = arrOfText.Select(x => x.Replace("-1", "")).ToArray();
-                return fixedArr;
+            string[] arrOfText = File.ReadAllText(pathToFile).Split('\n');
+            string[] fixedArr = arrOfText.Select(x => x.Replace("-1", "")).ToArray();
+            currentList = fixedArr.ToList();
             //}
             //catch (Exception)
             //{
             //    MessageBox.Show("Invalid file type!");
             //    return null;
             //}
-
         }
 
         public string[] GetCurrentTimeParsedArray(string[] parsedTextToStringArray)
@@ -115,22 +116,33 @@ namespace ALGODS_Projekt
             }
         }
 
-        public List<Person> GetCurrentTimeParsedListPerson(string[] parsedTextToStringArray)
+        public List<Person> GetCurrentTimeParsedListPerson()
         {
             try
             {
-                Person person;
-                List<Person> listPerson = new List<Person>();
+                listPerson = new List<Person>(10);
                 int isSkip;
-                string[] currentTimedArr = new string[10];
-                for (int i = currIndex; i < currIndex + 10; i++)
+                List<string> currentTimeList = new List<string>();
+                for (int j = 0; j < 10; j++)
                 {
-                    currentTimedArr[i - currIndex] = parsedTextToStringArray[i];
+                    currentTimeList.Add(currentList[j]);
+                }
 
-                    foreach (char c in currentTimedArr[i - currIndex])
+                currentList.RemoveRange(currIndex, 10);
+
+                for (int i = 0; i < currentList.Count - 1; i++)
+                {
+                    if (string.IsNullOrWhiteSpace(currentList[i]))
+                    {
+                        currentList.Remove(currentList[i]);
+                    }
+                }
+
+                for (int i = 0; i < 10; i++)
+                {
+                    foreach (char c in currentTimeList[i])
                     {
                         isSkip = 0;
-
                         if (c.ToString() == "-")
                         {
                             isSkip = 1;
@@ -150,13 +162,11 @@ namespace ALGODS_Projekt
                         else
                         {
                             int test = Convert.ToInt32(char.GetNumericValue(c));
-                            person = new Person(i - currIndex, test);
-                            listPerson.Add(person);
+                            listPerson.Add(new Person(i, test));
                         }
-                        
+
                     }
                 }
-
                 currIndex += 10;
                 return listPerson;
             }
@@ -164,6 +174,11 @@ namespace ALGODS_Projekt
             {
                 return null;
             }
+        }
+
+        public List<string> GetCurrList()
+        {
+            return currentList;
         }
     }
 

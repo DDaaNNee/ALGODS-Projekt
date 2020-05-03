@@ -82,6 +82,8 @@ namespace ALGODS_Projekt
         }
 
        
+        // Metod för sortering av våningar efter antal väntande personer:
+
         public List<Floor> SortFloorsByPeopleWaiting()
         {
             List<Floor> orderedFloorList = new List<Floor>();
@@ -100,6 +102,30 @@ namespace ALGODS_Projekt
             }
             return orderedFloorList;
         }
+
+        // Samma metod men för sortering av passagerare efter deras completion-time:
+
+        public List<Person> SortPeopleByCompletionTime()
+        {
+            List<Person> orderedPeople = new List<Person>();
+            orderedPeople = arrivedPassengers;
+
+            for(int i = 0; i < orderedPeople.Count; i++)
+            {
+                for(int j = 0; j < orderedPeople.Count; j++)
+                {
+                    if(orderedPeople[i].GetCompletionTime() > orderedPeople[j].GetCompletionTime())
+                    {
+                        Person temp = orderedPeople[i];
+                        orderedPeople[i] = orderedPeople[j];
+                        orderedPeople[j] = temp;
+                    }
+                }
+            }
+            return orderedPeople;
+        }
+        
+  
 
         public bool PeopleLeft()
         {
@@ -284,18 +310,20 @@ namespace ALGODS_Projekt
 
 
         // Metod för att räkna ut antalet passagerare som har den längsta totala tiden samt kortaste totala tiden:
+
         public void CountPeopleShortestLongestTime()
         {
-            // Här behövs en metod för att sortera passagerare i arrivedPassengers efter deras CompletionTime från högst till lägst.
-            //sort(arrivedPassengers);
+            // Sortera passagerare efter deras CompletionTime från högst till lägst:
+            
+            List<Person> sortedPassagers = SortPeopleByCompletionTime();
 
-            foreach(Person passager in arrivedPassengers)
+            foreach(Person passager in sortedPassagers)
             {
-                if(passager.GetCompletionTime() == arrivedPassengers[0].GetCompletionTime())
+                if(passager.GetCompletionTime() == sortedPassagers[0].GetCompletionTime())
                 {
                     peopleWithLongestTime++;
                 }
-                else if(passager.GetCompletionTime() == arrivedPassengers[arrivedPassengers.Count-1].GetCompletionTime())
+                else if(passager.GetCompletionTime() == sortedPassagers[sortedPassagers.Count-1].GetCompletionTime())
                 {
                     peopleWithShortestTime++;
                 }

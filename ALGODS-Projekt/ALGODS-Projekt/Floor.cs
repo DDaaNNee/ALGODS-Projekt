@@ -17,8 +17,12 @@ namespace ALGODS_Projekt
             peopleWaiting = new List<Person>(50);
         }
 
+        // Instance variables:
+
         int _floorNumber;
         List<Person> peopleWaiting;
+
+        //Methods:
 
         // Denna metod ska kallas på i vår "Elevator"-klass för att avgöra om körningen är klar eller inte.
         public bool StillPeopleWaiting()

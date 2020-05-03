@@ -9,6 +9,8 @@ namespace ALGODS_Projekt
 {
     public class Floor
     {
+        //Constructor:
+
         public Floor(int floorNumber)
         {
             _floorNumber = floorNumber;

@@ -9,6 +9,7 @@ namespace ALGODS_Projekt
 {
     class Building
     {
+        // Constructor
         public Building()
         {
             allFloors = new List<Floor>();
@@ -29,7 +30,7 @@ namespace ALGODS_Projekt
 
         Floor floor;
 
-        // instansvariabler för total tidsåtgång
+        // instance variables for total time
         int totalWaitingTime;
         int totalCompletionTime;
         int averageWaitingTime;
@@ -105,8 +106,7 @@ namespace ALGODS_Projekt
             return allFloors;
         }
 
-       
-        // Metod för sortering av våningar efter antal väntande personer:
+        // Method for sorting floors by number of waiting people:
 
         public List<Floor> SortFloorsByPeopleWaiting()
         {
@@ -127,7 +127,7 @@ namespace ALGODS_Projekt
             return orderedFloorList;
         }
 
-        // Samma metod men för sortering av passagerare efter deras completion-time:
+        // Same method as above but for sorting arrived passagers by their completion time:
 
         public List<Person> SortPeopleByCompletionTime()
         {
@@ -340,7 +340,7 @@ namespace ALGODS_Projekt
             return false;
         }
 
-        // Metod för att räkna ut total Waiting time och Completion time:
+        // Method for calculating total waiting time and completion time:
 
         public void CalculateTotalTime()
         {
@@ -351,7 +351,8 @@ namespace ALGODS_Projekt
             }
         }
 
-        // Metod för att räkna ut medelvärden (Waiting och Completion time) bland passagerare:
+        
+        // Method for calculating averages (waiting and completion time) amongst passagers:
 
         public void CalculateAverageTime()
         {
@@ -363,12 +364,14 @@ namespace ALGODS_Projekt
         }
 
 
-        // Metod för att räkna ut antalet passagerare som har den längsta totala tiden samt kortaste totala tiden:
+        
+        // Method for counting the number of passagers with the longest and shortest completion time: 
 
         public void CountPeopleShortestLongestTime()
         {
-            // Sortera passagerare efter deras CompletionTime från högst till lägst:
             
+            // Sorting passagers by their completion time from highest to lowest:
+
             List<Person> sortedPassagers = SortPeopleByCompletionTime();
 
             foreach(Person passager in sortedPassagers)

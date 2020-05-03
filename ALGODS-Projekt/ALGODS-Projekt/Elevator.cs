@@ -14,6 +14,8 @@ namespace ALGODS_Projekt
         Floor _currentFloor;
         int elevatorRuntime;
         
+        // Constructor:
+
         public Elevator(List<Floor> allFloors, int numOfFloors = 10)
         {
             currentDirection = Direction.DirectionEnum.Up;
@@ -87,7 +89,9 @@ namespace ALGODS_Projekt
             return elevatorRuntime;
         }
 
-        // Öka passagerares System_time med 10
+        
+        // Increase the system time for passagers:
+
         public void IncreaseSystemTime()
         {
             foreach (Person passenger in currentPeople)
@@ -114,7 +118,7 @@ namespace ALGODS_Projekt
 
 
 
-        // Metod för att sortera passagerarna i currentPeople så att listan snabbare kan sökas igenom efter personer som ska gå av?
+        
 
 
     }

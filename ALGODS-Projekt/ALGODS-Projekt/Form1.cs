@@ -23,7 +23,7 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
         Building building;
         Elevator elevator;
         List<Person> listOfPeopleToFloor;
-        Floor floor;
+        string path;
         System.Timers.Timer testTimer = new System.Timers.Timer();
 
         private void Form1_Load(object sender, EventArgs e)
@@ -52,67 +52,12 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
                 lb_PeopleOnFloors.Items.Clear();
                 OpenFileDialog openFileDiag = new OpenFileDialog();
                 DialogResult result = openFileDiag.ShowDialog();
-                string path = openFileDiag.FileName;
-                //int selectedNumberOfFloors = Convert.ToInt32(cb_numOfFloors.SelectedItem);
-                //if (selectedNumberOfFloors != 0)
-                //{
-                //    t0 = csvParser.ParseCsv_T0_ListOfPerson(path, selectedNumberOfFloors);
-                //    building = new Building();
-                //    building.CreateFloor(t0);
-                //    elevator = new Elevator(building.GetFloors());
-                //}
-                //else
-                //{
-                //    t0 = csvParser.ParseCsv_T0_ListOfPerson(path);
-                //    building = new Building();
-                //    building.CreateFloor(t0);
-                //    elevator = new Elevator(building.GetFloors());
-                //}
+                path = openFileDiag.FileName;
                 
-                // Läser inte in -1 som en egen våning. Gör om -1 till nya våningar utan personer på dom.
                 building = new Building();
-                //building.CreateTenFloors();
-                building.CreateFloor(csvParser.TESTGetCurrentTimeParsedArray(csvParser.ParseCsvToArray(path)));
-                //foreach (var item in csvParser.GetCurrentTimeParsedArray(csvParser.ParseCsvToArray(path)))
-                //{
-
-                //}
-
-
-                //foreach (int startFloor in csvParser.TESTGetCurrentTimeParsedArray(csvParser.ParseCsvToArray(path)).Select(x => x.Start_floor).Distinct())
-                //{
-                //    floor = new Floor(startFloor);
-                //    foreach (Person p in csvParser.TESTGetCurrentTimeParsedArray(csvParser.ParseCsvToArray(path)).Where(x => x.Start_floor == startFloor))
-                //    {
-                //        floor.AddPersonToFloor(p);
-                //    }
-                //    allFloors.Add(floor);
-                //}
-
-
-                // Öka currFloor
-                //foreach (string item in t0StringArray)
-                //{
-                //    if (item != "")
-                //    {
-                //        person = new Person(currFloor, Convert.ToInt32(item));
-                //        foreach (Floor f in building.GetFloors())
-                //        {
-                //            if (f.GetFloorNumber() == currFloor)
-                //            {
-                //                f.AddPersonToFloor(person);
-                //            }
-                //        }
-                //    }
-                //}
-
-
-                string test = "";
-                foreach (var item in csvParser.GetCurrentTimeParsedArray(csvParser.ParseCsvToArray(path)))
-                {
-                    test += item;
-                }
-                MessageBox.Show(test);
+                building.CreateTenFloors();
+                building.PopulateFloors(csvParser.GetCurrentTimeParsedListPerson(csvParser.ParseCsvToArray(path)));
+                elevator = new Elevator(building.GetFloors());
 
                 foreach (string item in building.UpdateInformation())
                 {
@@ -153,33 +98,58 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
 
         private void button3_Click(object sender, EventArgs e)
         {
-            try
-            {
-                building.StartElevator(elevator);
-                lbl_CurrentFloorNumber_UPDATE.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
-                lbl_ElevatorState_UPDATE.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
-                lbl_ElapsedTime_UPDATE.Text = elevator.GetElevatorRuntime().ToString();
-                lb_PeopleOnFloors.Items.Clear();
-                foreach (string item in building.UpdateInformation())
-                {
-                    lb_PeopleOnFloors.Items.Add(item);
-                }
-                string currentPeople = "";
-                lb_PeopleInElevator.Items.Clear();
-                foreach (Person p in elevator.GetCurrentPassagers())
-                {
-                    currentPeople += p.End_floor + ", ";
-                }
-                lb_PeopleInElevator.Items.Add("\n");
-                lb_PeopleInElevator.Items.Add(currentPeople);
+            //try
+            //{
+            //building.StartElevator(elevator);
+            //lbl_CurrentFloorNumber_UPDATE.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
+            //lbl_ElevatorState_UPDATE.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
+            //lbl_ElapsedTime_UPDATE.Text = elevator.GetElevatorRuntime().ToString();
+            //lb_PeopleOnFloors.Items.Clear();
+            //building.PopulateFloors(csvParser.GetCurrentTimeParsedListPerson(csvParser.ParseCsvToArray(path)));
+            //foreach (string item in building.UpdateInformation())
+            //{
+            //    lb_PeopleOnFloors.Items.Add(item);
+            //}
+            //lb_PeopleInElevator.Items.Clear();
+            //string currentPeople = "";
 
-                //HideWhileRunningLabels();
-                //ShowAfterRunningLabels();
-            }
-            catch (Exception)
+            //foreach (Person p in elevator.GetCurrentPassagers())
+            //{
+            //    currentPeople += p.End_floor + ", ";
+            //}
+            //lb_PeopleInElevator.Items.Add("\n");
+            //lb_PeopleInElevator.Items.Add(currentPeople);
+
+            lb_PeopleOnFloors.Items.Clear();
+            lb_PeopleInElevator.Items.Clear();
+
+            building.StartElevator(elevator);
+            building.PopulateFloors(csvParser.GetCurrentTimeParsedListPerson(csvParser.ParseCsvToArray(path)));
+
+            foreach (string item in building.UpdateInformation())
             {
-                MessageBox.Show("No valid file selected!");
+                lb_PeopleOnFloors.Items.Add(item);
             }
+
+            testTimer.Enabled = true;
+            lbl_CurrentFloorNumber_UPDATE.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
+            lbl_ElevatorState_UPDATE.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
+            lbl_ElapsedTime_UPDATE.Text = elevator.GetElevatorRuntime().ToString();
+
+            string currentPeople = "";
+            foreach (Person p in elevator.GetCurrentPassagers())
+            {
+                currentPeople += p.End_floor + ", ";
+            }
+            lb_PeopleInElevator.Items.Add(currentPeople);
+
+            //HideWhileRunningLabels();
+            //ShowAfterRunningLabels();
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("No valid file selected!");
+            //}
         }
 
         public void HideAfterRunningLabels()

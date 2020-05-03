@@ -123,12 +123,13 @@ namespace ALGODS_Projekt
                 listPerson = new List<Person>(10);
                 int isSkip;
                 List<string> currentTimeList = new List<string>();
+
                 for (int j = 0; j < 10; j++)
                 {
                     currentTimeList.Add(currentList[j]);
                 }
+                currentList.RemoveRange(0, 10);
 
-                currentList.RemoveRange(currIndex, 10);
 
                 for (int i = 0; i < currentList.Count - 1; i++)
                 {
@@ -164,7 +165,6 @@ namespace ALGODS_Projekt
                             int test = Convert.ToInt32(char.GetNumericValue(c));
                             listPerson.Add(new Person(i, test));
                         }
-
                     }
                 }
                 currIndex += 10;
@@ -174,11 +174,20 @@ namespace ALGODS_Projekt
             {
                 return null;
             }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public List<string> GetCurrList()
         {
             return currentList;
+        }
+
+        public List<Person> GetListPerson()
+        {
+            return listPerson;
         }
     }
 

@@ -22,6 +22,8 @@ namespace ALGODS_Projekt
             goUp = false;
         }
 
+        // Instance variables:
+
         // Våningar - En lista med Floor-objekt?
         List<Floor> allFloors;
 
@@ -29,8 +31,6 @@ namespace ALGODS_Projekt
         List<Person> arrivedPassengers;
 
         Floor floor;
-
-        // instance variables for total time
         int totalWaitingTime;
         int totalCompletionTime;
         int averageWaitingTime;
@@ -39,6 +39,9 @@ namespace ALGODS_Projekt
         int peopleWithLongestTime;
         int currentTime;
         bool goUp;
+
+
+        // Methods:
 
         // Just nu kör den varje floor utan att ta hänsyn till hur många floors vi vill att den ska skapa.
         public void CreateFloor(List<Person> pList)

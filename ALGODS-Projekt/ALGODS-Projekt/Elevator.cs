@@ -100,6 +100,8 @@ namespace ALGODS_Projekt
             }
         }
 
+        // Methods for returning instance variables:
+
         public List<Person> GetCurrentPassagers()
         {
             return currentPeople;

@@ -71,7 +71,15 @@ namespace ALGODS_Projekt
                         else if (i != Convert.ToInt32(char.GetNumericValue(c)))
                         {
                             int test = Convert.ToInt32(char.GetNumericValue(c));
-                            listPerson.Add(new Person(i, test));
+                            if (test != -1)
+                            {
+                                listPerson.Add(new Person(i, test));
+                            }
+                            else
+                            {
+                                throw new InvalidDataException();
+                            }
+                            
                         }
                         else
                         {
@@ -85,10 +93,16 @@ namespace ALGODS_Projekt
             {
                 return null;
             }
+            catch (InvalidDataException)
+            {
+                MessageBox.Show("The file contains invalid data, please try again!");
+                return null;
+            }
             catch (Exception)
             {
                 return null;
             }
+
         }
 
         /// <summary>

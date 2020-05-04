@@ -115,8 +115,6 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
                 building.PopulateFloors(csvParser.GetCurrentTimeParsedListPerson());
                 building.StartElevator(elevator);
 
-                lbl_ElevatorState_UPDATE.Text = elevator.GetCurrentElevatorDirection().ToString();
-
                 if (building.CheckIfSimulationCompleted() == true)
                 {
                     MessageBox.Show("Simulation complete!");

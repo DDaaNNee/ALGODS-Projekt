@@ -93,7 +93,6 @@ namespace ALGODS_Projekt
                             f.GetPeopleOnFloor().Remove(p);
                         }
                     }
-
                 }
             }
         }
@@ -103,7 +102,7 @@ namespace ALGODS_Projekt
         /// It also increases or decreases our _currentFloor variable and increases our elevator runtime.
         /// </summary>
         /// <param name="currentDirection"></param>
-        public void MoveElevator(Direction.DirectionEnum currentDirection = Direction.DirectionEnum.Up)
+        public void MoveElevator(Direction.DirectionEnum currentDirection)
         {
             if(currentDirection == Direction.DirectionEnum.Up && _currentFloor < 9)
             {

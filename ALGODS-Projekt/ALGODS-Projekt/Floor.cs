@@ -54,9 +54,9 @@ namespace ALGODS_Projekt
             return _floorNumber;
         }
 
-        public void ChangeFloorNumber(int num)
-        {
-            _floorNumber = num;
-        }
+        //public void ChangeFloorNumber(int num)
+        //{
+        //    _floorNumber = num;
+        //}
     }
 }

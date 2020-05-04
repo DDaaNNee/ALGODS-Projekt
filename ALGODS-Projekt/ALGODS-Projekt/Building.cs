@@ -24,29 +24,10 @@ namespace ALGODS_Projekt
         Floor floor;
         int currentTime;
         bool goUp;
+        bool simulationComplete;
 
 
         // Methods:
-
-        // Just nu kör den varje floor utan att ta hänsyn till hur många floors vi vill att den ska skapa.
-        public void CreateFloor(List<Person> pList)
-        {
-            try
-            {
-                foreach(int startFloor in pList.Select(x=>x.Start_floor).Distinct())
-                {
-                    floor = new Floor(startFloor);
-                    foreach (Person p in pList.Where(x=>x.Start_floor == startFloor))
-                    {
-                        floor.AddPersonToFloor(p);
-                    }
-                    allFloors.Add(floor);
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }
 
         public void PopulateFloors(List<Person> pList)
         {
@@ -96,28 +77,24 @@ namespace ALGODS_Projekt
 
         // Method for sorting floors by number of waiting people:
 
-        public List<Floor> SortFloorsByPeopleWaiting()
-        {
-            List<Floor> orderedFloorList = new List<Floor>();
-            orderedFloorList = allFloors;
-            for (int i = 0; i < orderedFloorList.Count; i++)
-            {
-                for (int j = 0; j < orderedFloorList.Count; j++)
-                {
-                    if (orderedFloorList[i].GetPeopleOnFloor().Count > orderedFloorList[j].GetPeopleOnFloor().Count)
-                    {
-                        Floor temp = orderedFloorList[i];
-                        orderedFloorList[i] = orderedFloorList[j];
-                        orderedFloorList[j] = temp;
-                    }
-                }
-            }
-            return orderedFloorList;
-        }
-
-        
-        
-  
+        //public List<Floor> SortFloorsByPeopleWaiting()
+        //{
+        //    List<Floor> orderedFloorList = new List<Floor>();
+        //    orderedFloorList = allFloors;
+        //    for (int i = 0; i < orderedFloorList.Count; i++)
+        //    {
+        //        for (int j = 0; j < orderedFloorList.Count; j++)
+        //        {
+        //            if (orderedFloorList[i].GetPeopleOnFloor().Count > orderedFloorList[j].GetPeopleOnFloor().Count)
+        //            {
+        //                Floor temp = orderedFloorList[i];
+        //                orderedFloorList[i] = orderedFloorList[j];
+        //                orderedFloorList[j] = temp;
+        //            }
+        //        }
+        //    }
+        //    return orderedFloorList;
+        //}
 
         public bool PeopleLeft()
         {
@@ -148,59 +125,14 @@ namespace ALGODS_Projekt
             }
         }
 
-        public List<string> UpdateInformation()
-        {
-            List<string> allPeopleStartList = new List<string>();
-            foreach (Floor f in GetFloors())
-            {
-                string rowInList = "";
-
-                if (f.GetPeopleOnFloor().Count > 0)
-                {
-                    foreach (Person p in f.GetPeopleOnFloor())
-                    {
-                        rowInList += p.End_floor.ToString() + ", ";
-                    }
-                }
-                else
-                {
-                    rowInList = " ";
-                }
-                allPeopleStartList.Add(rowInList);
-            }
-            return allPeopleStartList;
-        }
-
-
-        // Används denna metod?
-        public void AddRemovePeople(Elevator elevator)
-        {
-
-            foreach (Person pDeparting in elevator.GetCurrentPassagers().ToList())
-            {
-                if (pDeparting.End_floor == elevator.GetCurrentFloor().GetFloorNumber())
-                {
-                    elevator.GetCurrentPassagers().Remove(pDeparting);                 
-                }
-            }
-            foreach (Person pArriving in elevator.GetCurrentFloor().GetPeopleOnFloor().ToList())
-            {
-                if (pArriving.GetDirection(pArriving.Start_floor, pArriving.End_floor) == elevator.GetCurrentElevatorDirection() && pArriving.End_floor != elevator.GetCurrentFloor().GetFloorNumber())
-                {
-                    elevator.GetCurrentPassagers().Add(pArriving);
-                    elevator.GetCurrentFloor().RemovePersonFromFloor(pArriving);
-                }
-            }
-        }
-
         // La till så att hissen ska röra sig mot den våningen där flest personer väntar. (Ta bort om det inte funkar).
         public void StartElevator(Elevator elevator, int numFloors = 10)
         {
-            bool peopleLeft = CheckIfPeopleWaiting();
+            simulationComplete = false;
 
-            List<Floor> sortedFloors = SortFloorsByPeopleWaiting();
+            //List<Floor> sortedFloors = SortFloorsByPeopleWaiting();
 
-            if (elevator.GetCurrentPassagers().Count > 0 && CheckIfPeopleWaiting() == true)
+            if (elevator.GetCurrentPassagers().Count > 0)
             {
                 elevator.RemovePersonFromElevator();
 
@@ -208,7 +140,7 @@ namespace ALGODS_Projekt
                 int goingDown = 0;
                 foreach (Person p in elevator.GetCurrentPassagers().ToList())
                 {
-                    if (p.End_floor > elevator.GetCurrentFloor().GetFloorNumber())
+                    if (p.End_floor > elevator.GetCurrentFloor())
                     {
                         goingUp++;
                     }
@@ -225,22 +157,27 @@ namespace ALGODS_Projekt
                 {
                     elevator.MoveElevator(Direction.DirectionEnum.Down);
                 }
+                elevator.IncreaseSystemTime();
+                IncreaseWaitTime();
             }
-            else if(CheckIfPeopleWaiting() == true)
+            else if(CheckIfPeopleWaiting(elevator) == true)
             {
-                int currFloorNum = elevator.GetCurrentFloor().GetFloorNumber();
+                int currFloorNum = elevator.GetCurrentFloor();
                 int minFloorNum = 0;
                 int maxFloorNum = 9;
 
                 if (currFloorNum == minFloorNum)
                 {
+                    
                     goUp = true;
                     elevator.AddPersonToElevator();
                     elevator.RemovePeopleFromFloor();
                     elevator.MoveElevator(Direction.DirectionEnum.Up);
+
                 }
                 else if (currFloorNum == maxFloorNum)
                 {
+                    
                     goUp = false;
                     elevator.AddPersonToElevator();
                     elevator.RemovePeopleFromFloor();
@@ -248,9 +185,11 @@ namespace ALGODS_Projekt
                 }
                 else if (goUp == true)
                 {
+                    
                     elevator.AddPersonToElevator();
                     elevator.RemovePeopleFromFloor();
                     elevator.MoveElevator(Direction.DirectionEnum.Up);
+
                 }
                 else if (goUp == false)
                 {
@@ -258,43 +197,40 @@ namespace ALGODS_Projekt
                     elevator.RemovePeopleFromFloor();
                     elevator.MoveElevator(Direction.DirectionEnum.Down);
                 }
+                elevator.IncreaseSystemTime();
+                IncreaseWaitTime();
             }
-            else
+            else if (CheckIfPeopleWaiting(elevator) == false)
             {
-                //Klar
+                simulationComplete = true;
             }
-
-
-            //if (elevator.GetCurrentFloor().GetFloorNumber() == numFloors - 1 || elevator.GetCurrentFloor().GetFloorNumber() > sortedFloors[0].GetFloorNumber() )
-            //{
-            //    elevator.MoveElevator(Direction.DirectionEnum.Down);
-            //}
-            //else /*if (elevator.GetCurrentFloor().GetFloorNumber() == 0 || elevator.GetCurrentFloor().GetFloorNumber() < sortedFloors[0].GetFloorNumber())*/
-            //{
-            //    elevator.MoveElevator(Direction.DirectionEnum.Up);
-            //}
-
-            elevator.IncreaseSystemTime();
-            IncreaseWaitTime();
-            peopleLeft = CheckIfPeopleWaiting();
-            //}
         }
 
         public void AddPersonToElevator(Elevator elevator)
         {
-            foreach (Person pArriving in elevator.GetCurrentFloor().GetPeopleOnFloor())
+            foreach (Floor f in allFloors.Where(x => x.GetFloorNumber() == elevator.GetCurrentFloor()).Take(1))
             {
-                elevator.GetCurrentPassagers().Add(pArriving);
-                elevator.GetCurrentFloor().RemovePersonFromFloor(pArriving);
+                foreach (Person p in f.GetPeopleOnFloor())
+                {
+                    elevator.GetCurrentPassagers().Add(p);
+                    f.RemovePersonFromFloor(p);
+                }
             }
         }
 
-        public bool CheckIfPeopleWaiting()
+        public bool CheckIfPeopleWaiting(Elevator elevat)
         {
             int peopleLeft = 0;
             foreach (Floor f in allFloors)
             {
                 if (f.StillPeopleWaiting() == true)
+                {
+                    peopleLeft++;
+                }
+            }
+            if (elevat.GetCurrentPassagers().Count > 0)
+            {
+                foreach (Person p in elevat.GetCurrentPassagers())
                 {
                     peopleLeft++;
                 }
@@ -306,13 +242,13 @@ namespace ALGODS_Projekt
             return false;
         }
 
-        
-
-        
-        
-
-
-        
-        
+        public bool CheckIfSimulationCompleted()
+        {
+            if (simulationComplete == true)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

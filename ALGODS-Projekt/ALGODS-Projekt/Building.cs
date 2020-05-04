@@ -75,27 +75,6 @@ namespace ALGODS_Projekt
             return allFloors;
         }
 
-        // Method for sorting floors by number of waiting people:
-
-        //public List<Floor> SortFloorsByPeopleWaiting()
-        //{
-        //    List<Floor> orderedFloorList = new List<Floor>();
-        //    orderedFloorList = allFloors;
-        //    for (int i = 0; i < orderedFloorList.Count; i++)
-        //    {
-        //        for (int j = 0; j < orderedFloorList.Count; j++)
-        //        {
-        //            if (orderedFloorList[i].GetPeopleOnFloor().Count > orderedFloorList[j].GetPeopleOnFloor().Count)
-        //            {
-        //                Floor temp = orderedFloorList[i];
-        //                orderedFloorList[i] = orderedFloorList[j];
-        //                orderedFloorList[j] = temp;
-        //            }
-        //        }
-        //    }
-        //    return orderedFloorList;
-        //}
-
         public bool PeopleLeft()
         {
             int numFloorsWithPeople = 0;

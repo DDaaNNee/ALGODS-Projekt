@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btn_play = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.btn_Go = new System.Windows.Forms.Button();
+            this.btn_SelectAFile = new System.Windows.Forms.Button();
+            this.btn_RunThroughSim = new System.Windows.Forms.Button();
+            this.btn_StepByStep = new System.Windows.Forms.Button();
             this.lbl_CurrentFloorNumber = new System.Windows.Forms.Label();
             this.lbl_CurrentFloorNumber_UPDATE = new System.Windows.Forms.Label();
             this.lbl_ElevatorState = new System.Windows.Forms.Label();
@@ -55,46 +55,47 @@
             this.lb_PeopleInElevator = new System.Windows.Forms.ListBox();
             this.lbl_PeopleInElevator = new System.Windows.Forms.Label();
             this.lbl_PeopleOnFloors = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.lbl_floor1 = new System.Windows.Forms.Label();
+            this.lbl_floor2 = new System.Windows.Forms.Label();
+            this.lbl_floor3 = new System.Windows.Forms.Label();
+            this.lbl_floor6 = new System.Windows.Forms.Label();
+            this.lbl_floor5 = new System.Windows.Forms.Label();
+            this.lbl_floor4 = new System.Windows.Forms.Label();
+            this.lbl_floor9 = new System.Windows.Forms.Label();
+            this.lbl_floor8 = new System.Windows.Forms.Label();
+            this.lbl_floor7 = new System.Windows.Forms.Label();
+            this.lbl_floor0 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // btn_play
+            // btn_SelectAFile
             // 
-            this.btn_play.Location = new System.Drawing.Point(12, 475);
-            this.btn_play.Name = "btn_play";
-            this.btn_play.Size = new System.Drawing.Size(235, 65);
-            this.btn_play.TabIndex = 0;
-            this.btn_play.Text = "Select a file";
-            this.btn_play.UseVisualStyleBackColor = true;
-            this.btn_play.Click += new System.EventHandler(this.btn_play_Click);
+            this.btn_SelectAFile.Location = new System.Drawing.Point(12, 475);
+            this.btn_SelectAFile.Name = "btn_SelectAFile";
+            this.btn_SelectAFile.Size = new System.Drawing.Size(235, 65);
+            this.btn_SelectAFile.TabIndex = 0;
+            this.btn_SelectAFile.Text = "Select a file";
+            this.btn_SelectAFile.UseVisualStyleBackColor = true;
+            this.btn_SelectAFile.Click += new System.EventHandler(this.btn_play_Click);
             // 
-            // button2
+            // btn_RunThroughSim
             // 
-            this.button2.Location = new System.Drawing.Point(318, 475);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(235, 65);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Pause";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_RunThroughSim.Location = new System.Drawing.Point(318, 475);
+            this.btn_RunThroughSim.Name = "btn_RunThroughSim";
+            this.btn_RunThroughSim.Size = new System.Drawing.Size(235, 65);
+            this.btn_RunThroughSim.TabIndex = 1;
+            this.btn_RunThroughSim.Text = "Run through simulation";
+            this.btn_RunThroughSim.UseVisualStyleBackColor = true;
+            this.btn_RunThroughSim.Click += new System.EventHandler(this.btn_RunThroughSim_Click);
             // 
-            // btn_Go
+            // btn_StepByStep
             // 
-            this.btn_Go.Location = new System.Drawing.Point(624, 475);
-            this.btn_Go.Name = "btn_Go";
-            this.btn_Go.Size = new System.Drawing.Size(235, 65);
-            this.btn_Go.TabIndex = 2;
-            this.btn_Go.Text = "Start";
-            this.btn_Go.UseVisualStyleBackColor = true;
-            this.btn_Go.Click += new System.EventHandler(this.button3_Click);
+            this.btn_StepByStep.Location = new System.Drawing.Point(624, 475);
+            this.btn_StepByStep.Name = "btn_StepByStep";
+            this.btn_StepByStep.Size = new System.Drawing.Size(235, 65);
+            this.btn_StepByStep.TabIndex = 2;
+            this.btn_StepByStep.Text = "Step by step";
+            this.btn_StepByStep.UseVisualStyleBackColor = true;
+            this.btn_StepByStep.Click += new System.EventHandler(this.btn_StepByStep_Click);
             // 
             // lbl_CurrentFloorNumber
             // 
@@ -198,7 +199,7 @@
             // lbl_AverageWaitTime_UPDATE
             // 
             this.lbl_AverageWaitTime_UPDATE.AutoSize = true;
-            this.lbl_AverageWaitTime_UPDATE.Location = new System.Drawing.Point(462, 182);
+            this.lbl_AverageWaitTime_UPDATE.Location = new System.Drawing.Point(462, 181);
             this.lbl_AverageWaitTime_UPDATE.Name = "lbl_AverageWaitTime_UPDATE";
             this.lbl_AverageWaitTime_UPDATE.Size = new System.Drawing.Size(111, 13);
             this.lbl_AverageWaitTime_UPDATE.TabIndex = 25;
@@ -216,7 +217,7 @@
             // lbl_AverageCompTime_UPDATE
             // 
             this.lbl_AverageCompTime_UPDATE.AutoSize = true;
-            this.lbl_AverageCompTime_UPDATE.Location = new System.Drawing.Point(462, 211);
+            this.lbl_AverageCompTime_UPDATE.Location = new System.Drawing.Point(462, 210);
             this.lbl_AverageCompTime_UPDATE.Name = "lbl_AverageCompTime_UPDATE";
             this.lbl_AverageCompTime_UPDATE.Size = new System.Drawing.Size(129, 13);
             this.lbl_AverageCompTime_UPDATE.TabIndex = 27;
@@ -234,7 +235,7 @@
             // lbl_LeastTimeTaken_UPDATE
             // 
             this.lbl_LeastTimeTaken_UPDATE.AutoSize = true;
-            this.lbl_LeastTimeTaken_UPDATE.Location = new System.Drawing.Point(464, 241);
+            this.lbl_LeastTimeTaken_UPDATE.Location = new System.Drawing.Point(464, 239);
             this.lbl_LeastTimeTaken_UPDATE.Name = "lbl_LeastTimeTaken_UPDATE";
             this.lbl_LeastTimeTaken_UPDATE.Size = new System.Drawing.Size(66, 13);
             this.lbl_LeastTimeTaken_UPDATE.TabIndex = 29;
@@ -252,7 +253,7 @@
             // lbl_HighestTimeTaken_UPDATE
             // 
             this.lbl_HighestTimeTaken_UPDATE.AutoSize = true;
-            this.lbl_HighestTimeTaken_UPDATE.Location = new System.Drawing.Point(464, 276);
+            this.lbl_HighestTimeTaken_UPDATE.Location = new System.Drawing.Point(464, 273);
             this.lbl_HighestTimeTaken_UPDATE.Name = "lbl_HighestTimeTaken_UPDATE";
             this.lbl_HighestTimeTaken_UPDATE.Size = new System.Drawing.Size(66, 13);
             this.lbl_HighestTimeTaken_UPDATE.TabIndex = 34;
@@ -269,7 +270,7 @@
             // lbl_ChooseNumOfFloors
             // 
             this.lbl_ChooseNumOfFloors.AutoSize = true;
-            this.lbl_ChooseNumOfFloors.Location = new System.Drawing.Point(314, 177);
+            this.lbl_ChooseNumOfFloors.Location = new System.Drawing.Point(24, 66);
             this.lbl_ChooseNumOfFloors.Name = "lbl_ChooseNumOfFloors";
             this.lbl_ChooseNumOfFloors.Size = new System.Drawing.Size(127, 13);
             this.lbl_ChooseNumOfFloors.TabIndex = 38;
@@ -278,7 +279,7 @@
             // cb_numOfFloors
             // 
             this.cb_numOfFloors.FormattingEnabled = true;
-            this.cb_numOfFloors.Location = new System.Drawing.Point(447, 174);
+            this.cb_numOfFloors.Location = new System.Drawing.Point(157, 63);
             this.cb_numOfFloors.Name = "cb_numOfFloors";
             this.cb_numOfFloors.Size = new System.Drawing.Size(121, 21);
             this.cb_numOfFloors.TabIndex = 39;
@@ -309,111 +310,111 @@
             this.lbl_PeopleOnFloors.TabIndex = 42;
             this.lbl_PeopleOnFloors.Text = "People on floors:";
             // 
-            // label1
+            // lbl_floor1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(582, 79);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 13);
-            this.label1.TabIndex = 43;
-            this.label1.Text = "Floor 1:";
+            this.lbl_floor1.AutoSize = true;
+            this.lbl_floor1.Location = new System.Drawing.Point(582, 79);
+            this.lbl_floor1.Name = "lbl_floor1";
+            this.lbl_floor1.Size = new System.Drawing.Size(42, 13);
+            this.lbl_floor1.TabIndex = 43;
+            this.lbl_floor1.Text = "Floor 1:";
             // 
-            // label2
+            // lbl_floor2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(582, 92);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 13);
-            this.label2.TabIndex = 44;
-            this.label2.Text = "Floor 2:";
+            this.lbl_floor2.AutoSize = true;
+            this.lbl_floor2.Location = new System.Drawing.Point(582, 92);
+            this.lbl_floor2.Name = "lbl_floor2";
+            this.lbl_floor2.Size = new System.Drawing.Size(42, 13);
+            this.lbl_floor2.TabIndex = 44;
+            this.lbl_floor2.Text = "Floor 2:";
             // 
-            // label3
+            // lbl_floor3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(582, 105);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(42, 13);
-            this.label3.TabIndex = 45;
-            this.label3.Text = "Floor 3:";
+            this.lbl_floor3.AutoSize = true;
+            this.lbl_floor3.Location = new System.Drawing.Point(582, 105);
+            this.lbl_floor3.Name = "lbl_floor3";
+            this.lbl_floor3.Size = new System.Drawing.Size(42, 13);
+            this.lbl_floor3.TabIndex = 45;
+            this.lbl_floor3.Text = "Floor 3:";
             // 
-            // label4
+            // lbl_floor6
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(582, 144);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 13);
-            this.label4.TabIndex = 48;
-            this.label4.Text = "Floor 6:";
+            this.lbl_floor6.AutoSize = true;
+            this.lbl_floor6.Location = new System.Drawing.Point(582, 144);
+            this.lbl_floor6.Name = "lbl_floor6";
+            this.lbl_floor6.Size = new System.Drawing.Size(42, 13);
+            this.lbl_floor6.TabIndex = 48;
+            this.lbl_floor6.Text = "Floor 6:";
             // 
-            // label5
+            // lbl_floor5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(582, 131);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(42, 13);
-            this.label5.TabIndex = 47;
-            this.label5.Text = "Floor 5:";
+            this.lbl_floor5.AutoSize = true;
+            this.lbl_floor5.Location = new System.Drawing.Point(582, 131);
+            this.lbl_floor5.Name = "lbl_floor5";
+            this.lbl_floor5.Size = new System.Drawing.Size(42, 13);
+            this.lbl_floor5.TabIndex = 47;
+            this.lbl_floor5.Text = "Floor 5:";
             // 
-            // label6
+            // lbl_floor4
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(582, 118);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(42, 13);
-            this.label6.TabIndex = 46;
-            this.label6.Text = "Floor 4:";
+            this.lbl_floor4.AutoSize = true;
+            this.lbl_floor4.Location = new System.Drawing.Point(582, 118);
+            this.lbl_floor4.Name = "lbl_floor4";
+            this.lbl_floor4.Size = new System.Drawing.Size(42, 13);
+            this.lbl_floor4.TabIndex = 46;
+            this.lbl_floor4.Text = "Floor 4:";
             // 
-            // label7
+            // lbl_floor9
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(582, 183);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(42, 13);
-            this.label7.TabIndex = 51;
-            this.label7.Text = "Floor 9:";
+            this.lbl_floor9.AutoSize = true;
+            this.lbl_floor9.Location = new System.Drawing.Point(582, 183);
+            this.lbl_floor9.Name = "lbl_floor9";
+            this.lbl_floor9.Size = new System.Drawing.Size(42, 13);
+            this.lbl_floor9.TabIndex = 51;
+            this.lbl_floor9.Text = "Floor 9:";
             // 
-            // label8
+            // lbl_floor8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(582, 170);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(42, 13);
-            this.label8.TabIndex = 50;
-            this.label8.Text = "Floor 8:";
+            this.lbl_floor8.AutoSize = true;
+            this.lbl_floor8.Location = new System.Drawing.Point(582, 170);
+            this.lbl_floor8.Name = "lbl_floor8";
+            this.lbl_floor8.Size = new System.Drawing.Size(42, 13);
+            this.lbl_floor8.TabIndex = 50;
+            this.lbl_floor8.Text = "Floor 8:";
             // 
-            // label9
+            // lbl_floor7
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(582, 157);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(42, 13);
-            this.label9.TabIndex = 49;
-            this.label9.Text = "Floor 7:";
+            this.lbl_floor7.AutoSize = true;
+            this.lbl_floor7.Location = new System.Drawing.Point(582, 157);
+            this.lbl_floor7.Name = "lbl_floor7";
+            this.lbl_floor7.Size = new System.Drawing.Size(42, 13);
+            this.lbl_floor7.TabIndex = 49;
+            this.lbl_floor7.Text = "Floor 7:";
             // 
-            // label10
+            // lbl_floor0
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(582, 66);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(42, 13);
-            this.label10.TabIndex = 52;
-            this.label10.Text = "Floor 0:";
+            this.lbl_floor0.AutoSize = true;
+            this.lbl_floor0.Location = new System.Drawing.Point(582, 66);
+            this.lbl_floor0.Name = "lbl_floor0";
+            this.lbl_floor0.Size = new System.Drawing.Size(42, 13);
+            this.lbl_floor0.TabIndex = 52;
+            this.lbl_floor0.Text = "Floor 0:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1136, 552);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbl_floor0);
+            this.Controls.Add(this.lbl_floor9);
+            this.Controls.Add(this.lbl_floor8);
+            this.Controls.Add(this.lbl_floor7);
+            this.Controls.Add(this.lbl_floor6);
+            this.Controls.Add(this.lbl_floor5);
+            this.Controls.Add(this.lbl_floor4);
+            this.Controls.Add(this.lbl_floor3);
+            this.Controls.Add(this.lbl_floor2);
+            this.Controls.Add(this.lbl_floor1);
             this.Controls.Add(this.lbl_PeopleOnFloors);
             this.Controls.Add(this.lbl_PeopleInElevator);
             this.Controls.Add(this.cb_numOfFloors);
@@ -437,9 +438,9 @@
             this.Controls.Add(this.lbl_ElevatorState);
             this.Controls.Add(this.lbl_CurrentFloorNumber_UPDATE);
             this.Controls.Add(this.lbl_CurrentFloorNumber);
-            this.Controls.Add(this.btn_Go);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.btn_play);
+            this.Controls.Add(this.btn_StepByStep);
+            this.Controls.Add(this.btn_RunThroughSim);
+            this.Controls.Add(this.btn_SelectAFile);
             this.Controls.Add(this.lb_PeopleInElevator);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -451,9 +452,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btn_play;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button btn_Go;
+        private System.Windows.Forms.Button btn_SelectAFile;
+        private System.Windows.Forms.Button btn_RunThroughSim;
+        private System.Windows.Forms.Button btn_StepByStep;
         private System.Windows.Forms.Label lbl_CurrentFloorNumber;
         private System.Windows.Forms.Label lbl_CurrentFloorNumber_UPDATE;
         private System.Windows.Forms.Label lbl_ElevatorState;
@@ -478,16 +479,16 @@
         private System.Windows.Forms.ListBox lb_PeopleInElevator;
         private System.Windows.Forms.Label lbl_PeopleInElevator;
         private System.Windows.Forms.Label lbl_PeopleOnFloors;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lbl_floor1;
+        private System.Windows.Forms.Label lbl_floor2;
+        private System.Windows.Forms.Label lbl_floor3;
+        private System.Windows.Forms.Label lbl_floor6;
+        private System.Windows.Forms.Label lbl_floor5;
+        private System.Windows.Forms.Label lbl_floor4;
+        private System.Windows.Forms.Label lbl_floor9;
+        private System.Windows.Forms.Label lbl_floor8;
+        private System.Windows.Forms.Label lbl_floor7;
+        private System.Windows.Forms.Label lbl_floor0;
     }
 }
 

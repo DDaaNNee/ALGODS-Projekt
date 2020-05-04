@@ -40,15 +40,6 @@ namespace ALGODS_Projekt
             listOfFloors = allFloors;
             elevatorRuntime = 0;
             _currentFloor = 0;
-            try
-            {
-                //Floor firstFloor = listOfFloors.First();
-                //_currentFloor = listOfFloors.First();
-            }
-            catch (Exception)
-            {
-                
-            }
         }
 
         // Methods:
@@ -106,13 +97,11 @@ namespace ALGODS_Projekt
         {
             if(currentDirection == Direction.DirectionEnum.Up && _currentFloor < 9)
             {
-                //_currentFloor.ChangeFloorNumber(_currentFloor.GetFloorNumber() + 1);
                 _currentFloor += 1;
                 elevatorRuntime += 10;
             }
             else if (currentDirection == Direction.DirectionEnum.Down && _currentFloor > 0)
             {
-                //_currentFloor.ChangeFloorNumber(_currentFloor.GetFloorNumber() - 1);
                 _currentFloor -= 1;
                 elevatorRuntime += 10;
             }
@@ -180,7 +169,7 @@ namespace ALGODS_Projekt
 
         public void CalculateTotalTime()
         {
-            foreach(Person p in arrivedPassengers)
+            foreach (Person p in arrivedPassengers)
             {
                 totalWaitingTime = totalWaitingTime + p.Waiting_time;
                 totalCompletionTime = totalCompletionTime + p.GetCompletionTime();
@@ -190,13 +179,22 @@ namespace ALGODS_Projekt
 
         // Method for calculating averages (waiting and completion time) amongst passagers:
 
-        public void CalculateAverageTime()
+        public int CalculateAverageWaitingTime()
         {
             if(arrivedPassengers.Count != 0)
             {
                 averageWaitingTime = (totalWaitingTime/arrivedPassengers.Count);
-                averageCompletionTime = (totalCompletionTime/arrivedPassengers.Count);
             }
+            return averageWaitingTime;
+        }
+
+        public int CalculateAverageCompletionTime()
+        {
+            if (arrivedPassengers.Count != 0)
+            {
+                averageCompletionTime = (totalCompletionTime / arrivedPassengers.Count);
+            }
+            return averageCompletionTime;
         }
 
 
@@ -236,12 +234,13 @@ namespace ALGODS_Projekt
 
         public int GetShortestCompletionTime()
         {
-
             List<Person> sortedPassengers = SortPeopleByCompletionTime();
             return sortedPassengers[sortedPassengers.Count - 1].GetCompletionTime();
-
         }
 
-
+        public int CalculateTotalNumberOfPeople()
+        {
+            return arrivedPassengers.Count();
+        }
     }
 }

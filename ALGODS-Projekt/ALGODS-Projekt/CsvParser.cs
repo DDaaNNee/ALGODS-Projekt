@@ -10,15 +10,22 @@ namespace ALGODS_Projekt
 {
     class CsvParser
     {
-        int currIndex;
         List<string> currentList;
         List<Person> listPerson;
+
+        /// <summary>
+        /// Class constructor.
+        /// </summary>
         public CsvParser()
         {
-            currIndex = 0;
         }
 
-        public void ParseCsvToArray(string pathToFile)
+        /// <summary>
+        /// Reads a selected text file and stores it's information in an array of strings.
+        /// This array then gets edited in order to remove incorrect values and saved as a new string array.
+        /// </summary>
+        /// <param name="pathToFile">The path to our selected file.</param>
+        public void ParseTextToArray(string pathToFile)
         {
             try
             {
@@ -32,6 +39,13 @@ namespace ALGODS_Projekt
             }
         }
 
+        /// <summary>
+        /// Method that uses the already parsed text, saved as a "List<String> currentList" variable, then copies the first ten values into a new "List<string> currentTimeList".
+        /// We then remove the first ten values from the stored in currentList in order to not input the same values multiple times.
+        /// After that, the method checks for punctuation, this includes commas, or "r", which indicates a new row, and skips adding these values to the "List<Person> listPerson",
+        /// which our method returns upon executing.
+        /// </summary>
+        /// <returns>List<Person> containing all of our specified times people. Ex: At T0, our method will return a list of people waiting for the elevator at any floor, at T0. </returns>
         public List<Person> GetCurrentTimeParsedListPerson()
         {
             try
@@ -60,7 +74,6 @@ namespace ALGODS_Projekt
                         }
                     }
                 }
-                currIndex += 10;
                 return listPerson;
             }
             catch (IndexOutOfRangeException)
@@ -73,11 +86,17 @@ namespace ALGODS_Projekt
             }
         }
 
+        /// <summary>
+        /// </summary>
+        /// <returns>Returns our currentList variable</returns>
         public List<string> GetCurrList()
         {
             return currentList;
         }
 
+        /// <summary>
+        /// </summary>
+        /// <returns>Returns our listPerson variable</returns>
         public List<Person> GetListPerson()
         {
             return listPerson;

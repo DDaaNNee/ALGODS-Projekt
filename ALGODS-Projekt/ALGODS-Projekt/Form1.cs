@@ -14,17 +14,19 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         CsvParser csvParser;
         Building building;
         Elevator elevator;
         List<Person> listOfPeopleToFloor;
         string path;
-        System.Timers.Timer testTimer = new System.Timers.Timer();
+
+        /// <summary>
+        /// Form initialization
+        /// </summary>
+        public Form1()
+        {
+            InitializeComponent();
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -53,20 +55,7 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
             building.CreateTenFloors();
             elevator = new Elevator(building.GetFloors());
 
-            csvParser.ParseCsvToArray(path);
-        }
-
-        public void OnStartElevator(object source, ElapsedEventArgs e)
-        {
-            ChangeLabels();
-        }
-
-        public void ChangeLabels()
-        {
-            lbl_CurrentFloorNumber_UPDATE.Text = elevator.GetCurrentFloor().ToString();
-            lbl_ElevatorState_UPDATE.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
-            lbl_ElapsedTime_UPDATE.Text = elevator.GetElevatorRuntime().ToString();
-
+            csvParser.ParseTextToArray(path);
         }
 
         private void btn_RunThroughSim_Click(object sender, EventArgs e)
@@ -82,7 +71,6 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
                     building.PopulateFloors(csvParser.GetCurrentTimeParsedListPerson());
                     building.StartElevator(elevator);
 
-                    testTimer.Enabled = true;
                     lbl_CurrentFloorNumber_UPDATE.Text = elevator.GetCurrentFloor().ToString();
                     lbl_ElevatorState_UPDATE.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
                     lbl_ElapsedTime_UPDATE.Text = elevator.GetElevatorRuntime().ToString();
@@ -136,6 +124,8 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
                 building.PopulateFloors(csvParser.GetCurrentTimeParsedListPerson());
                 building.StartElevator(elevator);
 
+                lbl_ElevatorState_UPDATE.Text = elevator.GetCurrentElevatorDirection().ToString();
+
                 if (building.CheckIfSimulationCompleted() == true)
                 {
                     MessageBox.Show("Simulation complete!");
@@ -164,7 +154,6 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
                         lb_PeopleOnFloors.Items.Add(text);
                     }
 
-                    testTimer.Enabled = true;
                     lbl_CurrentFloorNumber_UPDATE.Text = elevator.GetCurrentFloor().ToString();
                     lbl_ElevatorState_UPDATE.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
                     lbl_ElapsedTime_UPDATE.Text = elevator.GetElevatorRuntime().ToString();
@@ -183,6 +172,9 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
             }
         }
 
+        /// <summary>
+        /// Changes all of the appropriate labels to the correct texts.
+        /// </summary>
         #region Labels
 
         public void HideAfterRunningLabels()

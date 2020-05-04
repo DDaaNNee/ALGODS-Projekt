@@ -8,16 +8,11 @@ namespace ALGODS_Projekt
 {
     class Elevator
     {
-        // Instance variables:
-
         Direction.DirectionEnum currentDirection;
         List<Person> currentPeople;
         List<Floor> listOfFloors;
-        //Floor _currentFloor;
         int elevatorRuntime;
-        int _currentFloor;
-        
-        // Då passagerare lämnar hissen adderas de till denna lista.
+        int _currentFloor; 
         List<Person> arrivedPassengers;
         int totalWaitingTime;
         int totalCompletionTime;
@@ -26,8 +21,12 @@ namespace ALGODS_Projekt
         int peopleWithShortestTime;
         int peopleWithLongestTime;
 
-        // Constructor:
-
+        /// <summary>
+        /// Class constructor.
+        /// Here we instantiate all of our class variables.
+        /// </summary>
+        /// <param name="allFloors">Our constructor takes a "List<Floor>" object in order to compare the data inside this class with the variable.</param>
+        /// <param name="numOfFloors">An integer which can be used to controll the number of floors./param>
         public Elevator(List<Floor> allFloors, int numOfFloors = 10)
         {
             arrivedPassengers = new List<Person>();
@@ -42,8 +41,9 @@ namespace ALGODS_Projekt
             _currentFloor = 0;
         }
 
-        // Methods:
-
+        /// <summary>
+        /// Adds people from the current floor to our elevator, if it isn't at capacity.
+        /// </summary>
         public void AddPersonToElevator()
         {
             foreach (Floor f in listOfFloors.Where(x => x.GetFloorNumber() == _currentFloor).Take(1))
@@ -58,6 +58,10 @@ namespace ALGODS_Projekt
             }
         }
 
+        /// <summary>
+        /// Removes each person from our elevator if their end floor is the current floor of our elevator,
+        /// and adds these people to a list<person> called "arrivedPassengers", in order to keep track of times.
+        /// </summary>
         public void RemovePersonFromElevator()
         {
             foreach (Floor f in listOfFloors.Where(x => x.GetFloorNumber() == _currentFloor).Take(1))
@@ -67,13 +71,15 @@ namespace ALGODS_Projekt
                     if (p.End_floor == f.GetFloorNumber())
                     {
                         currentPeople.Remove(p);
-                        // Lägg till person som går av i lista för personer som kommit fram:
                         arrivedPassengers.Add(p);
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// Removes each person from the floor from which they came, after they've entered our elevator.
+        /// </summary>
         public void RemovePeopleFromFloor()
         {
             foreach (Floor f in listOfFloors.Where(x => x.GetFloorNumber() == _currentFloor).Take(1))
@@ -92,7 +98,11 @@ namespace ALGODS_Projekt
             }
         }
 
-        // Flytta hissen en våning uppåt eller en våning nedåt.
+        /// <summary>
+        /// Moves our elevator up or down depending on what the current direction and current floor variables are currently set to.
+        /// It also increases or decreases our _currentFloor variable and increases our elevator runtime.
+        /// </summary>
+        /// <param name="currentDirection"></param>
         public void MoveElevator(Direction.DirectionEnum currentDirection = Direction.DirectionEnum.Up)
         {
             if(currentDirection == Direction.DirectionEnum.Up && _currentFloor < 9)
@@ -107,14 +117,18 @@ namespace ALGODS_Projekt
             }
         }
 
+        /// <summary>
+        /// Method for accessing elevatorRuntime variable.
+        /// </summary>
+        /// <returns></returns>
         public int GetElevatorRuntime()
         {
             return elevatorRuntime;
         }
 
-        
-        // Increase the system time for passagers:
-
+        /// <summary>
+        /// Method which increases each passengers system time.
+        /// </summary>
         public void IncreaseSystemTime()
         {
             foreach (Person passenger in currentPeople)
@@ -123,27 +137,37 @@ namespace ALGODS_Projekt
             }
         }
 
-        // Methods for returning instance variables:
-
+        /// <summary>
+        /// Method for accessing currentPeople variable.
+        /// </summary>
+        /// <returns>Returns the "currentPeople" variable</returns>
         public List<Person> GetCurrentPassagers()
         {
             return currentPeople;
         }
 
+        /// <summary>
+        /// Method for accessing _currentFloor variable.
+        /// </summary>
+        /// <returns>Returns the "_currentFloor" variable</returns>
         public int GetCurrentFloor()
         {
             return _currentFloor;
         }
 
+        /// <summary>
+        /// Method for accessing currentDirection variable.
+        /// </summary>
+        /// <returns>Returns the "currentDirection" variable</returns>
         public Direction.DirectionEnum GetCurrentElevatorDirection()
         {
             return currentDirection;
         }
 
-
-
-        // Same method as SortFloorsByPeopleWaiting but for sorting arrived passagers by their completion time:
-
+        /// <summary>
+        /// Method for sorting people by completion time in order to be able to see the fastest and slowest completion times.
+        /// </summary>
+        /// <returns>Returns a "List<Person>" object with the passengers which have arrived in order</returns>
         public List<Person> SortPeopleByCompletionTime()
         {
             List<Person> orderedPeople = new List<Person>();
@@ -164,9 +188,9 @@ namespace ALGODS_Projekt
             return orderedPeople;
         }
 
-
-        // Method for calculating total waiting time and completion time:
-
+        /// <summary>
+        /// Method for calculating total time, this is then used in order to calculate average times.
+        /// </summary>
         public void CalculateTotalTime()
         {
             foreach (Person p in arrivedPassengers)
@@ -177,8 +201,10 @@ namespace ALGODS_Projekt
         }
 
 
-        // Method for calculating averages (waiting and completion time) amongst passagers:
-
+        /// <summary>
+        /// Method for calculating average waiting time amongst finished passengers.
+        /// </summary>
+        /// <returns>Returns an integer with the average waiting time</returns>
         public int CalculateAverageWaitingTime()
         {
             if(arrivedPassengers.Count != 0)
@@ -188,6 +214,10 @@ namespace ALGODS_Projekt
             return averageWaitingTime;
         }
 
+        /// <summary>
+        /// Method for calculating average completion time amongst finished passengers.
+        /// </summary>
+        /// <returns>Returns an integer with the average completion time</returns>
         public int CalculateAverageCompletionTime()
         {
             if (arrivedPassengers.Count != 0)
@@ -197,13 +227,12 @@ namespace ALGODS_Projekt
             return averageCompletionTime;
         }
 
-
-        // Methods for counting the number of passagers with the longest and shortest completion time:
-
+        /// <summary>
+        /// Method for counting the number of people with the longest completion time
+        /// </summary>
+        /// <returns>Returns an integer with the number of people who shares the longest completion time</returns>
         public int CountPeopleLongestTime()
         {
-            // Sorting passagers by their completion time from highest to lowest:
-
             List<Person> sortedPassagers = SortPeopleByCompletionTime();
 
             foreach(Person passager in sortedPassagers)
@@ -216,7 +245,10 @@ namespace ALGODS_Projekt
             return peopleWithLongestTime;
         }
 
-
+        /// <summary>
+        /// Method for counting the number of people with the shortest completion time
+        /// </summary>
+        /// <returns>Returns an integer with the number of people who shares the shortest completion time</returns>
         public int CountPeopleShortestTime()
         {
             List<Person> sortedPassengers = SortPeopleByCompletionTime();
@@ -231,25 +263,30 @@ namespace ALGODS_Projekt
             return peopleWithShortestTime;
         }
 
-
-        // Method to return the longest completion time of any passenger:
-
+        /// <summary>
+        /// Method for accessing the longest completion time
+        /// </summary>
+        /// <returns>Returns an integer set to the longest completion time</returns>
         public int GetLongestCompletionTime()
         {
-
             List<Person> sortedPassengers = SortPeopleByCompletionTime();
             return sortedPassengers[0].GetCompletionTime();
-
         }
 
-        // Method to return the shortest completion time of any passenger:
-
+        /// <summary>
+        /// Method for accessing the shortest completion time
+        /// </summary>
+        /// <returns>Returns an integer set to the shortest completion time</returns>
         public int GetShortestCompletionTime()
         {
             List<Person> sortedPassengers = SortPeopleByCompletionTime();
             return sortedPassengers[sortedPassengers.Count - 1].GetCompletionTime();
         }
 
+        /// <summary>
+        /// Counts the number of people who have arrived to their destinations
+        /// </summary>
+        /// <returns>Returns an int set to the number of people who have arrived at their destinations</returns>
         public int CalculateTotalNumberOfPeople()
         {
             return arrivedPassengers.Count();

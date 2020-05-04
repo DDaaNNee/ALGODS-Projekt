@@ -9,7 +9,16 @@ namespace ALGODS_Projekt
 {
     class Building
     {
-        // Constructor
+        List<Floor> allFloors;
+        Floor floor;
+        int currentTime;
+        bool goUp;
+        bool simulationComplete;
+
+        /// <summary>
+        /// Class constructor.
+        /// The constructor initializes some of our class variables.
+        /// </summary>
         public Building()
         {
             allFloors = new List<Floor>();
@@ -17,18 +26,10 @@ namespace ALGODS_Projekt
             goUp = false;
         }
 
-        // Instance variables:
-
-        // Våningar - En lista med Floor-objekt?
-        List<Floor> allFloors;
-        Floor floor;
-        int currentTime;
-        bool goUp;
-        bool simulationComplete;
-
-
-        // Methods:
-
+        /// <summary>
+        /// Method used for adding people to our floors based on a "List<Person>" object which is provided by the inparameters of our method.
+        /// </summary>
+        /// <param name="pList">A "List<Person>" object</param>
         public void PopulateFloors(List<Person> pList)
         {
             try
@@ -51,6 +52,9 @@ namespace ALGODS_Projekt
 
         }
 
+        /// <summary>
+        /// Method for creating ten floors and adding them to our floor-list.
+        /// </summary>
         public void CreateTenFloors()
         {
             if (currentTime == 0)
@@ -61,20 +65,21 @@ namespace ALGODS_Projekt
                     allFloors.Add(floor);
                 }
             }
-
         }
 
-        public Floor GetStartingFloor()
-        {
-            Floor startingFloor = allFloors.Min();
-            return startingFloor;
-        }
-
+        /// <summary>
+        /// Method for accessing our allFloors variable.
+        /// </summary>
+        /// <returns>Returns our "allFloors" variable</returns>
         public List<Floor> GetFloors()
         {
             return allFloors;
         }
 
+        /// <summary>
+        /// Method for checking if our elevator and all of our floors are empty or not.
+        /// </summary>
+        /// <returns>Returns true of false based on of there are people left</returns>
         public bool PeopleLeft()
         {
             int numFloorsWithPeople = 0;
@@ -93,6 +98,9 @@ namespace ALGODS_Projekt
             return false;
         }
 
+        /// <summary>
+        /// Method for increasing the wait time for each person on each floor.
+        /// </summary>
         public void IncreaseWaitTime()
         {
             foreach (Floor floor in allFloors)
@@ -104,7 +112,11 @@ namespace ALGODS_Projekt
             }
         }
 
-        // La till så att hissen ska röra sig mot den våningen där flest personer väntar. (Ta bort om det inte funkar).
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="elevator"></param>
+        /// <param name="numFloors"></param>
         public void StartElevator(Elevator elevator, int numFloors = 10)
         {
             simulationComplete = false;

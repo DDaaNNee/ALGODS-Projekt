@@ -50,8 +50,6 @@
             this.lbl_HighestTimeTaken = new System.Windows.Forms.Label();
             this.lbl_HighestTimeTaken_UPDATE = new System.Windows.Forms.Label();
             this.lb_PeopleOnFloors = new System.Windows.Forms.ListBox();
-            this.lbl_ChooseNumOfFloors = new System.Windows.Forms.Label();
-            this.cb_numOfFloors = new System.Windows.Forms.ComboBox();
             this.lb_PeopleInElevator = new System.Windows.Forms.ListBox();
             this.lbl_PeopleInElevator = new System.Windows.Forms.Label();
             this.lbl_PeopleOnFloors = new System.Windows.Forms.Label();
@@ -65,13 +63,19 @@
             this.lbl_floor8 = new System.Windows.Forms.Label();
             this.lbl_floor7 = new System.Windows.Forms.Label();
             this.lbl_floor0 = new System.Windows.Forms.Label();
+            this.lbl_PeopleWithHighestTotalTime = new System.Windows.Forms.Label();
+            this.lbl_PeopleWithLowestTotalTime = new System.Windows.Forms.Label();
+            this.lbl_PeopleWithLowestTotalTime_UPDATE = new System.Windows.Forms.Label();
+            this.lbl_PeopleWithHighestTotalTime_UPDATE = new System.Windows.Forms.Label();
+            this.lbl_PathToFile = new System.Windows.Forms.Label();
+            this.lbl_PathToFile_UPDATE = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn_SelectAFile
             // 
-            this.btn_SelectAFile.Location = new System.Drawing.Point(12, 475);
+            this.btn_SelectAFile.Location = new System.Drawing.Point(12, 455);
             this.btn_SelectAFile.Name = "btn_SelectAFile";
-            this.btn_SelectAFile.Size = new System.Drawing.Size(235, 65);
+            this.btn_SelectAFile.Size = new System.Drawing.Size(339, 84);
             this.btn_SelectAFile.TabIndex = 0;
             this.btn_SelectAFile.Text = "Select a file";
             this.btn_SelectAFile.UseVisualStyleBackColor = true;
@@ -79,9 +83,9 @@
             // 
             // btn_RunThroughSim
             // 
-            this.btn_RunThroughSim.Location = new System.Drawing.Point(318, 475);
+            this.btn_RunThroughSim.Location = new System.Drawing.Point(785, 455);
             this.btn_RunThroughSim.Name = "btn_RunThroughSim";
-            this.btn_RunThroughSim.Size = new System.Drawing.Size(235, 65);
+            this.btn_RunThroughSim.Size = new System.Drawing.Size(339, 84);
             this.btn_RunThroughSim.TabIndex = 1;
             this.btn_RunThroughSim.Text = "Run through simulation";
             this.btn_RunThroughSim.UseVisualStyleBackColor = true;
@@ -89,9 +93,9 @@
             // 
             // btn_StepByStep
             // 
-            this.btn_StepByStep.Location = new System.Drawing.Point(624, 475);
+            this.btn_StepByStep.Location = new System.Drawing.Point(401, 455);
             this.btn_StepByStep.Name = "btn_StepByStep";
-            this.btn_StepByStep.Size = new System.Drawing.Size(235, 65);
+            this.btn_StepByStep.Size = new System.Drawing.Size(339, 85);
             this.btn_StepByStep.TabIndex = 2;
             this.btn_StepByStep.Text = "Step by step";
             this.btn_StepByStep.UseVisualStyleBackColor = true;
@@ -154,108 +158,120 @@
             // lbl_TotalNumOfPassengers
             // 
             this.lbl_TotalNumOfPassengers.AutoSize = true;
-            this.lbl_TotalNumOfPassengers.Location = new System.Drawing.Point(315, 130);
+            this.lbl_TotalNumOfPassengers.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_TotalNumOfPassengers.Location = new System.Drawing.Point(406, 133);
             this.lbl_TotalNumOfPassengers.Name = "lbl_TotalNumOfPassengers";
-            this.lbl_TotalNumOfPassengers.Size = new System.Drawing.Size(141, 13);
+            this.lbl_TotalNumOfPassengers.Size = new System.Drawing.Size(211, 20);
             this.lbl_TotalNumOfPassengers.TabIndex = 9;
             this.lbl_TotalNumOfPassengers.Text = "Total number of passengers:";
             // 
             // lbl_TotalNumOfPassengers_UPDATE
             // 
             this.lbl_TotalNumOfPassengers_UPDATE.AutoSize = true;
-            this.lbl_TotalNumOfPassengers_UPDATE.Location = new System.Drawing.Point(462, 130);
+            this.lbl_TotalNumOfPassengers_UPDATE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_TotalNumOfPassengers_UPDATE.Location = new System.Drawing.Point(636, 133);
             this.lbl_TotalNumOfPassengers_UPDATE.Name = "lbl_TotalNumOfPassengers_UPDATE";
-            this.lbl_TotalNumOfPassengers_UPDATE.Size = new System.Drawing.Size(119, 13);
+            this.lbl_TotalNumOfPassengers_UPDATE.Size = new System.Drawing.Size(180, 20);
             this.lbl_TotalNumOfPassengers_UPDATE.TabIndex = 10;
             this.lbl_TotalNumOfPassengers_UPDATE.Text = "(Number of passengers)";
             // 
             // lbl_TotalTime
             // 
             this.lbl_TotalTime.AutoSize = true;
-            this.lbl_TotalTime.Location = new System.Drawing.Point(315, 156);
+            this.lbl_TotalTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_TotalTime.Location = new System.Drawing.Point(406, 159);
             this.lbl_TotalTime.Name = "lbl_TotalTime";
-            this.lbl_TotalTime.Size = new System.Drawing.Size(56, 13);
+            this.lbl_TotalTime.Size = new System.Drawing.Size(82, 20);
             this.lbl_TotalTime.TabIndex = 20;
             this.lbl_TotalTime.Text = "Total time:";
             // 
             // lbl_TotalTime_UPDATE
             // 
             this.lbl_TotalTime_UPDATE.AutoSize = true;
-            this.lbl_TotalTime_UPDATE.Location = new System.Drawing.Point(462, 156);
+            this.lbl_TotalTime_UPDATE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_TotalTime_UPDATE.Location = new System.Drawing.Point(636, 159);
             this.lbl_TotalTime_UPDATE.Name = "lbl_TotalTime_UPDATE";
-            this.lbl_TotalTime_UPDATE.Size = new System.Drawing.Size(59, 13);
+            this.lbl_TotalTime_UPDATE.Size = new System.Drawing.Size(88, 20);
             this.lbl_TotalTime_UPDATE.TabIndex = 23;
             this.lbl_TotalTime_UPDATE.Text = "(Total time)";
             // 
             // lbl_AverageWaitTime
             // 
             this.lbl_AverageWaitTime.AutoSize = true;
-            this.lbl_AverageWaitTime.Location = new System.Drawing.Point(315, 182);
+            this.lbl_AverageWaitTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_AverageWaitTime.Location = new System.Drawing.Point(406, 185);
             this.lbl_AverageWaitTime.Name = "lbl_AverageWaitTime";
-            this.lbl_AverageWaitTime.Size = new System.Drawing.Size(111, 13);
+            this.lbl_AverageWaitTime.Size = new System.Drawing.Size(163, 20);
             this.lbl_AverageWaitTime.TabIndex = 24;
             this.lbl_AverageWaitTime.Text = "Average waiting time: ";
             // 
             // lbl_AverageWaitTime_UPDATE
             // 
             this.lbl_AverageWaitTime_UPDATE.AutoSize = true;
-            this.lbl_AverageWaitTime_UPDATE.Location = new System.Drawing.Point(462, 181);
+            this.lbl_AverageWaitTime_UPDATE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_AverageWaitTime_UPDATE.Location = new System.Drawing.Point(636, 184);
             this.lbl_AverageWaitTime_UPDATE.Name = "lbl_AverageWaitTime_UPDATE";
-            this.lbl_AverageWaitTime_UPDATE.Size = new System.Drawing.Size(111, 13);
+            this.lbl_AverageWaitTime_UPDATE.Size = new System.Drawing.Size(165, 20);
             this.lbl_AverageWaitTime_UPDATE.TabIndex = 25;
             this.lbl_AverageWaitTime_UPDATE.Text = "(Average waiting time)";
             // 
             // lbl_AverageCompTime
             // 
             this.lbl_AverageCompTime.AutoSize = true;
-            this.lbl_AverageCompTime.Location = new System.Drawing.Point(315, 211);
+            this.lbl_AverageCompTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_AverageCompTime.Location = new System.Drawing.Point(406, 214);
             this.lbl_AverageCompTime.Name = "lbl_AverageCompTime";
-            this.lbl_AverageCompTime.Size = new System.Drawing.Size(129, 13);
+            this.lbl_AverageCompTime.Size = new System.Drawing.Size(191, 20);
             this.lbl_AverageCompTime.TabIndex = 26;
             this.lbl_AverageCompTime.Text = "Average completion time: ";
             // 
             // lbl_AverageCompTime_UPDATE
             // 
             this.lbl_AverageCompTime_UPDATE.AutoSize = true;
-            this.lbl_AverageCompTime_UPDATE.Location = new System.Drawing.Point(462, 210);
+            this.lbl_AverageCompTime_UPDATE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_AverageCompTime_UPDATE.Location = new System.Drawing.Point(636, 213);
             this.lbl_AverageCompTime_UPDATE.Name = "lbl_AverageCompTime_UPDATE";
-            this.lbl_AverageCompTime_UPDATE.Size = new System.Drawing.Size(129, 13);
+            this.lbl_AverageCompTime_UPDATE.Size = new System.Drawing.Size(193, 20);
             this.lbl_AverageCompTime_UPDATE.TabIndex = 27;
             this.lbl_AverageCompTime_UPDATE.Text = "(Average completion time)";
             // 
             // lbl_LeastTimeTaken
             // 
             this.lbl_LeastTimeTaken.AutoSize = true;
-            this.lbl_LeastTimeTaken.Location = new System.Drawing.Point(315, 241);
+            this.lbl_LeastTimeTaken.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_LeastTimeTaken.Location = new System.Drawing.Point(406, 244);
             this.lbl_LeastTimeTaken.Name = "lbl_LeastTimeTaken";
-            this.lbl_LeastTimeTaken.Size = new System.Drawing.Size(114, 13);
+            this.lbl_LeastTimeTaken.Size = new System.Drawing.Size(170, 20);
             this.lbl_LeastTimeTaken.TabIndex = 28;
             this.lbl_LeastTimeTaken.Text = "Least total time taken: ";
             // 
             // lbl_LeastTimeTaken_UPDATE
             // 
             this.lbl_LeastTimeTaken_UPDATE.AutoSize = true;
-            this.lbl_LeastTimeTaken_UPDATE.Location = new System.Drawing.Point(464, 239);
+            this.lbl_LeastTimeTaken_UPDATE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_LeastTimeTaken_UPDATE.Location = new System.Drawing.Point(638, 242);
             this.lbl_LeastTimeTaken_UPDATE.Name = "lbl_LeastTimeTaken_UPDATE";
-            this.lbl_LeastTimeTaken_UPDATE.Size = new System.Drawing.Size(66, 13);
+            this.lbl_LeastTimeTaken_UPDATE.Size = new System.Drawing.Size(97, 20);
             this.lbl_LeastTimeTaken_UPDATE.TabIndex = 29;
             this.lbl_LeastTimeTaken_UPDATE.Text = "(Time taken)";
             // 
             // lbl_HighestTimeTaken
             // 
             this.lbl_HighestTimeTaken.AutoSize = true;
-            this.lbl_HighestTimeTaken.Location = new System.Drawing.Point(315, 271);
+            this.lbl_HighestTimeTaken.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_HighestTimeTaken.Location = new System.Drawing.Point(406, 299);
             this.lbl_HighestTimeTaken.Name = "lbl_HighestTimeTaken";
-            this.lbl_HighestTimeTaken.Size = new System.Drawing.Size(124, 13);
+            this.lbl_HighestTimeTaken.Size = new System.Drawing.Size(185, 20);
             this.lbl_HighestTimeTaken.TabIndex = 32;
             this.lbl_HighestTimeTaken.Text = "Highest total time taken: ";
             // 
             // lbl_HighestTimeTaken_UPDATE
             // 
             this.lbl_HighestTimeTaken_UPDATE.AutoSize = true;
-            this.lbl_HighestTimeTaken_UPDATE.Location = new System.Drawing.Point(464, 273);
+            this.lbl_HighestTimeTaken_UPDATE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_HighestTimeTaken_UPDATE.Location = new System.Drawing.Point(638, 301);
             this.lbl_HighestTimeTaken_UPDATE.Name = "lbl_HighestTimeTaken_UPDATE";
-            this.lbl_HighestTimeTaken_UPDATE.Size = new System.Drawing.Size(66, 13);
+            this.lbl_HighestTimeTaken_UPDATE.Size = new System.Drawing.Size(97, 20);
             this.lbl_HighestTimeTaken_UPDATE.TabIndex = 34;
             this.lbl_HighestTimeTaken_UPDATE.Text = "(Time taken)";
             // 
@@ -266,23 +282,6 @@
             this.lb_PeopleOnFloors.Name = "lb_PeopleOnFloors";
             this.lb_PeopleOnFloors.Size = new System.Drawing.Size(500, 355);
             this.lb_PeopleOnFloors.TabIndex = 37;
-            // 
-            // lbl_ChooseNumOfFloors
-            // 
-            this.lbl_ChooseNumOfFloors.AutoSize = true;
-            this.lbl_ChooseNumOfFloors.Location = new System.Drawing.Point(24, 66);
-            this.lbl_ChooseNumOfFloors.Name = "lbl_ChooseNumOfFloors";
-            this.lbl_ChooseNumOfFloors.Size = new System.Drawing.Size(127, 13);
-            this.lbl_ChooseNumOfFloors.TabIndex = 38;
-            this.lbl_ChooseNumOfFloors.Text = "Choose number of floors: ";
-            // 
-            // cb_numOfFloors
-            // 
-            this.cb_numOfFloors.FormattingEnabled = true;
-            this.cb_numOfFloors.Location = new System.Drawing.Point(157, 63);
-            this.cb_numOfFloors.Name = "cb_numOfFloors";
-            this.cb_numOfFloors.Size = new System.Drawing.Size(121, 21);
-            this.cb_numOfFloors.TabIndex = 39;
             // 
             // lb_PeopleInElevator
             // 
@@ -400,11 +399,77 @@
             this.lbl_floor0.TabIndex = 52;
             this.lbl_floor0.Text = "Floor 0:";
             // 
+            // lbl_PeopleWithHighestTotalTime
+            // 
+            this.lbl_PeopleWithHighestTotalTime.AutoSize = true;
+            this.lbl_PeopleWithHighestTotalTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_PeopleWithHighestTotalTime.Location = new System.Drawing.Point(406, 326);
+            this.lbl_PeopleWithHighestTotalTime.Name = "lbl_PeopleWithHighestTotalTime";
+            this.lbl_PeopleWithHighestTotalTime.Size = new System.Drawing.Size(219, 20);
+            this.lbl_PeopleWithHighestTotalTime.TabIndex = 53;
+            this.lbl_PeopleWithHighestTotalTime.Text = "People with highest total time:";
+            // 
+            // lbl_PeopleWithLowestTotalTime
+            // 
+            this.lbl_PeopleWithLowestTotalTime.AutoSize = true;
+            this.lbl_PeopleWithLowestTotalTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_PeopleWithLowestTotalTime.Location = new System.Drawing.Point(406, 272);
+            this.lbl_PeopleWithLowestTotalTime.Name = "lbl_PeopleWithLowestTotalTime";
+            this.lbl_PeopleWithLowestTotalTime.Size = new System.Drawing.Size(212, 20);
+            this.lbl_PeopleWithLowestTotalTime.TabIndex = 54;
+            this.lbl_PeopleWithLowestTotalTime.Text = "People with lowest total time:";
+            // 
+            // lbl_PeopleWithLowestTotalTime_UPDATE
+            // 
+            this.lbl_PeopleWithLowestTotalTime_UPDATE.AutoSize = true;
+            this.lbl_PeopleWithLowestTotalTime_UPDATE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_PeopleWithLowestTotalTime_UPDATE.Location = new System.Drawing.Point(638, 272);
+            this.lbl_PeopleWithLowestTotalTime_UPDATE.Name = "lbl_PeopleWithLowestTotalTime_UPDATE";
+            this.lbl_PeopleWithLowestTotalTime_UPDATE.Size = new System.Drawing.Size(97, 20);
+            this.lbl_PeopleWithLowestTotalTime_UPDATE.TabIndex = 55;
+            this.lbl_PeopleWithLowestTotalTime_UPDATE.Text = "(Time taken)";
+            // 
+            // lbl_PeopleWithHighestTotalTime_UPDATE
+            // 
+            this.lbl_PeopleWithHighestTotalTime_UPDATE.AutoSize = true;
+            this.lbl_PeopleWithHighestTotalTime_UPDATE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_PeopleWithHighestTotalTime_UPDATE.Location = new System.Drawing.Point(638, 326);
+            this.lbl_PeopleWithHighestTotalTime_UPDATE.Name = "lbl_PeopleWithHighestTotalTime_UPDATE";
+            this.lbl_PeopleWithHighestTotalTime_UPDATE.Size = new System.Drawing.Size(97, 20);
+            this.lbl_PeopleWithHighestTotalTime_UPDATE.TabIndex = 56;
+            this.lbl_PeopleWithHighestTotalTime_UPDATE.Text = "(Time taken)";
+            // 
+            // lbl_PathToFile
+            // 
+            this.lbl_PathToFile.AutoSize = true;
+            this.lbl_PathToFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_PathToFile.Location = new System.Drawing.Point(407, 85);
+            this.lbl_PathToFile.Name = "lbl_PathToFile";
+            this.lbl_PathToFile.Size = new System.Drawing.Size(101, 20);
+            this.lbl_PathToFile.TabIndex = 57;
+            this.lbl_PathToFile.Text = "Path to file:";
+            // 
+            // lbl_PathToFile_UPDATE
+            // 
+            this.lbl_PathToFile_UPDATE.AutoSize = true;
+            this.lbl_PathToFile_UPDATE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_PathToFile_UPDATE.Location = new System.Drawing.Point(636, 85);
+            this.lbl_PathToFile_UPDATE.Name = "lbl_PathToFile_UPDATE";
+            this.lbl_PathToFile_UPDATE.Size = new System.Drawing.Size(94, 20);
+            this.lbl_PathToFile_UPDATE.TabIndex = 58;
+            this.lbl_PathToFile_UPDATE.Text = "(Path to file)";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1136, 552);
+            this.ClientSize = new System.Drawing.Size(1136, 551);
+            this.Controls.Add(this.lbl_PathToFile_UPDATE);
+            this.Controls.Add(this.lbl_PathToFile);
+            this.Controls.Add(this.lbl_PeopleWithHighestTotalTime_UPDATE);
+            this.Controls.Add(this.lbl_PeopleWithLowestTotalTime_UPDATE);
+            this.Controls.Add(this.lbl_PeopleWithLowestTotalTime);
+            this.Controls.Add(this.lbl_PeopleWithHighestTotalTime);
             this.Controls.Add(this.lbl_floor0);
             this.Controls.Add(this.lbl_floor9);
             this.Controls.Add(this.lbl_floor8);
@@ -417,9 +482,6 @@
             this.Controls.Add(this.lbl_floor1);
             this.Controls.Add(this.lbl_PeopleOnFloors);
             this.Controls.Add(this.lbl_PeopleInElevator);
-            this.Controls.Add(this.cb_numOfFloors);
-            this.Controls.Add(this.lbl_ChooseNumOfFloors);
-            this.Controls.Add(this.lb_PeopleOnFloors);
             this.Controls.Add(this.lbl_HighestTimeTaken_UPDATE);
             this.Controls.Add(this.lbl_HighestTimeTaken);
             this.Controls.Add(this.lbl_LeastTimeTaken_UPDATE);
@@ -442,6 +504,7 @@
             this.Controls.Add(this.btn_RunThroughSim);
             this.Controls.Add(this.btn_SelectAFile);
             this.Controls.Add(this.lb_PeopleInElevator);
+            this.Controls.Add(this.lb_PeopleOnFloors);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -474,8 +537,6 @@
         private System.Windows.Forms.Label lbl_HighestTimeTaken;
         private System.Windows.Forms.Label lbl_HighestTimeTaken_UPDATE;
         private System.Windows.Forms.ListBox lb_PeopleOnFloors;
-        private System.Windows.Forms.Label lbl_ChooseNumOfFloors;
-        private System.Windows.Forms.ComboBox cb_numOfFloors;
         private System.Windows.Forms.ListBox lb_PeopleInElevator;
         private System.Windows.Forms.Label lbl_PeopleInElevator;
         private System.Windows.Forms.Label lbl_PeopleOnFloors;
@@ -489,6 +550,12 @@
         private System.Windows.Forms.Label lbl_floor8;
         private System.Windows.Forms.Label lbl_floor7;
         private System.Windows.Forms.Label lbl_floor0;
+        private System.Windows.Forms.Label lbl_PeopleWithHighestTotalTime;
+        private System.Windows.Forms.Label lbl_PeopleWithLowestTotalTime;
+        private System.Windows.Forms.Label lbl_PeopleWithLowestTotalTime_UPDATE;
+        private System.Windows.Forms.Label lbl_PeopleWithHighestTotalTime_UPDATE;
+        private System.Windows.Forms.Label lbl_PathToFile;
+        private System.Windows.Forms.Label lbl_PathToFile_UPDATE;
     }
 }
 

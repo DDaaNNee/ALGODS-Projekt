@@ -202,7 +202,6 @@ namespace ALGODS_Projekt
 
         public int CountPeopleLongestTime()
         {
-            
             // Sorting passagers by their completion time from highest to lowest:
 
             List<Person> sortedPassagers = SortPeopleByCompletionTime();
@@ -222,9 +221,9 @@ namespace ALGODS_Projekt
         {
             List<Person> sortedPassengers = SortPeopleByCompletionTime();
 
-            foreach(Person passager in sortedPassagers)
+            foreach(Person passager in sortedPassengers)
             {
-                if(passager.GetCompletionTime() == sortedPassagers[sortedPassagers.Count - 1].GetCompletionTime())
+                if(passager.GetCompletionTime() == sortedPassengers[sortedPassengers.Count - 1].GetCompletionTime())
                 {
                     peopleWithShortestTime++;
                 }     

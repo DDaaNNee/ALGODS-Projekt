@@ -77,28 +77,6 @@ namespace ALGODS_Projekt
         }
 
         /// <summary>
-        /// Method for checking if our elevator and all of our floors are empty or not.
-        /// </summary>
-        /// <returns>Returns true of false based on of there are people left</returns>
-        public bool PeopleLeft()
-        {
-            int numFloorsWithPeople = 0;
-
-            foreach (Floor f in allFloors)
-            {
-                if (f.GetPeopleOnFloor().Count > 0)
-                {
-                    numFloorsWithPeople++;
-                }
-            }
-            if (numFloorsWithPeople > 0)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
         /// Method for increasing the wait time for each person on each floor.
         /// </summary>
         public void IncreaseWaitTime()
@@ -113,15 +91,18 @@ namespace ALGODS_Projekt
         }
 
         /// <summary>
-        /// 
+        /// Main method used for running the simulation.
+        /// The algorithm decides whether to go up or down based on where people currently standing in the elevator needs to get off.
+        /// As long as there either are people waiting on any floor, or people waiting inside the elevator, the returned bool is true.
         /// </summary>
-        /// <param name="elevator"></param>
-        /// <param name="numFloors"></param>
+        /// <param name="elevator">Uses an elevator object in order to 
+        /// access it's methods and use the same object, instead of creating a new one.</param>
+        /// <param name="numFloors">An integer representing the number of floors in our building, it is possible to change this variable</param>
         public void StartElevator(Elevator elevator, int numFloors = 10)
         {
             simulationComplete = false;
-
-            //List<Floor> sortedFloors = SortFloorsByPeopleWaiting();
+            int minFloorNum = 0;
+            int maxFloorNum = numFloors - 1;
 
             if (elevator.GetCurrentPassagers().Count > 0)
             {
@@ -154,8 +135,7 @@ namespace ALGODS_Projekt
             else if(CheckIfPeopleWaiting(elevator) == true)
             {
                 int currFloorNum = elevator.GetCurrentFloor();
-                int minFloorNum = 0;
-                int maxFloorNum = 9;
+
 
                 if (currFloorNum == minFloorNum)
                 {
@@ -197,6 +177,11 @@ namespace ALGODS_Projekt
             }
         }
 
+        /// <summary>
+        /// Adds each person on a specific floor to our elevator, and then removes then from the floor that they were coming from.
+        /// </summary>
+        /// <param name="elevator">Uses an elevator object in order to 
+        /// access it's methods and use the same object, instead of creating a new one</param>
         public void AddPersonToElevator(Elevator elevator)
         {
             foreach (Floor f in allFloors.Where(x => x.GetFloorNumber() == elevator.GetCurrentFloor()).Take(1))
@@ -209,6 +194,10 @@ namespace ALGODS_Projekt
             }
         }
 
+        /// <summary>
+        /// Method for checking if our elevator and all of our floors are empty or not.
+        /// </summary>
+        /// <returns>Returns true of false based on of there are people left</returns>
         public bool CheckIfPeopleWaiting(Elevator elevat)
         {
             int peopleLeft = 0;
@@ -233,6 +222,10 @@ namespace ALGODS_Projekt
             return false;
         }
 
+        /// <summary>
+        /// Method for checking if the variable "simulationComplete" is true or false.
+        /// </summary>
+        /// <returns>Returns the value of the variable "simulationComplete"</returns>
         public bool CheckIfSimulationCompleted()
         {
             if (simulationComplete == true)

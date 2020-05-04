@@ -200,9 +200,9 @@ namespace ALGODS_Projekt
         }
 
 
-        // Method for counting the number of passagers with the longest and shortest completion time:
+        // Methods for counting the number of passagers with the longest and shortest completion time:
 
-        public void CountPeopleShortestLongestTime()
+        public int CountPeopleLongestTime()
         {
             
             // Sorting passagers by their completion time from highest to lowest:
@@ -214,13 +214,26 @@ namespace ALGODS_Projekt
                 if(passager.GetCompletionTime() == sortedPassagers[0].GetCompletionTime())
                 {
                     peopleWithLongestTime++;
-                }
-                else if(passager.GetCompletionTime() == sortedPassagers[sortedPassagers.Count-1].GetCompletionTime())
+                }     
+            }
+            return peopleWithLongestTime;
+        }
+
+
+        public int CountPeopleShortestTime()
+        {
+            List<Person> sortedPassengers = SortPeopleByCompletionTime();
+
+            foreach(Person passager in sortedPassagers)
+            {
+                if(passager.GetCompletionTime() == sortedPassagers[sortedPassagers.Count - 1].GetCompletionTime())
                 {
                     peopleWithShortestTime++;
-                }
+                }     
             }
+            return peopleWithShortestTime;
         }
+
 
         // Method to return the longest completion time of any passenger:
 

@@ -96,6 +96,8 @@ namespace ALGODS_Projekt
             catch (InvalidDataException)
             {
                 MessageBox.Show("The file contains invalid data, please try again!");
+                Application.Restart();
+                Environment.Exit(0);
                 return null;
             }
             catch (Exception)

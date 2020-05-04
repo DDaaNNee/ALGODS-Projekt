@@ -13,11 +13,6 @@ namespace ALGODS_Projekt
         public Building()
         {
             allFloors = new List<Floor>();
-            arrivedPassengers = new List<Person>();
-            totalWaitingTime = 0;
-            totalCompletionTime = 0;
-            peopleWithShortestTime = 0;
-            peopleWithLongestTime = 0;
             currentTime = 0;
             goUp = false;
         }
@@ -26,17 +21,7 @@ namespace ALGODS_Projekt
 
         // Våningar - En lista med Floor-objekt?
         List<Floor> allFloors;
-
-        // Då passagerare lämnar hissen adderas de till denna lista.
-        List<Person> arrivedPassengers;
-
         Floor floor;
-        int totalWaitingTime;
-        int totalCompletionTime;
-        int averageWaitingTime;
-        int averageCompletionTime;
-        int peopleWithShortestTime;
-        int peopleWithLongestTime;
         int currentTime;
         bool goUp;
 
@@ -130,27 +115,7 @@ namespace ALGODS_Projekt
             return orderedFloorList;
         }
 
-        // Same method as above but for sorting arrived passagers by their completion time:
-
-        public List<Person> SortPeopleByCompletionTime()
-        {
-            List<Person> orderedPeople = new List<Person>();
-            orderedPeople = arrivedPassengers;
-
-            for(int i = 0; i < orderedPeople.Count; i++)
-            {
-                for(int j = 0; j < orderedPeople.Count; j++)
-                {
-                    if(orderedPeople[i].GetCompletionTime() > orderedPeople[j].GetCompletionTime())
-                    {
-                        Person temp = orderedPeople[i];
-                        orderedPeople[i] = orderedPeople[j];
-                        orderedPeople[j] = temp;
-                    }
-                }
-            }
-            return orderedPeople;
-        }
+        
         
   
 
@@ -206,6 +171,8 @@ namespace ALGODS_Projekt
             return allPeopleStartList;
         }
 
+
+        // Används denna metod?
         public void AddRemovePeople(Elevator elevator)
         {
 
@@ -213,9 +180,7 @@ namespace ALGODS_Projekt
             {
                 if (pDeparting.End_floor == elevator.GetCurrentFloor().GetFloorNumber())
                 {
-                    elevator.GetCurrentPassagers().Remove(pDeparting);
-                    // Lägger till en person som går av på våningen i en lista för alla personer som ankommit till sin destination:
-                    arrivedPassengers.Add(pDeparting);
+                    elevator.GetCurrentPassagers().Remove(pDeparting);                 
                 }
             }
             foreach (Person pArriving in elevator.GetCurrentFloor().GetPeopleOnFloor().ToList())
@@ -341,51 +306,13 @@ namespace ALGODS_Projekt
             return false;
         }
 
-        // Method for calculating total waiting time and completion time:
-
-        public void CalculateTotalTime()
-        {
-            foreach(Person p in arrivedPassengers)
-            {
-                totalWaitingTime = totalWaitingTime + p.Waiting_time;
-                totalCompletionTime = totalCompletionTime + p.GetCompletionTime();
-            }
-        }
+        
 
         
-        // Method for calculating averages (waiting and completion time) amongst passagers:
-
-        public void CalculateAverageTime()
-        {
-            if(arrivedPassengers.Count != 0)
-            {
-                averageWaitingTime = (totalWaitingTime/arrivedPassengers.Count);
-                averageCompletionTime = (totalCompletionTime/arrivedPassengers.Count);
-            }
-        }
+        
 
 
         
-        // Method for counting the number of passagers with the longest and shortest completion time: 
-
-        public void CountPeopleShortestLongestTime()
-        {
-            
-            // Sorting passagers by their completion time from highest to lowest:
-
-            List<Person> sortedPassagers = SortPeopleByCompletionTime();
-
-            foreach(Person passager in sortedPassagers)
-            {
-                if(passager.GetCompletionTime() == sortedPassagers[0].GetCompletionTime())
-                {
-                    peopleWithLongestTime++;
-                }
-                else if(passager.GetCompletionTime() == sortedPassagers[sortedPassagers.Count-1].GetCompletionTime())
-                {
-                    peopleWithShortestTime++;
-                }
-            }
-        }
+        
     }
 }

@@ -65,18 +65,9 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
                 HideWhileRunningLabels();
                 while (building.CheckIfSimulationCompleted() == false)
                 {
-                    lb_PeopleOnFloors.Items.Clear();
-                    lb_PeopleInElevator.Items.Clear();
-
                     building.PopulateFloors(csvParser.GetCurrentTimeParsedListPerson());
                     building.StartElevator(elevator);
 
-                    lbl_CurrentFloorNumber_UPDATE.Text = elevator.GetCurrentFloor().ToString();
-                    lbl_ElevatorState_UPDATE.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
-                    lbl_ElapsedTime_UPDATE.Text = elevator.GetElevatorRuntime().ToString();
-
-                    lb_PeopleOnFloors.Items.Clear();
-                    lb_PeopleInElevator.Items.Clear();
                     foreach (Floor f in building.GetFloors())
                     {
                         string text = "";

@@ -67,10 +67,14 @@ namespace ALGODS_Projekt
                         {
                             continue;
                         }
-                        else
+                        else if (i != Convert.ToInt32(char.GetNumericValue(c)))
                         {
                             int test = Convert.ToInt32(char.GetNumericValue(c));
                             listPerson.Add(new Person(i, test));
+                        }
+                        else
+                        {
+                            continue;
                         }
                     }
                 }

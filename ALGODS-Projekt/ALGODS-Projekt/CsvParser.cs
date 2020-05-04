@@ -43,7 +43,8 @@ namespace ALGODS_Projekt
         /// Method that uses the already parsed text, saved as a "List<String> currentList" variable, then copies the first ten values into a new "List<string> currentTimeList".
         /// We then remove the first ten values from the stored in currentList in order to not input the same values multiple times.
         /// After that, the method checks for punctuation, this includes commas, or "r", which indicates a new row, and skips adding these values to the "List<Person> listPerson",
-        /// which our method returns upon executing.
+        /// which our method returns upon executing. Also checks if the persons end floor is the same as their starting floor, 
+        /// and if that is the case, skips adding them into our person list "listPerson".
         /// </summary>
         /// <returns>List<Person> containing all of our specified times people. Ex: At T0, our method will return a list of people waiting for the elevator at any floor, at T0. </returns>
         public List<Person> GetCurrentTimeParsedListPerson()

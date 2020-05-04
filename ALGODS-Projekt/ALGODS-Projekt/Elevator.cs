@@ -222,9 +222,25 @@ namespace ALGODS_Projekt
             }
         }
 
+        // Method to return the longest completion time of any passenger:
 
+        public int GetLongestCompletionTime()
+        {
 
+            List<Person> sortedPassengers = SortPeopleByCompletionTime();
+            return sortedPassengers[0].GetCompletionTime();
 
+        }
+
+        // Method to return the shortest completion time of any passenger:
+
+        public int GetShortestCompletionTime()
+        {
+
+            List<Person> sortedPassengers = SortPeopleByCompletionTime();
+            return sortedPassengers[sortedPassengers.Count - 1].GetCompletionTime();
+
+        }
 
 
     }

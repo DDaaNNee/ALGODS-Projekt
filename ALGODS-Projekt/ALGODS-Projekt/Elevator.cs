@@ -13,8 +13,9 @@ namespace ALGODS_Projekt
         Direction.DirectionEnum currentDirection;
         List<Person> currentPeople;
         List<Floor> listOfFloors;
-        Floor _currentFloor;
+        //Floor _currentFloor;
         int elevatorRuntime;
+        int _currentFloor;
         
         // Då passagerare lämnar hissen adderas de till denna lista.
         List<Person> arrivedPassengers;
@@ -38,9 +39,11 @@ namespace ALGODS_Projekt
             currentPeople = new List<Person>(10);
             listOfFloors = allFloors;
             elevatorRuntime = 0;
+            _currentFloor = 0;
             try
             {
-                _currentFloor = listOfFloors.First();
+                //Floor firstFloor = listOfFloors.First();
+                //_currentFloor = listOfFloors.First();
             }
             catch (Exception)
             {
@@ -52,54 +55,65 @@ namespace ALGODS_Projekt
 
         public void AddPersonToElevator()
         {
-            foreach (Person p in GetCurrentFloor().GetPeopleOnFloor().ToList())
-            {            
-                if (currentPeople.Count <= 9)
+            foreach (Floor f in listOfFloors.Where(x => x.GetFloorNumber() == _currentFloor).Take(1))
+            {
+                foreach (Person p in f.GetPeopleOnFloor().ToList())
                 {
-                    currentPeople.Add(p);
+                    if (currentPeople.Count <= 9)
+                    {
+                        currentPeople.Add(p);
+                    }
                 }
             }
         }
 
         public void RemovePersonFromElevator()
         {
-            foreach (Person p in GetCurrentPassagers().ToList())
+            foreach (Floor f in listOfFloors.Where(x => x.GetFloorNumber() == _currentFloor).Take(1))
             {
-                if (p.End_floor == GetCurrentFloor().GetFloorNumber())
+                foreach (Person p in GetCurrentPassagers().ToList())
                 {
-                    currentPeople.Remove(p);
-                    // Lägg till person som går av i lista för personer som kommit fram:
-                    arrivedPassengers.Add(p);
+                    if (p.End_floor == f.GetFloorNumber())
+                    {
+                        currentPeople.Remove(p);
+                        // Lägg till person som går av i lista för personer som kommit fram:
+                        arrivedPassengers.Add(p);
+                    }
                 }
             }
         }
 
         public void RemovePeopleFromFloor()
         {
-            foreach (Person p in GetCurrentFloor().GetPeopleOnFloor().ToList())
+            foreach (Floor f in listOfFloors.Where(x => x.GetFloorNumber() == _currentFloor).Take(1))
             {
-                for (int i = 0; i < GetCurrentPassagers().Count; i++)
+                foreach (Person p in f.GetPeopleOnFloor().ToList())
                 {
-                    if (p == GetCurrentPassagers()[i])
+                    for (int i = 0; i < GetCurrentPassagers().Count; i++)
                     {
-                        GetCurrentFloor().GetPeopleOnFloor().Remove(p);
+                        if (p == GetCurrentPassagers()[i])
+                        {
+                            f.GetPeopleOnFloor().Remove(p);
+                        }
                     }
-                }
 
+                }
             }
         }
 
         // Flytta hissen en våning uppåt eller en våning nedåt.
         public void MoveElevator(Direction.DirectionEnum currentDirection = Direction.DirectionEnum.Up)
         {
-            if(currentDirection == Direction.DirectionEnum.Up && _currentFloor.GetFloorNumber() < 9)
+            if(currentDirection == Direction.DirectionEnum.Up && _currentFloor < 9)
             {
-                _currentFloor.ChangeFloorNumber(_currentFloor.GetFloorNumber() + 1);
+                //_currentFloor.ChangeFloorNumber(_currentFloor.GetFloorNumber() + 1);
+                _currentFloor += 1;
                 elevatorRuntime += 10;
             }
-            else if (currentDirection == Direction.DirectionEnum.Down && _currentFloor.GetFloorNumber() > 0)
+            else if (currentDirection == Direction.DirectionEnum.Down && _currentFloor > 0)
             {
-                _currentFloor.ChangeFloorNumber(_currentFloor.GetFloorNumber() - 1);
+                //_currentFloor.ChangeFloorNumber(_currentFloor.GetFloorNumber() - 1);
+                _currentFloor -= 1;
                 elevatorRuntime += 10;
             }
         }
@@ -127,7 +141,7 @@ namespace ALGODS_Projekt
             return currentPeople;
         }
 
-        public Floor GetCurrentFloor()
+        public int GetCurrentFloor()
         {
             return _currentFloor;
         }

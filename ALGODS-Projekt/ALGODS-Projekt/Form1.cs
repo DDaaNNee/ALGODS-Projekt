@@ -53,20 +53,13 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
                 OpenFileDialog openFileDiag = new OpenFileDialog();
                 DialogResult result = openFileDiag.ShowDialog();
                 path = openFileDiag.FileName;
-                
+
                 building = new Building();
                 building.CreateTenFloors();
-                //building.PopulateFloors(csvParser.GetCurrentTimeParsedListPerson(csvParser.ParseCsvToArray(path)));
                 elevator = new Elevator(building.GetFloors());
 
                 csvParser.ParseCsvToArray(path);
 
-                string A = "";
-                foreach (Floor item in building.GetFloors())
-                {
-                    A += "1, ";
-                }
-                //MessageBox.Show(A);
                 //foreach (string item in building.UpdateInformation())
                 //{
                 //    lb_PeopleOnFloors.Items.Add(item);
@@ -98,7 +91,7 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
 
         public void ChangeLabels()
         {
-            lbl_CurrentFloorNumber_UPDATE.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
+            lbl_CurrentFloorNumber_UPDATE.Text = elevator.GetCurrentFloor().ToString();
             lbl_ElevatorState_UPDATE.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
             lbl_ElapsedTime_UPDATE.Text = elevator.GetElevatorRuntime().ToString();
 
@@ -126,6 +119,13 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
             building.StartElevator(elevator);
             building.PopulateFloors(csvParser.GetCurrentTimeParsedListPerson());
 
+            //if (building.CheckIfSimulationCompleted() == true)
+            //{
+            //    MessageBox.Show("Simulation complete!");
+            //    HideWhileRunningLabels();
+            //    ShowAfterRunningLabels();
+            //}
+
             foreach (Floor f in building.GetFloors())
             {
                 string text = "";
@@ -144,22 +144,8 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
                 lb_PeopleOnFloors.Items.Add(text);
             }
 
-            //string test = "";
-            //foreach (var item in csvParser.GetListPerson())
-            //{
-            //    lb_PeopleOnFloors.Items.Add(item.End_floor);
-            //    //test += item;
-            //}
-            //MessageBox.Show(test);
-
-            //foreach (var item in csvParser.GetCurrList())
-            //{
-            //    test += item;
-            //}
-            //MessageBox.Show(test);
-
             testTimer.Enabled = true;
-            lbl_CurrentFloorNumber_UPDATE.Text = elevator.GetCurrentFloor().GetFloorNumber().ToString();
+            lbl_CurrentFloorNumber_UPDATE.Text = elevator.GetCurrentFloor().ToString();
             lbl_ElevatorState_UPDATE.Text = "Going " + elevator.GetCurrentElevatorDirection().ToString();
             lbl_ElapsedTime_UPDATE.Text = elevator.GetElevatorRuntime().ToString();
 
@@ -169,15 +155,9 @@ namespace ALGODS_Projekt // Gruppmedlemmar: Daniel Pettersson, Nils Nyrén, Kasp
                 currentPeople += p.End_floor + ", ";
             }
             lb_PeopleInElevator.Items.Add(currentPeople);
-
-            //HideWhileRunningLabels();
-            //ShowAfterRunningLabels();
-            //}
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("No valid file selected!");
-            //}
         }
+         
+
 
         public void HideAfterRunningLabels()
         {

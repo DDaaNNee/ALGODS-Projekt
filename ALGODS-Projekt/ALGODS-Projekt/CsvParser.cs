@@ -85,17 +85,16 @@ namespace ALGODS_Projekt
 
         public void ParseCsvToArray(string pathToFile)
         {
-            //try
-            //{
-            string[] arrOfText = File.ReadAllText(pathToFile).Split('\n');
-            string[] fixedArr = arrOfText.Select(x => x.Replace("-1", "")).ToArray();
-            currentList = fixedArr.ToList();
-            //}
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("Invalid file type!");
-            //    return null;
-            //}
+            try
+            {
+                string[] arrOfText = File.ReadAllText(pathToFile).Split('\n');
+                string[] fixedArr = arrOfText.Select(x => x.Replace("-1", "")).ToArray();
+                currentList = fixedArr.ToList();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Invalid file type!");
+            }
         }
 
         public string[] GetCurrentTimeParsedArray(string[] parsedTextToStringArray)

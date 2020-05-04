@@ -123,10 +123,12 @@ namespace ALGODS_Projekt
                 }
                 if (goingUp > goingDown)
                 {
+                    elevator.SetCurrentDirection(Direction.DirectionEnum.Up);
                     elevator.MoveElevator(Direction.DirectionEnum.Up);
                 }
                 else
                 {
+                    elevator.SetCurrentDirection(Direction.DirectionEnum.Down);
                     elevator.MoveElevator(Direction.DirectionEnum.Down);
                 }
                 elevator.IncreaseSystemTime();
@@ -143,6 +145,7 @@ namespace ALGODS_Projekt
                     goUp = true;
                     elevator.AddPersonToElevator();
                     elevator.RemovePeopleFromFloor();
+                    elevator.SetCurrentDirection(Direction.DirectionEnum.Up);
                     elevator.MoveElevator(Direction.DirectionEnum.Up);
 
                 }
@@ -152,6 +155,7 @@ namespace ALGODS_Projekt
                     goUp = false;
                     elevator.AddPersonToElevator();
                     elevator.RemovePeopleFromFloor();
+                    elevator.SetCurrentDirection(Direction.DirectionEnum.Down);
                     elevator.MoveElevator(Direction.DirectionEnum.Down);
                 }
                 else if (goUp == true)
@@ -159,6 +163,7 @@ namespace ALGODS_Projekt
                     
                     elevator.AddPersonToElevator();
                     elevator.RemovePeopleFromFloor();
+                    elevator.SetCurrentDirection(Direction.DirectionEnum.Up);
                     elevator.MoveElevator(Direction.DirectionEnum.Up);
 
                 }
@@ -166,6 +171,7 @@ namespace ALGODS_Projekt
                 {
                     elevator.AddPersonToElevator();
                     elevator.RemovePeopleFromFloor();
+                    elevator.SetCurrentDirection(Direction.DirectionEnum.Down);
                     elevator.MoveElevator(Direction.DirectionEnum.Down);
                 }
                 elevator.IncreaseSystemTime();

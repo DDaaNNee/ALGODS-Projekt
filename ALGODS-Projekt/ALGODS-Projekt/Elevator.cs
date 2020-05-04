@@ -290,5 +290,10 @@ namespace ALGODS_Projekt
         {
             return arrivedPassengers.Count();
         }
+
+        public void SetCurrentDirection(Direction.DirectionEnum currDirr)
+        {
+            currentDirection = currDirr;
+        }
     }
 }

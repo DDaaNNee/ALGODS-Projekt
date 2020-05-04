@@ -17,7 +17,5 @@ namespace ALGODS_Projekt
             Down,
             Neutral
         }
-
-        
     }
 }
